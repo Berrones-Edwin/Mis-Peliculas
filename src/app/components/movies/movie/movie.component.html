@@ -1,0 +1,121 @@
+<ng-container *ngIf="movie">
+  <div class="row">
+
+    <section class="col-sm-12 col-md-4 mb-3">
+
+      <img class="img-fluid img-poster mb-4 shadow-lg" src="{{ movie.poster_path | image}}" alt="{{ movie.title }}"
+        title="{{ movie.title }}">
+
+
+      <div class="container-left-btn">
+
+        <button class="btn btn-outline-danger mr-2">Agregar Favoritos</button>
+
+        <a href="{{ urlTrailerYotube }}" target="_blank" class="btn btn-outline-warning"
+          *ngIf="!btnWatchTrailer; else elseTrailer">Mirar Trailer</a>
+
+        <ng-template #elseTrailer>
+
+          <button [disabled]="true" class="btn btn-outline-warning watch-trailer">Mirar Trailer</button>
+        </ng-template>
+      </div>
+
+    </section>
+
+    <section class="col-sm-12 col-md-8">
+      <!-- <h2 class="title">{{ movie.title }}</h2> -->
+      <div class="row mb-4 container-title">
+        <h2 class="title col-sm-12 col-md-10">{{movie.title}}</h2>
+        <span class="container-title-btn col-sm-12 col-md-2">
+          <button (click)="goBack()" class="btn btn-outline-pink">Regresar</button>
+        </span>
+      </div>
+      <h6 class="title">Fecha Lanzamiento: {{ movie.release_date }}</h6>
+      <h5 class="mb-4 title">Promedio: {{ movie.vote_average }} | Cantidad Votos: {{ movie.vote_count }} </h5>
+      <div class="container-genres mb-3">
+        <button *ngFor="let genre of movie.genres" class="btn btn-outline-info mr-2">{{genre.name}}</button>
+      </div>
+
+      <!-- Sinopsis -->
+      <div>
+        <h4 class="title">Sinopsis</h4>
+        <p>{{ movie.overview }}</p>
+      </div>
+
+      <hr>
+
+      <!-- Elenco -->
+      <div class="cast">
+        <div class="row mb-4 container-title">
+          <h4 class="title col-sm-12 col-md-10">Elenco</h4>
+          <span class="container-title-btn col-sm-12 col-md-2">
+            <button class="btn btn-outline-warning">Explorar</button>
+          </span>
+        </div>
+        <div class="container-cast">
+          <div class="card-cast  mr-3" *ngFor="let credit of credits">
+            <img class="img-fluid  shadow-lg cast__img" height="120px;" src="{{ credit.profile_path | image}}"
+              alt="{{ credit.name }}">
+            <p class="cast__name">{{ credit.name }}</p>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- Peliculas Similares -->
+      <div class="row mb-4 container-title">
+        <h4 class="title col-sm-12 col-md-10">Recomendaciones</h4>
+        <span class="container-title-btn col-sm-12 col-md-2">
+          <button class="btn btn-outline-warning">Explorar</button>
+        </span>
+      </div>
+
+      <div style="margin-bottom:200px; " *ngIf="recomendations">
+
+        <div class="container-cast" *ngIf=" recomendations.length >= 2; else movie">
+
+          <div class="card-cast mr-3" *ngFor="let r of recomendations">
+            <img src="{{ r.poster_path | image}}" class="img-fluid   shadow-lg cast__img" alt="{{ r.title }}">
+            <p class="cast__name">{{r.title}}</p>
+          </div>
+        </div>
+
+        <ng-template #movie>
+
+          <div class="card-cast" *ngIf="recomendations.length != 0">
+            <img src="{{ recomendations[0].poster_path | image}}" class=" shadow-lg" alt="{{ recomendations[0].title }}"
+              class="img-fluid  mr-3 shadow-lg cast__img">
+            <p class="cast__name">{{recomendations[0].title}}</p>
+          </div>
+        </ng-template>
+      </div>
+
+      <hr>
+
+      <div class="row mb-4 container-title" *ngIf="reviews.length>0">
+        <h4 class="title col-sm-12 col-md-10">Reseñas</h4>
+        <span class="container-title-btn col-sm-12 col-md-2">
+          <button class="btn btn-outline-warning">Explorar</button>
+        </span>
+      </div>
+
+      <div class="row" *ngIf="reviews.length>0">
+          <div class="col-sm-6" *ngFor="let review of reviews">
+            <div class="card " style="background-color:transparent!important;border-radius: 15px;border:1px solid #FFF;">
+              <div class="card-body">
+                <h5 class="card-title">{{ review.author | uppercase }}</h5>
+                <hr>
+                <p class="card-text">{{ review.content }}</p>
+                <a [href]="review.url" style="color:#FFF;" target="_blank" class="">Ver comentario</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+    </section>
+  </div>
+
+
+</ng-container>

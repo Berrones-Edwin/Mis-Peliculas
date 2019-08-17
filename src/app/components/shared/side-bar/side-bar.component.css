@@ -1,0 +1,38 @@
+.social-media{
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.social-media__link{
+
+    margin-right: .25rem;
+}
+
+.social-media__img{
+    height: 45px;
+    width: 45px;
+    transition: all .3s;
+}
+
+.social-media__img:hover{
+    transform: scale(1.1);
+}
+
+.interest__link{
+    color:#FFF;
+}
+
+.title-genres{
+    text-decoration: none;
+    color:#FFF;
+    cursor: pointer;
+    transition: all .2s;
+    
+}
+.title-genres:hover{
+    font-size: 1.10rem;
+    /* color:#fd7e14; */
+
+}

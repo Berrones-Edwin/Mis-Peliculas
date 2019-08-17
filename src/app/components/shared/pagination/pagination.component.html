@@ -1,0 +1,14 @@
+<nav aria-label="Page navigation example" >
+  <ul class="pagination justify-content-center text-center">
+
+    <ng-container *ngFor="let page of total_pages">
+
+      <li class="page-item" (click)="nextPage(page)" [ngClass]="{ 'active' : page == id }">
+
+        <a class="page-link">{{ page }} </a>
+
+      </li>
+    </ng-container>
+
+  </ul>
+</nav>

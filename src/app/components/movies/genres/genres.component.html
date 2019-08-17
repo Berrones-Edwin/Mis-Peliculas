@@ -1,0 +1,24 @@
+<div class="row mt-4">
+  <div class="col-sm-12 col-md-9">
+    <form action="" #myForm>
+      <fieldset [disabled]="disableListGenres">
+        <div class="form-group">
+          <select class="form-control disabled" (change)="showMovies(selectGenres.value)"
+            #selectGenres name="genres" id="genres">
+            <option value="" selected> Seleciona un genero</option>
+            <option *ngFor="let genres of listGenres" value="{{ genres.id }}"> {{ genres.name }} </option>
+          </select>
+        </div>
+      </fieldset>
+    </form>
+    <app-grid-card title="Películas Genero {{ genre.name }}" 
+                   [itemArray]="movies"
+                   (item)="detailsMovie($event)"
+                   [showBtnExplore]='false'
+                   *ngIf="movies.length > 0">
+    </app-grid-card>
+  </div>
+  <div class="col-sm-12 col-md-5">
+
+  </div>
+</div>

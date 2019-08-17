@@ -1,0 +1,61 @@
+.section-left{
+    margin-bottom: 2rem;
+}
+
+.cast{
+    margin-bottom: 8rem;
+}
+.container-cast{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+    margin-bottom: 200px;
+
+}
+
+.card-cast{
+    height: 800px;
+    transition: all .5s;
+    margin-right: 1rem;
+    margin-bottom: 7rem;
+    /* overflow: hidden; */
+}
+.card-cast:hover{
+    transform: scale(1.1);
+}
+.cast__img{
+    height:150px;
+    border-radius: 10px;
+    width: 125px;
+    margin-bottom: 0.50rem;
+}
+.cast__name{
+    font-size: 14px;
+    text-align: center;
+    word-wrap: break-word;
+    width: 125px;
+
+}
+
+
+/*---------------------------------------------- */
+/*------------ MODO CELULAR -----------------*/
+/* --------------------------------------------- */
+@media (max-width: 576px) { 
+
+/*---------------------------------------------- */
+/*------------ ESTILOS GENERALES -----------------*/
+/*---------------- CARDS--------------------------*/
+/* --------------------------------------------- */
+
+    .container-cast{
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    .container-cast div{
+        /* width: 30%; */
+        margin-bottom: 7rem;
+    }
+}  

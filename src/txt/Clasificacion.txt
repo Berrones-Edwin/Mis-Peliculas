@@ -1,0 +1,27 @@
+--Clasificacion (MEXICO)
+    --AA
+        --Películas para todo público que tengan además atractivo infantil y sean comprensibles para niños menores de siete años de edad. Películas para todo público que tengan además atractivo infantil y sean comprensibles para niños menores de siete años de edad.
+    --A
+        --Peliculas para todo Publico
+    --B
+        --Peliculas para adolescentes de 12 años en adelante
+    --B15
+        --Pelicula no recomendable para menos de 15 años de edad
+    --C
+        --Peliculas para adultos de 18 años en adelante
+    --D
+        --Peliculas para adultos con sexo explicito, lenguaje procaz o alto grado de violencia
+
+--Clasificacion (EUA)
+    --G 
+        --Todas las edades / todos los publicos
+    --PG 
+        -- +10años / Algun material puede ser no adecuado para niños menores de 10.
+    --PG-13 
+        -- +13 / Algunos materiales puede ser no adecuado para niños menores de 13.
+    --R
+        -- +17 / Menores de 17 años requieren acompañamiento de pares o tutor adulto.
+            Puede contener lenguaje fuerte, intensa enfasis sexual, desnudez explicita y fuerte,
+            fuerte contenido de violencia, uso muy frecuente de arma y sangre
+    --NC-17
+        -- +18 Pelicula no es adecuada los menores de 18 años. Casi igual que la clasificacion R pero lo unico que          cambia es que ahui hay mucha violencia extrema, contenido sexuales fuerte, extremo uso de armsas, desnudez en largos periodos tiempo y/o mucha sangre

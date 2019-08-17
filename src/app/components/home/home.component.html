@@ -1,0 +1,35 @@
+<div class="row mt-4">
+  <div class="container-side-left col-sm-12 col-md-9">
+   
+    <app-loading *ngIf="loadingMovies else elseBlock">
+    </app-loading>
+
+    <ng-template #elseBlock>
+
+      <app-grid-card title="Películas más top" 
+                     [itemArray]="movies"
+                     *ngIf="movies"
+                     url="/peliculas/top/1"
+                     (item)="detailsMovie($event)"
+      >
+      </app-grid-card>
+
+    </ng-template>
+    <hr>
+   
+    <app-loading *ngIf="loadingSeries else elseBlockSeries"></app-loading>
+
+    <ng-template #elseBlockSeries>
+      
+      <app-grid-card title="Series Más Populares" 
+                     [itemArray]="series"
+                     *ngIf="series"
+      >
+      </app-grid-card>
+
+    </ng-template>
+  </div>
+  <div class="container-side-left col-sm-12 col-md-3">
+    <app-side-bar></app-side-bar>
+  </div>
+</div>

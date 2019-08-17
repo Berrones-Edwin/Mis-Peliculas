@@ -1,0 +1,13 @@
+.cast{
+    margin-bottom: 100px;
+}
+
+.cast__img{
+    height: 120px;
+    max-height: 120px;
+    width: 90px;
+    min-width: 90px;
+}
+
+
+

@@ -1,0 +1,23 @@
+<div class="row mb-4 container-title">
+  <h4 class="title col-sm-12 col-md-10">{{ title }}</h4>
+  <span class="col-sm-12 col-md-2 container-btn-explore">
+    <button *ngIf="showBtnExplore" routerLink="{{ url }}" class="btn btn-outline-warning btn-explore">Explorar</button>
+  </span>
+</div>
+<div class="row mb-4 container-card">
+
+  <ng-container *ngFor="let movie of itemArray">
+
+    <div class="card-cast" (click)="details(movie)">
+
+      <img [src]="movie.poster_path | image" class="img-fluid shadow-lg cast__img" 
+            alt="{{ (movie.title != null ) ?  movie.title : movie.name }}"
+            title="{{ (movie.title != null ) ?  movie.title : movie.name }}"
+      >
+
+      <h6 class="cast__name">{{ (movie.title != null ) ?  movie.title : movie.name }}</h6>
+
+    </div>
+  </ng-container>
+
+</div>

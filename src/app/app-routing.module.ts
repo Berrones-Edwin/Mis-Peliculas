@@ -1,7 +1,22 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [];
+import { HomeComponent } from './components/home/home.component';
+import { SearchComponent } from './components/search/search.component';
+
+
+const routes: Routes = [
+  { path: 'inicio', component: HomeComponent },
+
+  { path: 'peliculas', loadChildren: './components/movies/movies.module#MoviesModule' },
+
+  { path: 'series', loadChildren: './components/series/series.module#SeriesModule' },
+
+  { path: 'buscar', component: SearchComponent},
+  { path: 'buscar/:termino', component: SearchComponent},
+
+  { path: '**', redirectTo: 'inicio', pathMatch: 'full' }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -1,0 +1,30 @@
+<div class="row mt-4">
+  <div class="container-side-left col-sm-12 col-md-9">
+    
+    <div class="row mb-4">
+
+      <app-loading class="offset-lg-4" *ngIf="loading  else elseBlock"></app-loading>
+
+      <ng-template #elseBlock>
+        
+        <app-grid-card title="Películas más votadas" 
+                       url="/peliculas/top/1"
+                       [itemArray]="movies"
+                       (item)="detailsMovie($event)"
+                       class="mx-auto"
+                       [showBtnExplore]="false">
+        </app-grid-card>
+
+        <app-pagination [total_pages]="total_pages"
+                        (page)="nextPage($event)"
+                        [id]="id"
+                        class="mx-auto">
+        </app-pagination>
+
+      </ng-template>
+    </div>
+  </div>
+  <div class="container-side-left col-sm-12 col-md-3">
+    <app-side-bar></app-side-bar>
+  </div>
+</div>

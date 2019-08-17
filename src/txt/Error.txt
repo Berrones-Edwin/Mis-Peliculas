@@ -1,0 +1,10 @@
+HttpErrorResponse
+error: {status_code: 34, status_message: "The resource you requested could not be found."}
+headers: HttpHeaders {normalizedNames: Map(0), lazyUpdate: null, lazyInit: ƒ}
+message: "Http failure response for https://api.themoviedb.org/3/movie/283?api_key=1de6ce733dd02d81073262cb66031536&language=es: 404 Not Found"
+name: "HttpErrorResponse"
+ok: false
+status: 404
+statusText: "Not Found"
+url: "https://api.themoviedb.org/3/movie/283?api_key=1de6ce733dd02d81073262cb66031536&language=es"
+__proto__: HttpResponseBase

@@ -1,0 +1,28 @@
+
+<div class="row mt-4">
+  <div class="container side-left col-sm-12 col-md-9">
+      <form action="" >
+        <div class="form-group">
+          <label for="">Nombre de Película | Serie</label>
+          <input type="text" class="form-control" 
+                  autocomplete="off" placeholder="Buscar..." 
+                  name="busqueda"
+                  [(ngModel)]="terminoBusqueda"
+          >
+        </div>
+        <button (click)="buscar(terminoBusqueda)" class="btn btn-primary">
+          Buscar
+        </button>
+      </form>
+        
+    <app-grid-card  [showBtnExplore]=false
+                     [itemArray]="movies"
+                     *ngIf="movies"
+                     (item)="detailsMovie($event)"
+      >
+      </app-grid-card>
+  </div>
+  <div class="container side-left col-sm-12 col-md-3">
+    <app-side-bar></app-side-bar>
+  </div>
+</div>
