@@ -8,12 +8,12 @@ import { MoviesService } from 'src/app/services/movies.service';
 @Component({
   selector: 'app-movie-top',
   templateUrl: './movie-top.component.html',
-  styleUrls: ['./movie-top.component.css']
+  styleUrls: ['./movie-top.component.css'],
 })
 export class MovieTopComponent implements OnInit, OnDestroy {
 
   movies: any[] = [];
-  total_pages: number[] = [];
+  total_results: number[] = [];
   loading: boolean = true;
   id: string = '1';
  
@@ -27,7 +27,7 @@ export class MovieTopComponent implements OnInit, OnDestroy {
     private _router: Router
   ) {
 
-    this.id = this._activatedRoute.snapshot.params.id;
+    this.getId();
 
   }
 
@@ -44,6 +44,9 @@ export class MovieTopComponent implements OnInit, OnDestroy {
       });
 
   }
+  getId(){
+    this.id = this._activatedRoute.snapshot.params.id;
+  }
   getMoviesTops(page: string = "1") {
 
    
@@ -53,8 +56,7 @@ export class MovieTopComponent implements OnInit, OnDestroy {
       this._homeService.getTops(page)
         .pipe(
           map((data: any) => {
-            for (let i = 0; i < 15; i++)
-              this.total_pages.push(i + 1)
+            this.total_results = data.total_results
             return data.results
           }),
           takeUntil(this.unsubscribe$)
@@ -71,32 +73,31 @@ export class MovieTopComponent implements OnInit, OnDestroy {
     })
   }
 
+
+
   nextPage(page): void {
-    
-    console.log(page)
-    // this.total_pages = [];
-    // this.loading = true;
-    // this.id = page;
 
-    // this._router.navigate([
-    //   '/peliculas/top',
-    //   page
-    // ]).then(() => {
+    this.loading = true;
+    this.id = page;
 
-    //   this.getMoviesTops(page)
-    //     .then((data: any) => {
+    this._router.navigate([
+      '/peliculas/top',
+      page
+    ]).then(() => {
 
-    //       this.movies = data;
-    //       setTimeout(() => {
-    //         this.loading = false;
-    //       }, 500);
+      this.getMoviesTops(page)
+        .then((data: any) => {
 
-    //     })
-    //     .catch(err => this.loading = true);
-    // })
+          this.movies = data;
+          this.loading = false;
+
+        })
+        .catch(err => this.loading = true);
+    })
 
 
   }
+
   detailsMovie(movie){
     this._router.navigate([
       'peliculas',

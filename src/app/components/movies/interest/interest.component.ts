@@ -119,7 +119,7 @@ export class InterestComponent implements OnInit {
 
     return new Promise((resolve, reject) => {
 
-      this._moviesService.getClasificationR(page)
+      this._moviesService.getClasification(page,"R")
         .pipe(
           map((data: any) => data.results),
           takeUntil(this.unsubscribe$)

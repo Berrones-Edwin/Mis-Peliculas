@@ -12,15 +12,12 @@
                        [itemArray]="movies"
                        (item)="detailsMovie($event)"
                        class="mx-auto"
-                       [showBtnExplore]="false">
+                       [showBtnExplore]="false"
+                       [total_results]="total_results"
+                       (number_page)="nextPage($event)"
+                       [page]="id">
         </app-grid-card>
-
-        <app-pagination [total_pages]="total_pages"
-                        (page)="nextPage($event)"
-                        [id]="id"
-                        class="mx-auto">
-        </app-pagination>
-
+        
       </ng-template>
     </div>
   </div>

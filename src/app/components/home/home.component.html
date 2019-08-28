@@ -11,6 +11,7 @@
                      *ngIf="movies"
                      url="/peliculas/top/1"
                      (item)="detailsMovie($event)"
+                     [showPagination]="false"
       >
       </app-grid-card>
 
@@ -24,6 +25,7 @@
       <app-grid-card title="Series Más Populares" 
                      [itemArray]="series"
                      *ngIf="series"
+                     [showPagination]="false"
       >
       </app-grid-card>
 

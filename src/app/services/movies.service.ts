@@ -21,7 +21,7 @@ export class MoviesService {
     let params: HttpParams = new HttpParams()
       .append('api_key', this.apiKey)
       .append('language', 'es')
-      .append('page', page);
+      .append('page', page)
 
     return this._http.get(`${environment.url}/movie/popular`, { params })
   }
@@ -120,15 +120,13 @@ export class MoviesService {
 
     return this._http.get(`${environment.url}/discover/movie`, { params })
   }
-  getClasificationR(page: string = "1") {
+  getClasification(page: string = "1",classification:string) {
 
-    //  /discover/movie/?certification_country=US&certification=R&sort_by=vote_average.desc
-    const LastYear = new Date().getFullYear() - 1;
     let params: HttpParams = new HttpParams()
       .append('api_key', this.apiKey)
       .append('language', 'es')
       .append('certification_country', 'US')
-      .append('certification.lte', 'R')
+      .append('certification.lte', classification)
       .append('sort_by', 'vote_average.desc')
       .append('page', page);
 

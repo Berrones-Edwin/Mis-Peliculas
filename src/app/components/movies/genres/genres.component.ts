@@ -3,7 +3,7 @@ import { Genres } from 'src/app/Data/Genres';
 import { MoviesService } from 'src/app/services/movies.service';
 import { Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-genres',
@@ -16,21 +16,36 @@ export class GenresComponent implements OnInit, OnDestroy {
   genreID: string = "";
   movies: any[] = [];
   disableListGenres: boolean = false;
-  genre:string='';
+  genre: string = '';
+  total_results: any[] = [];
+  page: string = "1";
 
   private unsubscribe$ = new Subject<void>();
 
   constructor(
     private _moviesService: MoviesService,
-    private _router:Router
+    private _router: Router,
+    private _activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
 
     this.listGenres = Genres.Movies;
+
+
+    if(this._activatedRoute.snapshot.params.genre != null){
+
+      
+      this.showMovies(this._activatedRoute.snapshot.params.genre)
+
+    }
   }
 
-  detailsMovie(movie){
+  getId() {
+    this.page = this._activatedRoute.snapshot.params.page;
+  }
+
+  detailsMovie(movie) {
     this._router.navigate([
       'peliculas',
       movie['id']
@@ -39,22 +54,52 @@ export class GenresComponent implements OnInit, OnDestroy {
 
   showMovies(selectGenres) {
 
-    this.genre = this.listGenres.find((e:any)=> e.id == selectGenres);
-    this.disableListGenres = true;
-
+    this.page = "1";
     this.genreID = selectGenres;
 
-    this.getMoviesGenres("1", this.genreID)
-      .then((data: any) => {
-        if (data) {
-          this.disableListGenres = false;
-          console.log(data);
+    this._router.navigate([
+      '/peliculas/generos',
+      this.genreID,
+      this.page
+    ]).then(() => {
+      this.genre = this.listGenres.find((e: any) => e.id == selectGenres);
+
+      this.disableListGenres = true;
+
+      this.getMoviesGenres("1", this.genreID)
+        .then((data: any) => {
+          if (data) {
+            this.disableListGenres = false;
+            this.movies = data;
+          }
+        })
+        .catch(() => {
+        
+        });
+    })
+
+
+  }
+  nextPage(page): void {
+
+    this.page = page;
+    this.genreID = this._activatedRoute.snapshot.params.genre;
+
+    this._router.navigate([
+      '/peliculas/generos',
+      this.genreID,
+      page
+    ]).then(() => {
+
+      this.getMoviesGenres(page, this.genreID)
+        .then((data: any) => {
+
           this.movies = data;
-        }
-      })
-      .catch(() => {
-        // this.loadingMovies = true;
-      });
+
+        })
+        .catch(err => console.log(err));
+    })
+
 
   }
 
@@ -64,7 +109,10 @@ export class GenresComponent implements OnInit, OnDestroy {
 
       this._moviesService.getMoviesGenres(page, genre)
         .pipe(
-          map((data: any) => data.results),
+          map((data: any) => {
+            this.total_results = data.total_results;
+            return data.results;
+          }),
           takeUntil(this.unsubscribe$)
         )
         .subscribe((data: any) => {

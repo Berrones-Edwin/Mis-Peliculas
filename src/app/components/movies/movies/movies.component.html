@@ -24,14 +24,16 @@
     <app-grid-card title="Películas más votadas" 
                    url="/peliculas/top/1"
                    [itemArray]="moviesTop"
-                   (item)="detailsMovie($event)">
+                   (item)="detailsMovie($event)"
+                   [showPagination]="false">
     </app-grid-card>
     <hr>
 
     <app-grid-card title="Las más populares" 
                    url="/peliculas/popular/1"
                    [itemArray]="moviesPopular"
-                   (item)="detailsMovie($event)">
+                   (item)="detailsMovie($event)"
+                   [showPagination]="false">
     </app-grid-card>
   </div>
 

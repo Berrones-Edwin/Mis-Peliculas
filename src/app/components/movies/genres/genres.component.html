@@ -11,11 +11,14 @@
         </div>
       </fieldset>
     </form>
-    <app-grid-card title="Películas Genero {{ genre.name }}" 
+    <app-grid-card title="Películas Genero" 
                    [itemArray]="movies"
                    (item)="detailsMovie($event)"
                    [showBtnExplore]='false'
-                   *ngIf="movies.length > 0">
+                   *ngIf="movies.length > 0"
+                   [total_results]="total_results"
+                  (number_page)="nextPage($event)"
+                  [page]="page">
     </app-grid-card>
   </div>
   <div class="col-sm-12 col-md-5">

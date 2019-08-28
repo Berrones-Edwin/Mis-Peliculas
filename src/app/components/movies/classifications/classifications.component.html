@@ -1,20 +1,14 @@
+<h2>Clasificaciones</h2>
+<p>Las siguientes clasificaciones son en basadas en las de los Estados Unidos</p>
 <div class="card-columns">
-  <div class="card">
+  <div class="card bg-dark" *ngFor="let c of classifications">
     <!-- <img src="..." class="card-img-top" alt="..."> -->
     <div class="card-body">
-      <h5 class="card-title">Card title that wraps to a new line</h5>
-      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.
-        This content is a little bit longer.</p>
+      <h5 class="card-title">{{ c.name | uppercase }}</h5>
+      <p  class="card-text">{{ c.text }}</p>
     </div>
-  </div>
-  <div class="card p-3">
-    <blockquote class="blockquote mb-0 card-body">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-      <footer class="blockquote-footer">
-        <small class="text-muted">
-          Someone famous in <cite title="Source Title">Source Title</cite>
-        </small>
-      </footer>
-    </blockquote>
+    <div class="card-footer">
+      <button routerLink="/peliculas/clasificaciones/{{c.id}}"  class="btn btn-outline-warning btn-block">Explorar</button>
+    </div>
   </div>
 </div>

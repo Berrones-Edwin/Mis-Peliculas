@@ -12,6 +12,7 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import { ImagePipe } from 'src/app/pipes/image.pipe';
 import { GridCardComponent } from './grid-card/grid-card.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   exports:[
@@ -36,7 +37,8 @@ import { PaginationComponent } from './pagination/pagination.component';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    NgxPaginationModule
   ]
 })
 export class SharedModule { }
