@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'generos/:genre/:page', component: GenresComponent },
   { path: 'clasificaciones', component: ClassificationsComponent },
   { path: 'clasificaciones/:opcion', component: ClassificationsComponent },
-  { path:'interesar/:opcion',component:InterestComponent },
+  { path:'interesar/:opcion/:page',component:InterestComponent },
   { path: ':id', component: MovieComponent }
 ];
 

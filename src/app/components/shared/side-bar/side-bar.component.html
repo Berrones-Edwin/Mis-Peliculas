@@ -13,13 +13,13 @@
 <div class="section-left">
   <h5 class="title">Quizas te pueda interesar</h5>
   <ul>
-    <li style="cursor: pointer;"> <a class="interest__link" routerLink="/peliculas/interesar/1"> Películas más populares
+    <li style="cursor: pointer;"> <a class="interest__link" routerLink="/peliculas/interesar/1/1"> Películas más populares
         para niños</a></li>
-    <li style="cursor: pointer;"><a class="interest__link" routerLink="/peliculas/interesar/2">¿Cuáles son las mejores
+    <li style="cursor: pointer;"><a class="interest__link" routerLink="/peliculas/interesar/2/1">¿Cuáles son las mejores
         películas del año pasado?</a></li>
-    <li style="cursor: pointer;"><a class="interest__link" routerLink="/peliculas/interesar/3">¿Cuáles son las películas
+    <li style="cursor: pointer;"><a class="interest__link" routerLink="/peliculas/interesar/3/1">¿Cuáles son las películas
         mejor valoradas con clasificación R?</a></li>
-    <li style="cursor: pointer;"><a class="interest__link" routerLink="/peliculas/interesar/4">¿Cuáles son los mejores
+    <li style="cursor: pointer;"><a class="interest__link" routerLink="/peliculas/interesar/4/1">¿Cuáles son los mejores
         dramas que se estrenaron este año?</a></li>
   </ul>
 </div>
@@ -43,7 +43,8 @@
   </a>
   <ul class="row container-genres mt-3">
     <span class="col-md-6 col-sm-12 mb-2" *ngFor="let genre of genresMovies">
-      <li class=" btn btn-sm btn-outline-teal btn-block" [textContent]="genre.name" style="list-style: none;">
+      <li style="list-style: none;">
+        <a class=" btn btn-sm btn-outline-teal btn-block" routerLink="/peliculas/generos/{{ genre.id }}/1" [textContent]="genre.name"></a>
       </li>
     </span>
     <!-- <li class="btn  btn-outline-teal btn-block"> <a> Ver lista completa </a></li> -->

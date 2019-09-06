@@ -15,68 +15,130 @@ export class InterestComponent implements OnInit {
 
   option: string = '';
   movies: any[] = [];
+  total_results: number[] = [];
+  loading: boolean = true;
+  title: string = "";
+  id: string = "1";
+
 
 
   constructor(
     private _activateRouter: ActivatedRoute,
     private _moviesService: MoviesService,
     private _router: Router
-  ) { }
+  ) {
+    console.log('constructor')
+   }
+  
 
   ngOnInit() {
 
     this.option = this._activateRouter.snapshot.params['opcion'];
+    this.id = this._activateRouter.snapshot.params['page'];
     this.movies = [];
+    this.total_results = [];
+    this.loading = true;
+    this.title = "";
 
-    switch (this.option) {
+    // console.log(
+    //   this.option,
+    //   this.id,
+    //   this.movies,
+    //   this.total_results,
+    //   this.loading,
+    //   this.title
+    // )
+
+    // return;
+
+    this.showResults(this.option, this.id);
+  }
+
+  showResults(option, page: string = "1") {
+    console.log('mostrar resultados')
+    switch (option) {
       case '1':
-        this.getPopularKids()
+        this.title = "Películas más populares para niños";
+        this.getPopularKids(page)
           .then((data: any) => {
-            // this.loadingMovies = false;
+
             this.movies = data;
+            if (this.movies.length > 0) this.loading = false;
             console.log(data)
+
           })
           .catch(() => {
-            // this.loadingMovies = true;
+            this.loading = true;
           });
         break;
       case '2':
-        this.getPopularLastYear()
+        this.title = "Mejores películas del año pasado";
+        this.getPopularLastYear(page)
           .then((data: any) => {
-            // this.loadingMovies = false;
+
             this.movies = data;
+            if (this.movies.length > 0) this.loading = false;
             console.log(data)
+
           })
           .catch(() => {
-            // this.loadingMovies = true;
+            this.loading = true;
           });
         break;
       case '3':
-        this.getClasificationR()
+        this.title = "Mejores películas clasificación R";
+        this.getClasificationR(page)
           .then((data: any) => {
-            // this.loadingMovies = false;
+
             this.movies = data;
+            if (this.movies.length > 0) this.loading = false;
             console.log(data)
+
           })
           .catch(() => {
-            // this.loadingMovies = true;
+            this.loading = true;
           });
         break;
       case '4':
-        this.getBestDramas()
+        this.title = "Mejores películas de dramas del año actual";
+        this.getBestDramas(page)
           .then((data: any) => {
-            // this.loadingMovies = false;
+
             this.movies = data;
+            if (this.movies.length > 0) this.loading = false;
             console.log(data)
+
           })
           .catch(() => {
-            // this.loadingMovies = true;
+            this.loading = true;
           });
         break;
 
       default:
         break;
     }
+  }
+
+  detailsMovie(movie) {
+    this._router.navigate([
+      'peliculas',
+      movie['id']
+    ])
+  }
+
+  nextPage(page): void {
+
+    this.loading = true;
+    this.id = page;
+
+    this._router.navigate([
+      '/peliculas/interesar',
+      this.option,
+      page
+    ]).then(() => {
+
+      this.showResults(this.option, this.id);
+    })
 
 
   }
@@ -87,7 +149,10 @@ export class InterestComponent implements OnInit {
 
       this._moviesService.getPopularKids(page)
         .pipe(
-          map((data: any) => data.results),
+          map((data: any) => {
+            this.total_results = data.total_results;
+            return data.results
+          }),
           takeUntil(this.unsubscribe$)
         )
         .subscribe((data: any) => {
@@ -104,7 +169,10 @@ export class InterestComponent implements OnInit {
 
       this._moviesService.getPopularLastYear(page)
         .pipe(
-          map((data: any) => data.results),
+          map((data: any) => {
+            this.total_results = data.total_results;
+            return data.results
+          }),
           takeUntil(this.unsubscribe$)
         )
         .subscribe((data: any) => {
@@ -119,9 +187,12 @@ export class InterestComponent implements OnInit {
 
     return new Promise((resolve, reject) => {
 
-      this._moviesService.getClasification(page,"R")
+      this._moviesService.getClasification(page, "R")
         .pipe(
-          map((data: any) => data.results),
+          map((data: any) => {
+            this.total_results = data.total_results;
+            return data.results
+          }),
           takeUntil(this.unsubscribe$)
         )
         .subscribe((data: any) => {
@@ -138,7 +209,10 @@ export class InterestComponent implements OnInit {
 
       this._moviesService.getBestDramas(page)
         .pipe(
-          map((data: any) => data.results),
+          map((data: any) => {
+            this.total_results = data.total_results;
+            return data.results
+          }),
           takeUntil(this.unsubscribe$)
         )
         .subscribe((data: any) => {

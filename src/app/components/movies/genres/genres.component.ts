@@ -19,6 +19,7 @@ export class GenresComponent implements OnInit, OnDestroy {
   genre: string = '';
   total_results: any[] = [];
   page: string = "1";
+  showLoading: boolean = true;
 
   private unsubscribe$ = new Subject<void>();
 
@@ -33,16 +34,16 @@ export class GenresComponent implements OnInit, OnDestroy {
     this.listGenres = Genres.Movies;
 
 
-    if(this._activatedRoute.snapshot.params.genre != null){
+    if (this._activatedRoute.snapshot.params.genre != null) {
 
-      
-      this.showMovies(this._activatedRoute.snapshot.params.genre)
+      this.genreID = this._activatedRoute.snapshot.params.genre;
+      this.page = (this._activatedRoute.snapshot.params.page != null)
+                  ? this._activatedRoute.snapshot.params.page
+                  : "1";
+
+      this.showMovies(this.genreID, this.page)
 
     }
-  }
-
-  getId() {
-    this.page = this._activatedRoute.snapshot.params.page;
   }
 
   detailsMovie(movie) {
@@ -52,17 +53,22 @@ export class GenresComponent implements OnInit, OnDestroy {
     ])
   }
 
-  showMovies(selectGenres) {
+  showMovies(selectGenres, page = "1") {
 
-    this.page = "1";
+    this.movies = [];
     this.genreID = selectGenres;
+    this.showLoading = true;
+    this.page = page;
+    
 
     this._router.navigate([
       '/peliculas/generos',
       this.genreID,
       this.page
     ]).then(() => {
-      this.genre = this.listGenres.find((e: any) => e.id == selectGenres);
+
+      //obtener el id y el nombre
+      this.genre = this.listGenres.find((e: any) => e.id == Number(selectGenres));
 
       this.disableListGenres = true;
 
@@ -71,19 +77,24 @@ export class GenresComponent implements OnInit, OnDestroy {
           if (data) {
             this.disableListGenres = false;
             this.movies = data;
+            if (this.movies.length > 0) this.showLoading = false;
           }
         })
         .catch(() => {
-        
+          this.showLoading = true;
         });
     })
 
 
   }
+
   nextPage(page): void {
+
+    this.movies = [];
 
     this.page = page;
     this.genreID = this._activatedRoute.snapshot.params.genre;
+    this.showLoading = true;
 
     this._router.navigate([
       '/peliculas/generos',
@@ -95,9 +106,10 @@ export class GenresComponent implements OnInit, OnDestroy {
         .then((data: any) => {
 
           this.movies = data;
+          if (this.movies.length > 0) this.showLoading = false;
 
         })
-        .catch(err => console.log(err));
+        .catch(err => this.showLoading = true);
     })
 
 

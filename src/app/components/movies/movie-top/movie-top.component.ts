@@ -14,7 +14,7 @@ export class MovieTopComponent implements OnInit, OnDestroy {
 
   movies: any[] = [];
   total_results: number[] = [];
-  loading: boolean = true;
+  showLoadingCardMovieTop: boolean = true;
   id: string = '1';
  
   
@@ -36,10 +36,11 @@ export class MovieTopComponent implements OnInit, OnDestroy {
     this.getMoviesTops(this.id)
       .then((data: any) => {
         this.movies = data
-        this.loading = false;
+        if(this.movies.length>0) this.showLoadingCardMovieTop = false;
+        
       })
       .catch((error) => {
-        this.loading = true;
+        this.showLoadingCardMovieTop = true;
 
       });
 
@@ -77,7 +78,7 @@ export class MovieTopComponent implements OnInit, OnDestroy {
 
   nextPage(page): void {
 
-    this.loading = true;
+    this.showLoadingCardMovieTop = true;
     this.id = page;
 
     this._router.navigate([
@@ -89,10 +90,10 @@ export class MovieTopComponent implements OnInit, OnDestroy {
         .then((data: any) => {
 
           this.movies = data;
-          this.loading = false;
+          if(this.movies.length>0) this.showLoadingCardMovieTop = false;
 
         })
-        .catch(err => this.loading = true);
+        .catch(err => this.showLoadingCardMovieTop = true);
     })
 
 

@@ -21,7 +21,7 @@ export class SideBarComponent implements OnInit {
   }
 
   getGenres() {
-    this.genresMovies = Genres.Movies.splice(5,6);
+    this.genresMovies = Genres.Movies;
     this.genresSeries = Genres.TV;
   }
 

@@ -13,8 +13,10 @@ export class MoviesComponent implements OnInit, OnDestroy {
 
   private unsubscribe$ = new Subject<void>();
 
-  moviesPopularWeek: any[] = [];
+  showLoadingMoviesPopular:boolean= true;
   moviesPopular: any[] = [];
+
+  showLoadingMoviesTop:boolean= true;
   moviesTop: any[] = [];
   
 
@@ -29,19 +31,21 @@ export class MoviesComponent implements OnInit, OnDestroy {
 
     this.topMovies()
       .then((data: any) => {
-        // this.loadingMovies = false;
+        
         this.moviesTop = data.slice(0, 18);
+        if(this.moviesTop.length>0) this.showLoadingMoviesTop = false;
       })
       .catch(() => {
-        // this.loadingMovies = true;
+          this.showLoadingMoviesTop = true;
       });
     this.popularMovies()
       .then((data: any) => {
-        // this.loadingMovies = false;
+        
         this.moviesPopular = data.slice(0, 18);
+        if(this.moviesPopular.length>0) this.showLoadingMoviesPopular = false;
       })
       .catch(() => {
-        // this.loadingMovies = true;
+        this.showLoadingMoviesPopular = true;
       });
 
   }

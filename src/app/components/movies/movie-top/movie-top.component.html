@@ -3,9 +3,12 @@
     
     <div class="row mb-4">
 
-      <app-loading class="offset-lg-4" *ngIf="loading  else elseBlock"></app-loading>
+      <app-loading class="offset-lg-4" 
+                  *ngIf="showLoadingCardMovieTop  
+                  else showGridCardMoviesTop">
+      </app-loading>
 
-      <ng-template #elseBlock>
+      <ng-template #showGridCardMoviesTop>
         
         <app-grid-card title="Películas más votadas" 
                        url="/peliculas/top/1"

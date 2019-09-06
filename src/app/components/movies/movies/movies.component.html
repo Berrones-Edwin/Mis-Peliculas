@@ -21,20 +21,32 @@
 
   <div class="container-side-left col-sm-12 col-md-9">
 
-    <app-grid-card title="Películas más votadas" 
-                   url="/peliculas/top/1"
-                   [itemArray]="moviesTop"
-                   (item)="detailsMovie($event)"
-                   [showPagination]="false">
-    </app-grid-card>
+    <app-loading *ngIf="showLoadingMoviesPopular; 
+                  else showGridCardMoviesTop">
+    </app-loading>
+
+    <ng-template #showGridCardMoviesTop>
+      <app-grid-card title="Películas más votadas" 
+                     url="/peliculas/top/1"
+                     [itemArray]="moviesTop"
+                     (item)="detailsMovie($event)"
+                     [showPagination]="false">
+      </app-grid-card>
+    </ng-template>
+
     <hr>
 
-    <app-grid-card title="Las más populares" 
-                   url="/peliculas/popular/1"
-                   [itemArray]="moviesPopular"
-                   (item)="detailsMovie($event)"
-                   [showPagination]="false">
-    </app-grid-card>
+    <app-loading *ngIf="showLoadingMoviesTop; else showGridCardMoviesPopular">
+    </app-loading>
+    
+    <ng-template #showGridCardMoviesPopular>
+      <app-grid-card title="Las más populares" 
+                     url="/peliculas/popular/1"
+                     [itemArray]="moviesPopular"
+                     (item)="detailsMovie($event)"
+                     [showPagination]="false">
+      </app-grid-card>
+    </ng-template>
   </div>
 
   <div class="container-side-right col-sm-12 col-md-3">

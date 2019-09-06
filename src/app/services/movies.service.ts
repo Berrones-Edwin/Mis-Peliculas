@@ -120,6 +120,7 @@ export class MoviesService {
 
     return this._http.get(`${environment.url}/discover/movie`, { params })
   }
+  
   getClasification(page: string = "1",classification:string) {
 
     let params: HttpParams = new HttpParams()
@@ -134,8 +135,6 @@ export class MoviesService {
   }
   getBestDramas(page: string = "1") {
 
-    //   /discover/movie?with_genres=18&primary_release_year=2014
-    const LastYear = new Date().getFullYear() - 1;
     let params: HttpParams = new HttpParams()
       .append('api_key', this.apiKey)
       .append('language', 'es')

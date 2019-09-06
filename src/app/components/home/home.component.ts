@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.popularMovies()
       .then((data: any) => {
         this.loadingMovies = false;
-        this.movies = data.slice(0, 12);
+        this.movies = data.slice(0, 15);
       })
       .catch(() => {
         this.loadingMovies = true;
@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.popularSeries()
       .then((data: any) => {
         this.loadingSeries = false;
-        this.series = data.slice(0, 12);
+        this.series = data.slice(0, 15);
       })
       .catch(() => {
         this.loadingSeries = true;

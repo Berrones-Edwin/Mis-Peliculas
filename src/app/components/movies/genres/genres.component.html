@@ -6,20 +6,27 @@
           <select class="form-control disabled" (change)="showMovies(selectGenres.value)"
             #selectGenres name="genres" id="genres">
             <option value="" selected> Seleciona un genero</option>
-            <option *ngFor="let genres of listGenres" value="{{ genres.id }}"> {{ genres.name }} </option>
+            <option *ngFor="let genres of listGenres" 
+                    value="{{ genres.id }}"
+                    [selected]="genre.id === genres.id"> 
+                    {{ genres.name }} 
+            </option>
           </select>
         </div>
       </fieldset>
     </form>
-    <app-grid-card title="Películas Genero" 
-                   [itemArray]="movies"
-                   (item)="detailsMovie($event)"
-                   [showBtnExplore]='false'
-                   *ngIf="movies.length > 0"
-                   [total_results]="total_results"
-                  (number_page)="nextPage($event)"
-                  [page]="page">
-    </app-grid-card>
+    <app-loading *ngIf="showLoading; else showGridCard"></app-loading>
+    <ng-template #showGridCard >
+      <app-grid-card title="Películas Genero {{ (genre.name !== null ) ? genre.name : '' }}" 
+                     [itemArray]="movies"
+                     (item)="detailsMovie($event)"
+                     [showBtnExplore]='false'
+                     *ngIf="movies.length > 0"
+                     [total_results]="total_results"
+                    (number_page)="nextPage($event)"
+                    [page]="page">
+      </app-grid-card>
+    </ng-template>
   </div>
   <div class="col-sm-12 col-md-5">
 
