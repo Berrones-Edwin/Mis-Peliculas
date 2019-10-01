@@ -39,7 +39,7 @@ export class HomeService {
       .append('api_key', this.apiKey)
       .append('language', 'es')
 
-    return this._http.get(`${environment.url}/tv/popular`, { params });
+    return this._http.get(`${environment.url}/t5v/popular`, { params });
   }
   
   searchMovies(busqueda:string){

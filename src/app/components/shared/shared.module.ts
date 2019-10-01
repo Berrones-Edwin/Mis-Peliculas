@@ -13,6 +13,7 @@ import { ImagePipe } from 'src/app/pipes/image.pipe';
 import { GridCardComponent } from './grid-card/grid-card.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MaintenanceComponent } from './maintenance/maintenance.component';
 
 @NgModule({
   exports:[
@@ -23,7 +24,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ImagePipe,
     SideBarComponent,
     GridCardComponent,
-    PaginationComponent
+    PaginationComponent,
+    MaintenanceComponent
   ],
   declarations: [
     FooterComponent,
@@ -33,7 +35,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ImagePipe,
     SideBarComponent,
     GridCardComponent,
-    PaginationComponent
+    PaginationComponent,
+    MaintenanceComponent
   ],
   imports: [
     CommonModule,

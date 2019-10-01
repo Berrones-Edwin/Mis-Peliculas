@@ -1,7 +1,7 @@
 // Modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from "@angular/forms";
 
@@ -12,6 +12,7 @@ import { HomeComponent } from './components/home/home.component';
 // Shared Module
 import { SharedModule } from './components/shared/shared.module';
 import { SearchComponent } from './components/search/search.component';
+import { GlobalService } from './interceptors/global.service';
 
 @NgModule({
   declarations: [
@@ -25,11 +26,17 @@ import { SearchComponent } from './components/search/search.component';
     HttpClientModule,
     FormsModule,
     SharedModule,
-    
+
 
 
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: GlobalService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

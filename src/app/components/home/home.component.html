@@ -1,8 +1,7 @@
 <div class="row mt-4">
   <div class="container-side-left col-sm-12 col-md-9">
    
-    <app-loading *ngIf="loadingMovies else elseBlock">
-    </app-loading>
+    <app-loading *ngIf="loadingMovies else elseBlock"></app-loading>
 
     <ng-template #elseBlock>
 
@@ -11,8 +10,7 @@
                      *ngIf="movies"
                      url="/peliculas/top/1"
                      (item)="detailsMovie($event)"
-                     [showPagination]="false"
-      >
+                     [showPagination]="false">
       </app-grid-card>
 
     </ng-template>
@@ -25,8 +23,7 @@
       <app-grid-card title="Series Más Populares" 
                      [itemArray]="series"
                      *ngIf="series"
-                     [showPagination]="false"
-      >
+                     [showPagination]="false">
       </app-grid-card>
 
     </ng-template>

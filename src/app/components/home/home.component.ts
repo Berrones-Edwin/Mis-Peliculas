@@ -17,7 +17,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   movies: any[] = [];
   series: any[] = [];
- 
+
+  prueba: any[];
+
 
   loadingMovies: boolean = true;
   loadingSeries: boolean = true;
@@ -29,24 +31,49 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+    // this.popularMovies()
+    //   .then((data: any) => {
+    //     this.loadingMovies = false;
+    //     this.movies = data.slice(0, 15);
+    //   })
+    //   .catch(() => {
+    //     this.loadingMovies = true;
+    //   });
+
+    // this.popularSeries()
+    //   .then((data: any) => {
+    //     this.loadingSeries = false;
+    //     this.series = data.slice(0, 15);
+    //   })
+    //   .catch(() => {
+    //     this.loadingSeries = true;
+    //   }); 
+
+    //===========================================
+    //============PROMESAS ENCADENADAS===========
+    //==========================================
+
     this.popularMovies()
       .then((data: any) => {
         this.loadingMovies = false;
         this.movies = data.slice(0, 15);
+        return this.popularSeries();
       })
-      .catch(() => {
-        this.loadingMovies = true;
-      });
-
-    this.popularSeries()
       .then((data: any) => {
         this.loadingSeries = false;
         this.series = data.slice(0, 15);
       })
-      .catch(() => {
+      .catch((err) => {
+        this.loadingMovies = true;
         this.loadingSeries = true;
+        console.log(err)
       });
 
+    // this.movies = await this.popularMovies()
+    // this.loadingMovies = (this.movies.length>0) ? false : true;
+    // this.series = await this.popularSeries()
+    // this.loadingSeries = (this.series.length>0) ? false : true;
+    // this.prueba.find
 
   }
 
@@ -55,13 +82,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   //  
   detailsMovie(movie) {
     // console.log(movie);
-    
+
     this._router.navigate([
       'peliculas',
       movie['id']
     ])
   }
-  popularMovies() {
+  popularMovies(): Promise<any[]> {
 
     return new Promise((resolve, reject) => {
 
@@ -74,10 +101,10 @@ export class HomeComponent implements OnInit, OnDestroy {
           if (data) resolve(data)
           else reject();
         },
-          error => reject());
+          err => reject(err));
     })
   }
-  popularSeries() {
+  popularSeries(): Promise<any[]> {
 
     return new Promise((resolve, reject) => {
       this._homeService.popularSeries()
@@ -89,11 +116,11 @@ export class HomeComponent implements OnInit, OnDestroy {
           if (data) resolve(data)
           else reject()
         },
-          err => reject());
+          err => reject(err));
     })
   }
 
-  
+
 
   ngOnDestroy(): void {
 

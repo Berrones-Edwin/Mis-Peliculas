@@ -15,9 +15,9 @@ export class MovieComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
 
   id: string;
-  movie: any[];
-  credits: any[];
-  recomendations: any[];
+  movie: any[] = [];
+  credits: any[] = [];
+  recomendations: any[] = [];
   reviews: any[] = []
   urlTrailerYotube: string;
   btnWatchTrailer: boolean = false;
@@ -63,7 +63,7 @@ export class MovieComponent implements OnInit, OnDestroy {
 
     this.getReviews(this.id)
       .then((data: any) => {
-        this.reviews= data;
+        this.reviews = data;
 
       })
       .catch((err) => console.log(err));

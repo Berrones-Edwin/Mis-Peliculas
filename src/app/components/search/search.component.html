@@ -19,6 +19,7 @@
                      [itemArray]="movies"
                      *ngIf="movies"
                      (item)="detailsMovie($event)"
+                     [showPagination]="false"
       >
       </app-grid-card>
   </div>
