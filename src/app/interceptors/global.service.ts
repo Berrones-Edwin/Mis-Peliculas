@@ -20,6 +20,8 @@ export class GlobalService implements HttpInterceptor {
     //   'token-usuario': '123456789'
     // });
 
+    
+
     console.log('interceptor funcionando');
     
 

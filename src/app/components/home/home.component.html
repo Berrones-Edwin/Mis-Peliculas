@@ -10,7 +10,8 @@
                      *ngIf="movies"
                      url="/peliculas/top/1"
                      (item)="detailsMovie($event)"
-                     [showPagination]="false">
+                     [showPagination]="false"
+                     >
       </app-grid-card>
 
     </ng-template>
@@ -23,7 +24,9 @@
       <app-grid-card title="Series Más Populares" 
                      [itemArray]="series"
                      *ngIf="series"
-                     [showPagination]="false">
+                     [showPagination]="false"
+                     
+                     [showBtnExplore]="false">
       </app-grid-card>
 
     </ng-template>

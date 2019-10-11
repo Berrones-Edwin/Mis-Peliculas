@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { Genres } from 'src/app/Data/Genres';
 import { MoviesService } from 'src/app/services/movies.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
@@ -117,6 +118,16 @@ export class HomeComponent implements OnInit, OnDestroy {
           else reject()
         },
           err => reject(err));
+    })
+  }
+
+  detailsSerie($event){
+    console.log('info')
+    Swal.fire({
+      title:'Comunicado',
+      text: 'Pronto estará disponible la sección de series',
+      type: 'info',
+      confirmButtonText: 'Aceptar'
     })
   }
 
