@@ -1,6 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-secondary mb-2"
-    style="background-color: #e91e63 !important"
->
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary mb-2" style="background-color: #e91e63 !important">
   <a class="navbar-brand" routerLink="/inicio">Mis Películas</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,29 +13,18 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/peliculas" routerLinkActive="active">Películas</a>
       </li>
-      
-      <!-- <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" routerLinkActive="active" >
-          Películas
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" routerLink="/peliculas">Peliculas</a>
-          <a class="dropdown-item" routerLink="/peliculas/popular/1">Las más populares</a>
-          <a class="dropdown-item" routerLink="/peliculas/top/1">Las más votadas</a>
-          <a class="dropdown-item" routerLink="/peliculas/generos">Generos</a>
-          <a class="dropdown-item" routerLink="/peliculas/clasificaciones">Clasificaciones</a>
-        </div>
-      </li> -->
       <li class="nav-item">
         <a class="nav-link" routerLink="/series" routerLinkActive="active">Series</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/buscar"  routerLinkActive="active">Explorar</a>
+        <a class="nav-link" routerLink="/buscar" routerLinkActive="active">Explorar</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/contacto"  routerLinkActive="active">Contacto</a>
+        <a class="nav-link" routerLink="/contacto" routerLinkActive="active">Contacto</a>
       </li>
     </ul>
+    <div class="form-inline my-2 my-lg-0">
+      <button (click)="login()" class="btn btn-outline-secondary my-2 my-sm-0">Iniciar Sesion</button>
+    </div>
   </div>
 </nav>
-

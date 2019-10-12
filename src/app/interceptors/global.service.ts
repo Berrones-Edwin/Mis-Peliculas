@@ -22,7 +22,7 @@ export class GlobalService implements HttpInterceptor {
 
     
 
-    console.log('interceptor funcionando');
+    // console.log('interceptor funcionando');
     
 
     const reqClone = req.clone()
