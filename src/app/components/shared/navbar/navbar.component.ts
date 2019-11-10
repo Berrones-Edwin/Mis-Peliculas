@@ -23,7 +23,16 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     // if(this.request_token)
-    //   this.getTokenApproved();
+      this.getTokenApproved();
+
+   
+  }
+
+  getTokenApproved() {
+
+    console.log('aqui')
+    // if(window.location.href.split('?')[1] === undefined || window.location.href.split('?')[1] === null)
+    //   return;
 
     if (window.location.href.split('?')[1] !== undefined) {
       this.request_token_approved = window.location.href.split('?')[1].split('&')[0].split('=')[1];
@@ -37,23 +46,6 @@ export class NavbarComponent implements OnInit {
             console.log(data['session_id'])
           })
     }
-  }
-
-  getTokenApproved() {
-
-    console.log('aqui')
-    // if(window.location.href.split('?')[1] === undefined || window.location.href.split('?')[1] === null)
-    //   return;
-
-    this.request_token_approved = window.location.href.split('?')[1].split('&')[0].split('=')[1];
-    console.log(this.request_token_approved)
-
-    if (this._authService.session_id.length > 0)
-      this.createNewSession(this.request_token_approved)
-        .then((data) => {
-          this._authService.session_id = data['session_id'];
-          console.log(this._authService.session_id)
-        })
 
   }
 
@@ -71,8 +63,19 @@ export class NavbarComponent implements OnInit {
 
   }
 
-  logout(){
+  cancelUser() {
     
+    
+    this.invalidateUser(this._authService.session_id)
+    .then((data)=>{
+      // success: true
+      console.log(data);
+      if(data['success']===true){
+
+        this._authService.session_id = "";
+        this.router.navigate(['/']);
+      }
+    });
   }
 
   getNewToken(): Promise<any[]> {
@@ -98,6 +101,16 @@ export class NavbarComponent implements OnInit {
         err => reject(err))
     })
   }
+
+  invalidateUser(session_id: string): Promise<any[]> {
+    return new Promise((resolve, reject) => {
+      this._authService.logout(session_id).subscribe((data: any) => {
+        if (data) resolve(data)
+        else reject()
+      }, err => reject(err))
+    });
+  }
+
 
 }
 

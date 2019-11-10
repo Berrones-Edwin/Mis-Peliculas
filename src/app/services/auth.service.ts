@@ -25,7 +25,7 @@ export class AuthService {
   }
 
   getPermissionUser(token: string) {
-    window.location.href = `https://www.themoviedb.org/authenticate/${token}?redirect_to=http://localhost:4200/inicio`;
+    window.location.href = `https://www.themoviedb.org/authenticate/${token}?redirect_to=http://localhost:4200/inicio`; 
   }
 
   createNewSession(request_token: string) {
@@ -51,7 +51,7 @@ export class AuthService {
         }
       }
 
-    return this._http.delete(`${environment.url}/authentication/session/new?api_key=${this.apiKey}`,options);
+    return this._http.delete(`https://api.themoviedb.org/3/authentication/session?api_key=${this.apiKey}`,options);
 
   }
 
