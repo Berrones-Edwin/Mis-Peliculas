@@ -13,6 +13,7 @@ import { HomeComponent } from './components/home/home.component';
 import { SharedModule } from './components/shared/shared.module';
 import { SearchComponent } from './components/search/search.component';
 import { GlobalService } from './interceptors/global.service';
+import { InformationModule } from './components/information/information.module';
 
 @NgModule({
   declarations: [
@@ -26,9 +27,7 @@ import { GlobalService } from './interceptors/global.service';
     HttpClientModule,
     FormsModule,
     SharedModule,
-
-
-
+    InformationModule
   ],
   providers: [
     {

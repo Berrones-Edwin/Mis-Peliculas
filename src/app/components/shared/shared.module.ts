@@ -14,6 +14,7 @@ import { GridCardComponent } from './grid-card/grid-card.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MaintenanceComponent } from './maintenance/maintenance.component';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   exports:[
@@ -25,7 +26,8 @@ import { MaintenanceComponent } from './maintenance/maintenance.component';
     SideBarComponent,
     GridCardComponent,
     PaginationComponent,
-    MaintenanceComponent
+    MaintenanceComponent,
+    ErrorComponent
   ],
   declarations: [
     FooterComponent,
@@ -36,7 +38,8 @@ import { MaintenanceComponent } from './maintenance/maintenance.component';
     SideBarComponent,
     GridCardComponent,
     PaginationComponent,
-    MaintenanceComponent
+    MaintenanceComponent,
+    ErrorComponent
   ],
   imports: [
     CommonModule,

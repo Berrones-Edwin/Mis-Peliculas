@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-navbar',
@@ -20,12 +21,13 @@ export class NavbarComponent implements OnInit {
   request_token: {};
   request_token_approved: string;
   session_id: string;
+  showLoginOrLogout:boolean = false;
 
   ngOnInit() {
     // if(this.request_token)
-      this.getTokenApproved();
+    this.getTokenApproved();
+    this.showLoginOrLogout = this._authService.session_id === '';
 
-   
   }
 
   getTokenApproved() {
@@ -50,32 +52,49 @@ export class NavbarComponent implements OnInit {
   }
 
   login() {
-    this.getNewToken()
-      .then((data) => {
-        this.request_token = data;
-        console.log(this.request_token);
+    Swal.fire({
+      title: 'Iniciar Sesión',
+      text: 'En un momento sera redireccionado al formulario',
+      type: 'info',
+      confirmButtonText: 'Aceptar'
+    })
 
-        return this.getPermissionUser(this.request_token['request_token'])
-      })
-      .then((data) => {
-        console.log(data)
-      })
+    setTimeout(() => {
+
+      this.getNewToken()
+        .then((data) => {
+          this.request_token = data;
+          console.log(this.request_token);
+
+          return this.getPermissionUser(this.request_token['request_token'])
+        })
+        .then((data) => {
+          console.log(data)
+        })
+    }, 1000);
 
   }
 
   cancelUser() {
-    
+
     
     this.invalidateUser(this._authService.session_id)
-    .then((data)=>{
-      // success: true
-      console.log(data);
-      if(data['success']===true){
+      .then((data) => {
+        // success: true
+        console.log(data);
+        if (data['success'] === true) {
 
-        this._authService.session_id = "";
-        this.router.navigate(['/']);
-      }
-    });
+          this._authService.session_id = "";
+          this.router.navigate(['/']);
+          
+          Swal.fire({
+            title: 'Cerrar Sesión',
+            text: 'Se cerró la sesión correctamente',
+            type: 'success',
+            confirmButtonText: 'Aceptar'
+          })
+        }
+      });
   }
 
   getNewToken(): Promise<any[]> {

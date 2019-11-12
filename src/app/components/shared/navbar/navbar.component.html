@@ -20,19 +20,23 @@
         <a class="nav-link" routerLink="/buscar" routerLinkActive="active">Explorar</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/contacto" routerLinkActive="active">Contacto</a>
+        <a class="nav-link" routerLink="/info/contacto" routerLinkActive="active">Contacto</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/info/acerca" routerLinkActive="active">Acerca de</a>
       </li>
     </ul>
-    <div class="form-inline my-2 my-lg-0">
+    <div class="form-inline my-1 my-lg-0">
 
-      <button *ngIf="!_authService.session_id.length > 0; else logout" (click)="login()"
-        class="btn btn-outline-warning my-2 my-sm-0">Iniciar Sesion</button>
+      <button *ngIf="_authService.session_id === ''; else logout" (click)="login()"
+        class="btn btn-outline-purple my-2 my-sm-0">Iniciar Sesion</button>
       
 
       <ng-template #logout>
       
-        <button (click)="cancelUser()" class="btn btn-outline-warning my-2 my-sm-0">Cerrar sesión</button>
+        <button (click)="cancelUser()" class="btn btn-outline-purple my-2 my-sm-0">Cerrar sesión</button>
       </ng-template>
+      
 
     </div>
   </div>
