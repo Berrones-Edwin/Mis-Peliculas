@@ -14,6 +14,7 @@ import { SharedModule } from './components/shared/shared.module';
 import { SearchComponent } from './components/search/search.component';
 import { GlobalService } from './interceptors/global.service';
 import { InformationModule } from './components/information/information.module';
+import { AuthModule } from './components/auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { InformationModule } from './components/information/information.module';
     HttpClientModule,
     FormsModule,
     SharedModule,
-    InformationModule
+    InformationModule,
+    AuthModule
   ],
   providers: [
     {

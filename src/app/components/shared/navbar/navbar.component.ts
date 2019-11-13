@@ -44,8 +44,6 @@ export class NavbarComponent implements OnInit {
         this.createNewSession(this.request_token_approved)
           .then((data) => {
             this._authService.session_id = data['session_id'];
-            console.log(this._authService.session_id)
-            console.log(data['session_id'])
           })
     }
 
