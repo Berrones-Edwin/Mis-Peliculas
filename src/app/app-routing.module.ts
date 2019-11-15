@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'peliculas', loadChildren: './components/movies/movies.module#MoviesModule', },
   { path: 'series', loadChildren: './components/series/series.module#SeriesModule' },
   { path: 'info', loadChildren: './components/information/information.module#InformationModule' },
-  { path: 'auth', loadChildren: './components/auth/auth.module#AuthModule' },
+  { path: 'auth', loadChildren: './components/auth/auth.module#AuthModule',canLoad:[AuthGuard] },
 
   { path: 'buscar', component: SearchComponent },
   { path: 'buscar/:termino', component: SearchComponent },

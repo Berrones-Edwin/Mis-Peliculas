@@ -5,10 +5,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { SeriesComponent } from './series/series.component';
 
 
-const routes:Routes=[
-    { path: '',component: SeriesComponent },
-    // { path: 'popular-semana/:id',component: MoviePopularComponent }
-  ];
+const routes: Routes = [
+  { path: '', component: SeriesComponent },
+  { path: '**', pathMatch: 'full', redirectTo: '' }
+  // { path: 'popular-semana/:id',component: MoviePopularComponent }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

@@ -21,8 +21,9 @@ const routes: Routes = [
   { path: 'generos/:genre/:page', component: GenresComponent },
   { path: 'clasificaciones', component: ClassificationsComponent },
   { path: 'clasificaciones/:opcion', component: ClassificationsComponent },
-  { path:'interesar/:opcion/:page',component:InterestComponent },
-  { path: ':id', component: MovieComponent }
+  { path: 'interesar/:opcion/:page', component: InterestComponent },
+  { path: ':id', component: MovieComponent },
+  { path: '**', pathMatch:'full',redirectTo:''}
 ];
 
 @NgModule({
