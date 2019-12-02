@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Location } from '@angular/common';
+import { AuthService } from 'src/app/services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-movie',
@@ -26,7 +28,8 @@ export class MovieComponent implements OnInit, OnDestroy {
   constructor(
     private _moviesService: MoviesService,
     private _activatedRouter: ActivatedRoute,
-    private _location: Location
+    private _location: Location,
+    private _authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -67,6 +70,19 @@ export class MovieComponent implements OnInit, OnDestroy {
 
       })
       .catch((err) => console.log(err));
+  }
+
+  addToFavorites() {
+    console.log('click');
+    
+    if (this._authService.session_id === "" || this._authService.session_id === null || this._authService.session_id === undefined) {
+      Swal.fire({
+        title: 'Ocurrio un error',
+        text: 'Debe de iniciar sesión para realizar esta acción.',
+        type: 'error',
+        confirmButtonText: 'Aceptar'
+      })
+    }
   }
 
   getDetails(id: string) {

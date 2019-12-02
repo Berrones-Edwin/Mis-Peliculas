@@ -9,7 +9,7 @@
 
       <div class="container-left-btn">
 
-        <button class="btn btn-outline-danger mr-2">Agregar Favoritos</button>
+        <button (click)="addToFavorites()" class="btn btn-outline-danger mr-2">Agregar Favoritos</button>
 
         <a href="{{ urlTrailerYotube }}" target="_blank" class="btn btn-outline-warning"
           *ngIf="!btnWatchTrailer; else elseTrailer">Mirar Trailer</a>
