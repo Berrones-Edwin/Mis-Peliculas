@@ -62,13 +62,10 @@
         </div>
       </div>
 
-      <!-- <button *ngIf="showLoginOrLogout; else logout" (click)="login()"
-        class="btn btn-outline-purple my-2 my-sm-0">Iniciar Sesion</button> -->
-      <button *ngIf="showLoginOrLogout; else logout" data-toggle="modal" data-target="#exampleModal"
-        class="btn btn-outline-secondary">Iniciar Sesion</button>
-
-
-
+      <button *ngIf="showLoginOrLogout; else logout" (click)="login()"
+        class="btn btn-outline-purple my-2 my-sm-0">Iniciar Sesion</button>
+      <!-- <button *ngIf="showLoginOrLogout; else logout" data-toggle="modal" data-target="#exampleModal"
+        class="btn btn-outline-secondary">Iniciar Sesion</button> -->
 
       <ng-template #logout>
 
