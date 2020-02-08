@@ -11,6 +11,8 @@ export class AuthGuard implements CanLoad {
   constructor(
     private _authService: AuthService
   ) { }
+
+  
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {

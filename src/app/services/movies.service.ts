@@ -90,9 +90,10 @@ export class MoviesService {
     return this._http.get(`${environment.url}/movie/${movie_id}/recommendations`, { params })
   }
 
-  /**
-   * METODOS PARA EL SIDEBAR
-   */
+  
+  /**********************************************/
+  /** METODOS PARA EL SIDEBAR */
+  /**********************************************/
 
   getPopularKids(page: string = "1") {
 

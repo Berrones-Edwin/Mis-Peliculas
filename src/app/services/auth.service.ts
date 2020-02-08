@@ -28,7 +28,11 @@ export class AuthService {
   }
 
   getPermissionUser(token: string) {
-    window.location.href = `https://www.themoviedb.org/authenticate/${token}?redirect_to=http://localhost:4200`;
+    //https://www.themoviedb.org/authenticate/
+    //https://www.themoviedb.org/authenticate/{REQUEST_TOKEN}?redirect_to=http://www.yourapp.com/approved
+
+    // window.location.href = `https://www.themoviedb.org/authenticate/${token}?redirect_to=https://berrones-edwin.github.io/Mega-Pelis/ `;
+    window.location.href = `https://www.themoviedb.org/authenticate/${token}?redirect_to=http://localhost:4200/inicio`;
   }
 
   createNewSession(request_token: string) {
@@ -39,6 +43,21 @@ export class AuthService {
 
     return this._http.post(`${environment.url}/authentication/session/new`, { "request_token": request_token }, { params });
 
+  }
+
+  createSessionLogin(username: string, password: string, request_token: string) {
+
+    let params: HttpParams = new HttpParams()
+      .append('api_key', this.apiKey)
+      .append('language', 'es');
+
+      const newUser = {
+        username,
+        password,
+        request_token
+      }
+
+    return this._http.post(`${environment.url}/authentication/token/validate_with_login`, newUser, { params });
   }
   logout(session_id: string) {
 

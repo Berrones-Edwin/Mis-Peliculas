@@ -25,7 +25,7 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/info/acerca" routerLinkActive="active">Acerca de</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="_authService.session_id != null">
         <a class="nav-link" routerLink="/auth/mi-perfil" routerLinkActive="active">Mi perfil</a>
       </li>
     </ul>
@@ -62,11 +62,9 @@
         </div>
       </div>
 
-      <button *ngIf="showLoginOrLogout; else logout" (click)="login()"
+      <button *ngIf="_authService.session_id === null; else logout" (click)="login()"
         class="btn btn-outline-purple my-2 my-sm-0">Iniciar Sesion</button>
-      <!-- <button *ngIf="showLoginOrLogout; else logout" data-toggle="modal" data-target="#exampleModal"
-        class="btn btn-outline-secondary">Iniciar Sesion</button> -->
-
+        
       <ng-template #logout>
 
         <button (click)="cancelUser()" class="btn btn-outline-purple my-2 my-sm-0">Cerrar sesión</button>

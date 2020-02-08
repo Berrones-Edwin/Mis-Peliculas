@@ -10,7 +10,7 @@ import { Subject } from 'rxjs';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit ,OnDestroy{
+export class NavbarComponent implements OnInit, OnDestroy {
 
   private unsubscribe$ = new Subject<void>();
 
@@ -18,32 +18,14 @@ export class NavbarComponent implements OnInit ,OnDestroy{
     private _authService: AuthService,
     private router: Router
   ) {
-    this.showLoginOrLogout = this._authService.session_id === null;
+   
   }
 
   request_token: {};
   request_token_approved: string;
   session_id: string;
-  showLoginOrLogout: boolean = false;
 
   ngOnInit() {
-    // if(this.request_token)
-    this.getTokenApproved();
-
-
-  }
-
-  getTokenApproved() {
-
-    if (window.location.href.split('?')[1] !== undefined) {
-      this.request_token_approved = window.location.href.split('?')[1].split('&')[0].split('=')[1];
-
-      if (this.request_token_approved.length > 0)
-        this.createNewSession(this.request_token_approved)
-          .then((data) => {
-            localStorage.setItem('session_id', data['session_id']);
-          })
-    }
 
   }
 
@@ -55,18 +37,30 @@ export class NavbarComponent implements OnInit ,OnDestroy{
       confirmButtonText: 'Aceptar'
     })
 
-    setTimeout(() => {
-
       this.getNewToken()
         .then((data) => {
-          this.request_token = data;
 
-          return this.getPermissionUser(this.request_token['request_token'])
+          this.request_token = data;
+          return this.createSessionLogin('edwinivan', 'berrones12', this.request_token['request_token']
+          );
+
         })
         .then((data) => {
           console.log(data)
+          return this.createNewSession(data['request_token'])
         })
-    }, 1000);
+        .then((data) => {
+          // Guardar el session ID
+          if (data) {
+            localStorage.setItem('session_id', data['session_id']);
+            this._authService.session_id = data['session_id'];
+
+          }
+          else {
+            console.error('Datos incorrectos');
+          }
+
+        })
 
   }
 
@@ -110,10 +104,21 @@ export class NavbarComponent implements OnInit ,OnDestroy{
     })
   }
 
-
-  getPermissionUser(token: string) {
-    this._authService.getPermissionUser(token);
+  createSessionLogin(username: string, password: string, requestToken: string): Promise<any[]> {
+    return new Promise((resolve, reject) => {
+      this._authService.createSessionLogin(username, password, requestToken)
+        .pipe(
+          takeUntil(this.unsubscribe$)
+        )
+        .subscribe((data: any) => {
+          if (data) resolve(data)
+          else reject()
+        },
+          err => reject(err))
+    })
   }
+
+
   createNewSession(requestToken: string): Promise<any[]> {
     return new Promise((resolve, reject) => {
       this._authService.createNewSession(requestToken)
