@@ -9,14 +9,12 @@ import { AuthGuard } from './guards/auth.guard';
 const routes: Routes = [
   { path: 'inicio', component: HomeComponent },
 
-  { path: 'peliculas', loadChildren: './components/movies/movies.module#MoviesModule', },
-  { path: 'series', loadChildren: './components/series/series.module#SeriesModule' },
-  { path: 'info', loadChildren: './components/information/information.module#InformationModule' },
-  { path: 'auth', loadChildren: './components/auth/auth.module#AuthModule',canLoad:[AuthGuard] },
-
+  { path: 'peliculas', loadChildren: () => import('./components/movies/movies.module').then(m => m.MoviesModule) },
+  { path: 'series', loadChildren: () => import('./components/series/series.module').then(m => m.SeriesModule) },
+  { path: 'info', loadChildren: () => import('./components/information/information.module').then(m => m.InformationModule) },
+  { path: 'auth', loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule), canLoad: [AuthGuard] },
   { path: 'buscar', component: SearchComponent },
   { path: 'buscar/:termino', component: SearchComponent },
-
   { path: '**', redirectTo: 'inicio', pathMatch: 'full' }
 ];
 
