@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
 
   constructor(
-    private _authService: AuthService,
+    public _authService: AuthService,
     private router: Router
   ) {
    
