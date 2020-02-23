@@ -2,19 +2,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { NgxPaginationModule } from 'ngx-pagination';
 // Componentes
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { LoadingComponent } from './loading/loading.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
-// Pipes
-import { ImagePipe } from 'src/app/pipes/image.pipe';
+import { SidenavbarUserComponent } from './sidenavbar-user/sidenavbar-user.component';
 import { GridCardComponent } from './grid-card/grid-card.component';
 import { PaginationComponent } from './pagination/pagination.component';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { MaintenanceComponent } from './maintenance/maintenance.component';
 import { ErrorComponent } from './error/error.component';
+// Pipes
+import { ImagePipe } from 'src/app/pipes/image.pipe';
 
 @NgModule({
   exports:[
@@ -27,7 +28,8 @@ import { ErrorComponent } from './error/error.component';
     GridCardComponent,
     PaginationComponent,
     MaintenanceComponent,
-    ErrorComponent
+    ErrorComponent,
+    SidenavbarUserComponent
   ],
   declarations: [
     FooterComponent,
@@ -39,7 +41,8 @@ import { ErrorComponent } from './error/error.component';
     GridCardComponent,
     PaginationComponent,
     MaintenanceComponent,
-    ErrorComponent
+    ErrorComponent,
+    SidenavbarUserComponent
   ],
   imports: [
     CommonModule,

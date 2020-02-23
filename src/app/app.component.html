@@ -1,8 +1,12 @@
 <app-navbar></app-navbar>
-<!-- <app-header></app-header> -->
-<main class="container" 
-      style="min-height: 100vh; height:100vh; margin-top:50px;"
->
-  <router-outlet></router-outlet>
-</main>
-<!-- <app-footer></app-footer> -->
+<div class="d-flex" id="wrapper">
+  <app-sidenavbar-user 
+    style="min-height: 100vh !important;" 
+    class="bg-dark sidenavbar">
+  </app-sidenavbar-user>
+  <div class="page-content-wrapper">
+    <main class="container">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
