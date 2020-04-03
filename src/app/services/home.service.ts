@@ -23,14 +23,14 @@ export class HomeService {
 
 
   // Peliculas en cines esta semana 
-  getTops(page: string = "1") {
+  getPopularMovies(page: string = "1") {
 
     let params: HttpParams = new HttpParams()
       .append('api_key', this.apiKey)
       .append('language', 'es')
       .append('page', page);
 
-    return this._http.get(`${environment.url}/movie/top_rated`, { params })
+    return this._http.get(`${environment.url}/movie/popular`, { params })
   }
 
   popularSeries() {

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MoviesService } from 'src/app/services/movies.service';
 import { ActivatedRoute } from '@angular/router';
 import { map, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { Location } from '@angular/common';
 import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
@@ -24,6 +24,11 @@ export class MovieComponent implements OnInit, OnDestroy {
   urlTrailerYotube: string;
   btnWatchTrailer: boolean = false;
 
+  movie$: Observable<any>;
+  credits$: Observable<any>;
+  recomendations$: Observable<any>;
+  reviews$: Observable<any>;
+
 
   constructor(
     private _moviesService: MoviesService,
@@ -38,12 +43,12 @@ export class MovieComponent implements OnInit, OnDestroy {
     this.id = this._activatedRouter.snapshot.params['id'];
 
     this.getDetails(this.id)
-      .then((data: any) => this.movie = data)
-      .catch((err) => console.log(err));
+      // .then((data: any) => this.movie = data)
+      // .catch((err) => console.log(err));
 
     this.getCredits(this.id)
-      .then((data: any) => { this.credits = data.slice(0, 7) })
-      .catch((err) => console.log(err));
+      // .then((data: any) => { this.credits = data.slice(0, 7) })
+      // .catch((err) => console.log(err));
 
     this.getRecommendations(this.id)
       .then((data: any) => {
@@ -87,34 +92,38 @@ export class MovieComponent implements OnInit, OnDestroy {
 
   getDetails(id: string) {
 
-    return new Promise((resolve, reject) => {
+    this.movie$ = this._moviesService.getDetails(id);
 
-      this._moviesService.getDetails(id)
-        .pipe(
-          takeUntil(this.unsubscribe$)
-        )
-        .subscribe((data: any) => {
-          if (data) resolve(data)
-          else reject();
-        },
-          error => reject(error));
-    })
+    // return new Promise((resolve, reject) => {
+
+    //   this._moviesService.getDetails(id)
+    //     .pipe(
+    //       takeUntil(this.unsubscribe$)
+    //     )
+    //     .subscribe((data: any) => {
+    //       if (data) resolve(data)
+    //       else reject();
+    //     },
+    //       error => reject(error));
+    // })
   }
   getCredits(id: string) {
 
-    return new Promise((resolve, reject) => {
+    this.credits$ = this._moviesService.getCredits(id)
 
-      this._moviesService.getCredits(id)
-        .pipe(
-          map((data) => data['cast']),
-          takeUntil(this.unsubscribe$)
-        )
-        .subscribe((data: any) => {
-          if (data) resolve(data)
-          else reject();
-        },
-          error => reject(error));
-    })
+    // return new Promise((resolve, reject) => {
+
+    //   this._moviesService.getCredits(id)
+    //     .pipe(
+    //       map((data) => data['cast']),
+    //       takeUntil(this.unsubscribe$)
+    //     )
+    //     .subscribe((data: any) => {
+    //       if (data) resolve(data)
+    //       else reject();
+    //     },
+    //       error => reject(error));
+    // })
   }
   getVideos(id: string) {
 

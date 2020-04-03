@@ -1,4 +1,4 @@
-<ng-container *ngIf="movie">
+<ng-container *ngIf="movie$ | async as movie; else loading">
   <div class="row">
 
     <section class="col-sm-12 col-md-4 mb-3">
@@ -45,7 +45,7 @@
       <hr>
 
       <!-- Elenco -->
-      <div class="cast" *ngIf="credits">
+      <div class="cast" *ngIf="credits$ | async as credits; else loadingCredits">
         <div class="row mb-4 container-title">
           <h4 class="title col-sm-12 col-md-10">Elenco</h4>
           <span class="container-title-btn col-sm-12 col-md-2">
@@ -53,13 +53,16 @@
           </span>
         </div>
         <div class="container-cast">
-          <div class="card-cast  mr-3" *ngFor="let credit of credits">
+          <div class="card-cast  mr-3" *ngFor="let credit of credits.cast.slice(0, 7)">
             <img class="img-fluid  shadow-lg cast__img" height="120px;" src="{{ credit.profile_path | image}}"
               alt="{{ credit.name }}">
             <p class="cast__name">{{ credit.name }}</p>
           </div>
         </div>
       </div>
+      <ng-template #loadingCredits>
+        <app-loading></app-loading>
+      </ng-template>
 
       <hr>
 
@@ -119,3 +122,7 @@
 
 
 </ng-container>
+
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>

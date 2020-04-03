@@ -3,25 +3,26 @@
     
     <div class="row mb-4">
 
-      <app-loading class="offset-lg-4" 
-                  *ngIf="showLoadingCardMovieTop  
-                  else showGridCardMoviesTop">
-      </app-loading>
+      <ng-template #loading>
+        <app-loading class="offset-lg-4">
+        </app-loading>
 
-      <ng-template #showGridCardMoviesTop>
+      </ng-template>
+
+      <ng-container *ngIf="movies$ | async as movies; else loading">
         
         <app-grid-card title="Películas más votadas" 
                        url="/peliculas/top/1"
-                       [itemArray]="movies"
+                       [itemArray]="movies.results"
                        (item)="detailsMovie($event)"
                        class="mx-auto"
                        [showBtnExplore]="false"
-                       [total_results]="total_results"
+                       [total_results]="movies.total_results"
                        (number_page)="nextPage($event)"
                        [page]="id">
         </app-grid-card>
         
-      </ng-template>
+      </ng-container >
     </div>
   </div>
   <div class="container-side-left col-sm-12 col-md-3">

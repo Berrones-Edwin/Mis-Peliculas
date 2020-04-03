@@ -12,12 +12,12 @@ export class GridCardComponent implements OnInit {
   @Input() url = '';
   @Input() showBtnExplore: boolean = true;
   @Input() itemArray: any[] = [];
-  @Output() item = new EventEmitter<any>();
-  @Output() number_page = new EventEmitter<any>();
   @Input() total_results = 0;
   @Input() page: number = 1;
   @Input() showPagination: boolean = true;
-
+  
+  @Output() number_page = new EventEmitter<any>();
+  @Output() item = new EventEmitter<any>();
 
   constructor() { }
 
