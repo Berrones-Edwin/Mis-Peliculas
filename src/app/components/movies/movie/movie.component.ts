@@ -51,10 +51,10 @@ export class MovieComponent implements OnInit, OnDestroy {
       // .catch((err) => console.log(err));
 
     this.getRecommendations(this.id)
-      .then((data: any) => {
-        this.recomendations = data.slice(0, 7);
-      })
-      .catch((err) => console.log(err));
+      // .then((data: any) => {
+      //   this.recomendations = data.slice(0, 7);
+      // })
+      // .catch((err) => console.log(err));
 
     this.getVideos(this.id)
       .then((data: any[]) => {
@@ -70,11 +70,11 @@ export class MovieComponent implements OnInit, OnDestroy {
       .catch((err) => console.log(err));
 
     this.getReviews(this.id)
-      .then((data: any) => {
-        this.reviews = data;
+      // .then((data: any) => {
+      //   this.reviews = data;
 
-      })
-      .catch((err) => console.log(err));
+      // })
+      // .catch((err) => console.log(err));
   }
 
   addToFavorites() {
@@ -143,35 +143,38 @@ export class MovieComponent implements OnInit, OnDestroy {
   }
   getRecommendations(id: string) {
 
-    return new Promise((resolve, reject) => {
+    this.recomendations$ =this._moviesService.getRecommendations(id);
+    // return new Promise((resolve, reject) => {
 
-      this._moviesService.getRecommendations(id)
-        .pipe(
-          map((data) => data['results']),
-          takeUntil(this.unsubscribe$)
-        )
-        .subscribe((data: any) => {
-          if (data) resolve(data)
-          else reject();
-        },
-          error => reject(error));
-    })
+    //   this._moviesService.getRecommendations(id)
+    //     .pipe(
+    //       map((data) => data['results']),
+    //       takeUntil(this.unsubscribe$)
+    //     )
+    //     .subscribe((data: any) => {
+    //       if (data) resolve(data)
+    //       else reject();
+    //     },
+    //       error => reject(error));
+    // })
   }
   getReviews(id: string) {
 
-    return new Promise((resolve, reject) => {
+    this.reviews$ = this._moviesService.getReviews(id);
 
-      this._moviesService.getReviews(id)
-        .pipe(
-          map((data) => data['results']),
-          takeUntil(this.unsubscribe$)
-        )
-        .subscribe((data: any) => {
-          if (data) resolve(data)
-          else reject();
-        },
-          error => reject(error));
-    })
+    // return new Promise((resolve, reject) => {
+
+    //   this._moviesService.getReviews(id)
+    //     .pipe(
+    //       map((data) => data['results']),
+    //       takeUntil(this.unsubscribe$)
+    //     )
+    //     .subscribe((data: any) => {
+    //       if (data) resolve(data)
+    //       else reject();
+    //     },
+    //       error => reject(error));
+    // })
   }
 
   goBack() {
@@ -180,8 +183,8 @@ export class MovieComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
 
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
+    // this.unsubscribe$.next();
+    // this.unsubscribe$.complete();
   }
 
 }

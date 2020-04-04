@@ -96,8 +96,7 @@ export class MoviesService {
   /**********************************************/
 
   getPopularKids(page: string = "1") {
-
-
+   
     let params: HttpParams = new HttpParams()
       .append('api_key', this.apiKey)
       .append('language', 'es')
@@ -110,7 +109,7 @@ export class MoviesService {
   }
 
   getPopularLastYear(page: string = "1") {
-
+    
     const LastYear = new Date().getFullYear() - 1;
     let params: HttpParams = new HttpParams()
       .append('api_key', this.apiKey)

@@ -2,25 +2,24 @@
     <div class="container-side-left col-sm-12 col-md-9">
       
       <div class="row mb-4">
-  
-        <app-loading class="offset-lg-4" 
-                    *ngIf="loading; 
-                    else showGridCardInterest">
-        </app-loading>
-  
-        <ng-template #showGridCardInterest>
+
+        <ng-container *ngIf="movies$ | async as movies; else loading">
           
           <app-grid-card title="{{ title }}" 
                          url="/peliculas/interesar/{{ option }}/{{ id }}"
-                         [itemArray]="movies"
+                         [itemArray]="movies.results"
                          (item)="detailsMovie($event)"
                          class="mx-auto"
                          [showBtnExplore]="false"
-                         [total_results]="total_results"
+                         [total_results]="movies.total_results"
                          (number_page)="nextPage($event)"
                          [page]="id">
           </app-grid-card>
           
+        </ng-container>
+
+        <ng-template #loading>
+          <app-loading class="offset-lg-4"></app-loading>
         </ng-template>
       </div>
     </div>

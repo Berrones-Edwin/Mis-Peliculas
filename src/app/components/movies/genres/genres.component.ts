@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Genres } from 'src/app/Data/Genres';
 import { MoviesService } from 'src/app/services/movies.service';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -10,18 +10,17 @@ import { Router, ActivatedRoute } from '@angular/router';
   templateUrl: './genres.component.html',
   styleUrls: ['./genres.component.css']
 })
-export class GenresComponent implements OnInit, OnDestroy {
+export class GenresComponent implements OnInit {
 
   listGenres: any[] = [];
   genreID: string = "";
-  movies: any[] = [];
+  
   disableListGenres: boolean = false;
   genre: string = '';
-  total_results: any[] = [];
   page: string = "1";
-  showLoading: boolean = true;
+  show: boolean = false;
 
-  private unsubscribe$ = new Subject<void>();
+  movies$:Observable<any>;
 
   constructor(
     private _moviesService: MoviesService,
@@ -33,15 +32,17 @@ export class GenresComponent implements OnInit, OnDestroy {
 
     this.listGenres = Genres.Movies;
 
-
     if (this._activatedRoute.snapshot.params.genre != null) {
 
       this.genreID = this._activatedRoute.snapshot.params.genre;
+
+      
+      // si no viene parametro es 1 | caso contrario toma el valor de la ruta
       this.page = (this._activatedRoute.snapshot.params.page != null)
                   ? this._activatedRoute.snapshot.params.page
                   : "1";
 
-      this.showMovies(this.genreID, this.page)
+        this.showMovies(this.genreID, this.page)
 
     }
   }
@@ -55,9 +56,8 @@ export class GenresComponent implements OnInit, OnDestroy {
 
   showMovies(selectGenres, page = "1") {
 
-    this.movies = [];
     this.genreID = selectGenres;
-    this.showLoading = true;
+    this.show = true;
     this.page = page;
     
 
@@ -69,20 +69,8 @@ export class GenresComponent implements OnInit, OnDestroy {
 
       //obtener el id y el nombre
       this.genre = this.listGenres.find((e: any) => e.id == Number(selectGenres));
-
-      this.disableListGenres = true;
-
       this.getMoviesGenres("1", this.genreID)
-        .then((data: any) => {
-          if (data) {
-            this.disableListGenres = false;
-            this.movies = data;
-            if (this.movies.length > 0) this.showLoading = false;
-          }
-        })
-        .catch(() => {
-          this.showLoading = true;
-        });
+      
     })
 
 
@@ -90,55 +78,21 @@ export class GenresComponent implements OnInit, OnDestroy {
 
   nextPage(page): void {
 
-    this.movies = [];
-
     this.page = page;
     this.genreID = this._activatedRoute.snapshot.params.genre;
-    this.showLoading = true;
-
+  
     this._router.navigate([
       '/peliculas/generos',
       this.genreID,
       page
-    ]).then(() => {
-
-      this.getMoviesGenres(page, this.genreID)
-        .then((data: any) => {
-
-          this.movies = data;
-          if (this.movies.length > 0) this.showLoading = false;
-
-        })
-        .catch(err => this.showLoading = true);
-    })
+    ]).then(() => this.getMoviesGenres(page, this.genreID))
 
 
   }
 
   getMoviesGenres(page: string = "1", genre: string) {
-
-    return new Promise((resolve, reject) => {
-
-      this._moviesService.getMoviesGenres(page, genre)
-        .pipe(
-          map((data: any) => {
-            this.total_results = data.total_results;
-            return data.results;
-          }),
-          takeUntil(this.unsubscribe$)
-        )
-        .subscribe((data: any) => {
-          if (data) resolve(data)
-          else reject();
-        },
-          error => reject());
-    })
+    this.movies$ = this._moviesService.getMoviesGenres(page, genre);
   }
 
-  ngOnDestroy() {
-
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
 
 }
