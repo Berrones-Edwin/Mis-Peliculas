@@ -38,9 +38,6 @@ export class InterestComponent implements OnInit {
 
 
     });
-
-
-
   }
 
 
@@ -50,10 +47,6 @@ export class InterestComponent implements OnInit {
   }
 
   showResults(option, page: string = "1") {
-    this.movies$ = null;
-    this.title = "";
-    console.log(option);
-
     switch (option) {
       case '1':
         this.title = "Películas más populares para niños";

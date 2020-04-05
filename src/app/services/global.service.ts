@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DatesInterface } from '../interfaces/Dates.interface';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,24 @@ import { DatesInterface } from '../interfaces/Dates.interface';
 export class GlobalService {
 
   constructor() { }
+
+  private apiKey = '1de6ce733dd02d81073262cb66031536';
+
+  getApiKey(): string {
+    return this.apiKey;
+  }
+
+  getHeaders(page?: string): HttpParams {
+
+    let params = new HttpParams()
+      .append('api_key', this.apiKey)
+      .append('language', 'es')
+
+    if (page !== undefined || page !== null || page !== "")
+      params.append('page', page)
+
+    return params;
+  }
 
   // Private Methods
   private numberWeek(currentDay: number): string {

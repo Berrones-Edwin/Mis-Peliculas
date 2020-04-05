@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-
-// Variables Globlas
-import { environment } from 'src/environments/environment';
-
 
 // Interfaces
 import { DatesInterface } from '../interfaces/Dates.interface';
+import { MoviesService } from './movies.service';
+import { GlobalService } from './global.service';
+import { SeriesService } from './series.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,42 +12,27 @@ import { DatesInterface } from '../interfaces/Dates.interface';
 export class HomeService {
 
   myDates: DatesInterface = { firstDate: '', lastDate: '' };
-  private apiKey = '1de6ce733dd02d81073262cb66031536';
+  private apiKey = '';
 
   constructor(
-    private _http: HttpClient
-  ) { }
-
-
+    private _moviesService: MoviesService,
+    private _globalService:GlobalService,
+    private _seriesService:SeriesService
+  ) {
+    this.apiKey = this._globalService.getApiKey();
+   }
 
   // Peliculas en cines esta semana 
   getPopularMovies(page: string = "1") {
-
-    let params: HttpParams = new HttpParams()
-      .append('api_key', this.apiKey)
-      .append('language', 'es')
-      .append('page', page);
-
-    return this._http.get(`${environment.url}/movie/popular`, { params })
+    return this._moviesService.getPopular();
   }
 
   popularSeries() {
-
-    let params: HttpParams = new HttpParams()
-      .append('api_key', this.apiKey)
-      .append('language', 'es')
-
-    return this._http.get(`${environment.url}/tv/popular`, { params });
+    return this._seriesService.popularSeries();
   }
-  
-  searchMovies(busqueda:string){
-    
-    let params: HttpParams = new HttpParams()
-      .append('api_key', this.apiKey)
-      .append('language', 'es')
-      .append('query', busqueda)
-  
-    return this._http.get(`${environment.url}/search/movie`, { params });
+
+  searchMovies(busqueda: string) {
+    return this._moviesService.searchMovies(busqueda);
   }
 
 
