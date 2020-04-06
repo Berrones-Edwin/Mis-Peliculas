@@ -10,6 +10,8 @@ import { MovieTopComponent } from './movie-top/movie-top.component';
 import { InterestComponent } from './interest/interest.component';
 import { GenresComponent } from './genres/genres.component';
 import { ClassificationsComponent } from './classifications/classifications.component';
+import { NowPlayingComponent } from './now-playing/now-playing.component';
+import { GetComingComponent } from './get-coming/get-coming.component';
 
 
 
@@ -17,13 +19,15 @@ const routes: Routes = [
   { path: '', component: MoviesComponent },
   { path: 'top/:id', component: MovieTopComponent },
   { path: 'popular/:id', component: MoviePopularComponent },
+  { path: 'ahora-cines/:id', component: NowPlayingComponent },
+  { path: 'proximo-estrenar/:id', component: GetComingComponent },
   { path: 'generos', component: GenresComponent },
   { path: 'generos/:genre/:page', component: GenresComponent },
   { path: 'clasificaciones', component: ClassificationsComponent },
   { path: 'clasificaciones/:opcion', component: ClassificationsComponent },
   { path: 'interesar/:opcion/:page', component: InterestComponent },
   { path: ':id', component: MovieComponent },
-  { path: '**', pathMatch:'full',redirectTo:''}
+  { path: '**', pathMatch: 'full', redirectTo: '' }
 ];
 
 @NgModule({

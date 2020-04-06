@@ -12,6 +12,8 @@ import { MovieTopComponent } from './movie-top/movie-top.component';
 import { InterestComponent } from './interest/interest.component';
 import { GenresComponent } from './genres/genres.component';
 import { ClassificationsComponent } from './classifications/classifications.component';
+import { GetComingComponent } from './get-coming/get-coming.component';
+import { NowPlayingComponent } from './now-playing/now-playing.component';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { ClassificationsComponent } from './classifications/classifications.comp
     MovieComponent,
     InterestComponent,
     GenresComponent,
-    ClassificationsComponent
+    ClassificationsComponent,
+    GetComingComponent,
+    NowPlayingComponent
   ],
   imports: [
     CommonModule,

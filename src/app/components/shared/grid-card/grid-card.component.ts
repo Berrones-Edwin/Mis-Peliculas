@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { 
+          Component, 
+          OnInit, 
+          Input, 
+          Output, 
+          EventEmitter, 
+          ChangeDetectionStrategy 
+        } from '@angular/core';
 
 @Component({
   selector: 'app-grid-card',
@@ -8,16 +15,25 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy
 })
 export class GridCardComponent implements OnInit {
 
-  @Input() title = '';
-  @Input() url = '';
-  @Input() showBtnExplore: boolean = true;
-  @Input() itemArray: any[] = [];
-  @Input() total_results = 0;
-  @Input() page: number = 1;
-  @Input() showPagination: boolean = true;
+  @Input() 
+    title = '';
+  @Input() 
+    url = '';
+  @Input() 
+    showBtnExplore: boolean = true;
+  @Input() 
+    itemArray: any[] = [];
+  @Input() 
+    total_results = 0;
+  @Input() 
+    page: number = 1;
+  @Input() 
+    showPagination: boolean = true;
   
-  @Output() number_page = new EventEmitter<any>();
-  @Output() item = new EventEmitter<any>();
+  @Output() 
+    number_page = new EventEmitter<any>();
+  @Output() 
+    item = new EventEmitter<any>();
 
   constructor() { }
 
