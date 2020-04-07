@@ -10,26 +10,26 @@ import { MoviesService } from 'src/app/services/movies.service';
   templateUrl: './movie-top.component.html',
   styleUrls: ['./movie-top.component.css'],
 })
-export class MovieTopComponent implements OnInit, OnDestroy {
+export class MovieTopComponent implements OnInit {
 
-  movies: any[] = [];
+  
   total_results: number[] = [];
-  showLoadingCardMovieTop: boolean = true;
+
   id: string = '1';
 
   movies$:Observable<any>;
- 
-  
 
-  private unsubscribe$ = new Subject<void>();
+
 
   constructor(
-    private _homeService: MoviesService,
+    private _moviesService: MoviesService,
     private _activatedRoute: ActivatedRoute,
     private _router: Router
   ) {
 
     this.getId();
+
+    
 
   }
 
@@ -42,8 +42,7 @@ export class MovieTopComponent implements OnInit, OnDestroy {
   }
   getMoviesTops() {
 
-   this.movies$ = this._homeService.getTops(this.id);
-
+   this.movies$ = this._moviesService.getTops(this.id);
    
   }
 
@@ -71,10 +70,4 @@ export class MovieTopComponent implements OnInit, OnDestroy {
     ])
   }
 
-  ngOnDestroy(): void {
-
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-
-  }
 }

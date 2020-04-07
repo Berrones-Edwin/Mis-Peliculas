@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { DatesInterface } from '../interfaces/Dates.interface';
 import { HttpParams } from '@angular/common/http';
 
+import { dataCalendar } from "../Data/calendar";
+import { Calendar } from '../interfaces/Calendar.interface';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,16 +18,44 @@ export class GlobalService {
     return this.apiKey;
   }
 
-  getHeaders(page?: string): HttpParams {
+  getHeaders(): HttpParams {
 
     let params = new HttpParams()
       .append('api_key', this.apiKey)
       .append('language', 'es')
 
-    if (page !== undefined || page !== null || page !== "")
-      params.append('page', page)
-
     return params;
+  }
+
+  getDateStart_DateEnd(): Calendar {
+
+    const currentMonth = new Date().getMonth() + 1 + "";
+    let calendar: Calendar;
+    
+    dataCalendar.forEach((element: Calendar) => {
+      if (element.month === currentMonth) {
+        calendar = element;
+      }
+    });
+    // calendar
+    return calendar;
+
+  }
+  getNextMonth(): Calendar {
+
+    let currentMonth = new Date().getMonth() + 1;
+    currentMonth++;
+
+    let calendar: Calendar;
+    
+    dataCalendar.forEach((element: Calendar) => {
+      if (element.month === currentMonth+'') {
+        calendar = element;
+      }
+    });
+    // calendar
+    return calendar;
+
   }
 
   // Private Methods

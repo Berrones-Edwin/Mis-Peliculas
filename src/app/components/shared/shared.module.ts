@@ -16,6 +16,7 @@ import { MaintenanceComponent } from './maintenance/maintenance.component';
 import { ErrorComponent } from './error/error.component';
 // Pipes
 import { ImagePipe } from 'src/app/pipes/image.pipe';
+import { Error404Component } from './error404/error404.component';
 
 @NgModule({
   exports:[
@@ -29,7 +30,8 @@ import { ImagePipe } from 'src/app/pipes/image.pipe';
     PaginationComponent,
     MaintenanceComponent,
     ErrorComponent,
-    SidenavbarUserComponent
+    SidenavbarUserComponent,
+    Error404Component
   ],
   declarations: [
     FooterComponent,
@@ -42,7 +44,8 @@ import { ImagePipe } from 'src/app/pipes/image.pipe';
     PaginationComponent,
     MaintenanceComponent,
     ErrorComponent,
-    SidenavbarUserComponent
+    SidenavbarUserComponent,
+    Error404Component
   ],
   imports: [
     CommonModule,

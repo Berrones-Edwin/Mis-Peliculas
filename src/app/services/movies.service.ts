@@ -4,21 +4,19 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 // Variables Globlas
 import { environment } from 'src/environments/environment';
 import { GlobalService } from './global.service';
+import { Calendar } from '../interfaces/Calendar.interface';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class MoviesService {
 
-  private apiKey = '1de6ce733dd02d81073262cb66031536';
-
   constructor(
     private _http: HttpClient,
     private _globalService: GlobalService
   ) { }
-
-
-
 
   /**
    * 
@@ -26,7 +24,7 @@ export class MoviesService {
    */
   getPopular(page: string = "1") {
 
-    let params = this._globalService.getHeaders(page);
+    let params = this._globalService.getHeaders().append('page', page);
 
     return this._http.get(`${environment.url}/movie/popular`, { params });
   }
@@ -34,11 +32,46 @@ export class MoviesService {
   // Las más votadas
   getTops(page: string = "1") {
 
-    let params = this._globalService.getHeaders(page);
+    let params = this._globalService.getHeaders().append('page', page);
 
     return this._http.get(`${environment.url}/movie/top_rated`, { params });
 
   }
+
+  /**
+   * Proximas a estrenar en los cines
+   * @param page string
+   */
+  getUpcoming(page: string = "1") {
+
+    let date = this._globalService.getNextMonth()
+
+    const currentYear = new Date().getFullYear();
+
+    let params = this._globalService
+      .getHeaders().append('page', page)
+      .append('primary_release_date.gte', `${currentYear}-${date.start}`)
+      .append('primary_release_date.lte', `${currentYear}-${date.end}`)
+
+    return this._http.get(`${environment.url}/movie/upcoming`, { params });
+
+  }
+
+  getNowPlaying(page: string = "1") {
+
+    let date = this._globalService.getDateStart_DateEnd()
+
+    const currentYear = new Date().getFullYear();
+
+    let params = this._globalService.getHeaders()
+      .append('page', page)
+      .append('primary_release_date.gte', `${currentYear}-${date.start}`)
+      .append('primary_release_date.lte', `${currentYear}-${date.end}`)
+
+    return this._http.get(`${environment.url}/movie/now_playing`, { params });
+
+  }
+
   searchMovies(busqueda: string) {
 
     let params = this._globalService.getHeaders()
@@ -92,9 +125,6 @@ export class MoviesService {
   // Lista de recomendaciones para una pelicula
   getRecommendations(movie_id: string) {
 
-    // let params: HttpParams = new HttpParams()
-    //   .append('api_key', this.apiKey)
-    //   .append('language', 'es');
 
     let params = this._globalService.getHeaders();
 
@@ -109,10 +139,10 @@ export class MoviesService {
   getPopularKids(page: string = "1") {
 
     let params = this._globalService
-      .getHeaders(page)
+      .getHeaders().append('page', page)
       .append('certification_country', 'US')
       .append('certification.lte', 'G')
-      // .append('sort_by', 'popularity.asc')
+    // .append('sort_by', 'popularity.asc')
 
     return this._http.get(`${environment.url}/discover/movie`, { params })
   }
@@ -122,9 +152,9 @@ export class MoviesService {
     const LastYear = new Date().getFullYear() - 1;
 
     let params = this._globalService
-      .getHeaders(page)
+      .getHeaders().append('page', page)
       .append('primary_release_year', LastYear.toString())
-      // .append('sort_by', 'vote_average.desc')
+    // .append('sort_by', 'vote_average.desc')
 
     return this._http.get(`${environment.url}/discover/movie`, { params })
   }
@@ -132,17 +162,17 @@ export class MoviesService {
   getClasification(page: string = "1", classification: string) {
 
     let params = this._globalService
-      .getHeaders(page)
+      .getHeaders().append('page', page)
       .append('certification_country', 'US')
       .append('certification.lte', classification)
-      // .append('sort_by', 'vote_average.desc')
+    // .append('sort_by', 'vote_average.desc')
 
     return this._http.get(`${environment.url}/discover/movie`, { params })
   }
   getBestDramas(page: string = "1") {
 
     let params = this._globalService
-      .getHeaders(page)
+      .getHeaders().append('page', page)
       .append('with_genres', '18')
       .append('primary_release_year', new Date().getFullYear().toString())
 
@@ -152,7 +182,7 @@ export class MoviesService {
   getMoviesGenres(page: string = "1", genresID: string) {
 
     let params = this._globalService
-      .getHeaders(page)
+      .getHeaders().append('page', page)
       // .append('sort_by', 'vote_average.desc')
       .append('with_genres', genresID)
 
@@ -160,5 +190,14 @@ export class MoviesService {
   }
 
 
+  /**
+   * Helpers
+   *
+   */
+  getDataCalendar(): Calendar {
+
+    return this._globalService.getDateStart_DateEnd()
+
+  }
 
 }
