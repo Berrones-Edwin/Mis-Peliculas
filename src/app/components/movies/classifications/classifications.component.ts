@@ -1,9 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { classifications } from 'src/app/Data/classifications';
 import { MoviesService } from 'src/app/services/movies.service';
-import { Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { Subject, Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-classifications',
@@ -12,52 +11,59 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ClassificationsComponent implements OnInit, OnDestroy {
 
-  classifications = classifications;
+  classifications = classifications; // Obtiene el array de clasificaciones
   private unsubscribe$ = new Subject<void>();
-  classificationsMovies: any[] = [];
+  classificationsMovies$: Observable<any>;
   classification: string;
+  id:string="";
 
   constructor(
     private _moviesService: MoviesService,
-    private _activatedRouter: ActivatedRoute
+    private _activatedRouter: ActivatedRoute,
+    private _router:Router
   ) { }
 
   ngOnInit() {
 
-    this.classification = this._activatedRouter.snapshot.params.opcion;
+    this._activatedRouter.params.subscribe((data) => {
 
-    if (this.classification) {
-      this.classificationsMovies = [];
-      this.getClasification("1", this.classification)
-        .then((data: any) => {
-          // this.loadingMovies = false;
-          this.classificationsMovies = data;
-          console.log(data)
-        })
-        .catch(() => {
-          // this.loadingMovies = true;
-        });
-    }
+      this.classification = data["opcion"];
+      this.id = data["page"];
 
+      if (this.classification) {
+        this.getClasification("1", this.classification)
+      }
+    })
 
   }
 
   getClasification(page: string = "1", classification: string) {
 
-    return new Promise((resolve, reject) => {
+    this.classificationsMovies$ = this._moviesService.getClasification(page, classification);
 
-      this._moviesService.getClasification(page, classification)
-        .pipe(
-          map((data: any) => data.results),
-          takeUntil(this.unsubscribe$)
-        )
-        .subscribe((data: any) => {
-          if (data) resolve(data)
-          else reject();
-        },
-          error => reject());
+  }
+
+  nextPage(page): void {
+
+    this.id = page;
+    let classification =  this.classification
+
+    this._router.navigate([
+      '/peliculas/clasificaciones/',
+        classification,
+        page
+      
+    ]).then(() => {
+      this.getClasification(this.id,this.classification);
     })
 
+  }
+
+  detailsMovie(movie) {
+    this._router.navigate([
+      'peliculas',
+      movie['id']
+    ])
   }
 
 

@@ -26,7 +26,7 @@ export class GetComingComponent implements OnInit {
     private _router: Router
   ) {
     this.getId();
-    this.calendar = this._moviesService.getDataCalendar();
+    this.calendar = this._moviesService.getNextMonth();
   }
 
   ngOnInit(): void {

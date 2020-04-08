@@ -43,7 +43,6 @@ export class MoviesService {
    * @param page string
    */
   getUpcoming(page: string = "1") {
-
     let date = this._globalService.getNextMonth()
 
     const currentYear = new Date().getFullYear();
@@ -164,7 +163,7 @@ export class MoviesService {
     let params = this._globalService
       .getHeaders().append('page', page)
       .append('certification_country', 'US')
-      .append('certification.lte', classification)
+      .append('certification', classification)
     // .append('sort_by', 'vote_average.desc')
 
     return this._http.get(`${environment.url}/discover/movie`, { params })
@@ -198,6 +197,10 @@ export class MoviesService {
 
     return this._globalService.getDateStart_DateEnd()
 
+  }
+
+  getNextMonth():Calendar{
+    return this._globalService.getNextMonth()
   }
 
 }

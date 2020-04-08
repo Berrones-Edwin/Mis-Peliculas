@@ -1,20 +1,44 @@
 <h2>Clasificaciones</h2>
 <p>Las siguientes clasificaciones son en basadas en Estados Unidos</p>
-<!-- <div class="row row-cols-1 row-cols-md-2"> -->
-  <div class="cards-container">
-    <div class="card bg-dark" *ngFor="let c of classifications">
-     <div class="card-header">
-       <h5 class="card-title">{{ c.name | uppercase }}</h5>
 
-     </div>
-      <div class="card-body">
-        <p class="card-text">{{ c.text  }}</p>
-      </div>
-      <div class="card-footer">
-        <button routerLink="/peliculas/clasificaciones/{{c.id}}"
-          class="btn btn-outline-warning btn-block">Explorar</button>
-      </div>
+<div class="cards-container">
+  <div class="card bg-dark" *ngFor="let c of classifications">
+    <div class="card-header">
+      <h5 class="card-title">{{ c.name | uppercase }}</h5>
+
+    </div>
+    <div class="card-body">
+      <p class="card-text">{{ c.text  }}</p>
+    </div>
+    <div class="card-footer">
+      <button routerLink="/peliculas/clasificaciones/{{c.id}}/1"
+        class="btn btn-outline-warning btn-block">Explorar</button>
     </div>
   </div>
-<!-- </div> -->
+</div>
 
+
+
+
+<ng-container *ngIf="classificationsMovies$ | async as movies">
+  
+  <ng-container *ngIf="movies.results.length > 0; else loading">
+
+    <app-grid-card title="Películas Clasificación" 
+                   
+                   [itemArray]="movies.results"
+                   (item)="detailsMovie($event)"
+                   class="mx-auto"
+                   [showBtnExplore]="false"
+                   [total_results]="movies.total_results"
+                   (number_page)="nextPage($event)"
+                   [page]="id">
+    </app-grid-card>
+  
+    <ng-template #loading>
+      <app-loading></app-loading>
+    </ng-template> <!-- End Ng-Template Loading-->
+
+  </ng-container><!-- End Ng-Template results.length -->
+  
+</ng-container>

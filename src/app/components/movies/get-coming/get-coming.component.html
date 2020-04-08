@@ -12,16 +12,24 @@
   
         <ng-container *ngIf="movies$ | async as movies; else loading">
           
-          <app-grid-card [title]="title" 
-                         url="/peliculas/proximo-estrenar/1"
-                         [itemArray]="movies.results"
-                         (item)="detailsMovie($event)"
-                         class="mx-auto"
-                         [showBtnExplore]="false"
-                         [total_results]="(movies.results.length === movies.total_results) ? movies.total_results : movies.results.length"
-                         (number_page)="nextPage($event)"
-                         [page]="id">
-          </app-grid-card>
+          <ng-container *ngIf="movies.results.length > 0; else nodata">
+            
+          
+            <app-grid-card [title]="title" 
+                          url="/peliculas/proximo-estrenar/1"
+                          [itemArray]="movies.results"
+                          (item)="detailsMovie($event)"
+                          class="mx-auto"
+                          [showBtnExplore]="false"
+                          [total_results]="(movies.results.length === movies.total_results) ? movies.total_results : movies.results.length"
+                          (number_page)="nextPage($event)"
+                          [page]="id">
+            </app-grid-card>
+          </ng-container>
+
+          <ng-template #nodata>
+            <p>No hay peliculas en estreno este mes</p>
+          </ng-template>
         </ng-container>
       </div>
     </div>

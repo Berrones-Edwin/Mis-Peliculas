@@ -35,8 +35,6 @@ export class InterestComponent implements OnInit {
         this.showResults(this.option, this.page);
 
       }
-
-
     });
   }
 

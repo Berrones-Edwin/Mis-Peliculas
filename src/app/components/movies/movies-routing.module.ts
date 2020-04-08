@@ -23,8 +23,10 @@ const routes: Routes = [
   { path: 'generos', component: GenresComponent },
   { path: 'generos/:genre/:page', component: GenresComponent },
   { path: 'clasificaciones', component: ClassificationsComponent },
-  { path: 'clasificaciones/:opcion', component: ClassificationsComponent },
-  { path: 'interesar/:opcion/:page', component: InterestComponent },
+  // { path: 'clasificaciones/:opcion', component: ClassificationsComponent },
+  { path: 'clasificaciones/:opcion/:page', component: ClassificationsComponent },
+  // { path: 'interesar/:opcion/:page', component: InterestComponent },
+
   { path: ':id', component: MovieComponent },
   { path: '**', pathMatch: 'full', redirectTo: '' }
 ];

@@ -8,7 +8,6 @@ import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: 'inicio', component: HomeComponent },
-
   { path: 'peliculas', loadChildren: () => import('./components/movies/movies.module').then(m => m.MoviesModule) },
   { path: 'series', loadChildren: () => import('./components/series/series.module').then(m => m.SeriesModule) },
   { path: 'info', loadChildren: () => import('./components/information/information.module').then(m => m.InformationModule) },
