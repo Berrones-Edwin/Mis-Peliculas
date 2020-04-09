@@ -1,8 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { map } from 'rxjs/internal/operators/map';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject, Observable } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import {  Observable } from 'rxjs';
+
 import { MoviesService } from 'src/app/services/movies.service';
 
 @Component({
@@ -28,9 +27,6 @@ export class MovieTopComponent implements OnInit {
   ) {
 
     this.getId();
-
-    
-
   }
 
   ngOnInit() {

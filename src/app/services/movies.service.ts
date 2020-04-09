@@ -24,7 +24,9 @@ export class MoviesService {
    */
   getPopular(page: string = "1") {
 
-    let params = this._globalService.getHeaders().append('page', page);
+    let params = this._globalService.getHeaders()
+      .append('page', page)
+
 
     return this._http.get(`${environment.url}/movie/popular`, { params });
   }
@@ -32,7 +34,9 @@ export class MoviesService {
   // Las más votadas
   getTops(page: string = "1") {
 
-    let params = this._globalService.getHeaders().append('page', page);
+    let params = this._globalService.getHeaders()
+      .append('page', page)
+      // .append('sort_by','vote_average.desc');
 
     return this._http.get(`${environment.url}/movie/top_rated`, { params });
 
@@ -75,6 +79,7 @@ export class MoviesService {
 
     let params = this._globalService.getHeaders()
       .append('query', busqueda)
+      .append('sort_by','vote_average.desc');
 
     return this._http.get(`${environment.url}/search/movie`, { params });
   }
@@ -199,7 +204,7 @@ export class MoviesService {
 
   }
 
-  getNextMonth():Calendar{
+  getNextMonth(): Calendar {
     return this._globalService.getNextMonth()
   }
 

@@ -4,14 +4,13 @@
     <div class="row mb-4">
 
       <ng-template #loading>
-        <app-loading class="offset-lg-4">
-        </app-loading>
+        <app-loading class="offset-lg-4"></app-loading>
 
       </ng-template>
 
       <ng-container *ngIf="movies$ | async as movies; else loading">
         
-        <app-grid-card title="Películas más votadas" 
+        <app-grid-card title="Películas más Top" 
                        url="/peliculas/top/1"
                        [itemArray]="movies.results"
                        (item)="detailsMovie($event)"
