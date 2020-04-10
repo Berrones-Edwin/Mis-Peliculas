@@ -1,24 +1,37 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { ClassificationsComponent } from './classifications/classifications.component';
+import { GenresComponent } from './genres/genres.component';
+import { GetComingComponent } from './get-coming/get-coming.component';
+import { MovieComponent } from './movie/movie.component';
+import { MoviePopularComponent } from './movie-popular/movie-popular.component';
+import { MovieTopComponent } from './movie-top/movie-top.component';
+import { MoviesComponent } from './movies/movies.component';
+import { NowPlayingComponent } from './now-playing/now-playing.component';
+
 
 const routes: Routes = [
-  { path: '', loadChildren: () => import('./movies/movies-main.module').then(m=> m.MoviesMainModule) },
+  { path: '', component: MoviesComponent },
 
-  { path: 'top/:id', loadChildren: () => import('./movie-top/movie-top.module').then(m => m.MovieTopModule) },
+  { path: 'top/:id', component: MovieTopComponent },
 
-  { path: 'popular/:id', loadChildren: () => import('./movie-popular/movie-popular.module').then(m => m.MoviePopularModule) },
+  { path: 'popular/:id', component: MoviePopularComponent },
 
-  { path: 'ahora-cines/:id', loadChildren: () => import('./now-playing/now-playing.module').then(m => m.NowPlayingModule) },
+  { path: 'ahora-cines/:id', component: NowPlayingComponent },
 
-  { path: 'proximo-estrenar/:id', loadChildren: () => import('./get-coming/get-coming.module').then(m => m.GetComingModule) },
-  { path: 'generos', loadChildren: () => import('./genres/genres.module').then(m => m.GenresModule) },
-  { path: 'generos/:genre/:page', loadChildren: () => import('./genres/genres.module').then(m => m.GenresModule) },
-  { path: 'clasificaciones', loadChildren: () => import('./classifications/classifications.module').then(m => m.ClassificationsModule) },
-  // { path: 'clasificaciones/:opcion', component: ClassificationsComponent },
-  { path: 'clasificaciones/:opcion/:page', loadChildren: () => import('./classifications/classifications.module').then(m => m.ClassificationsModule) },
+  { path: 'proximo-estrenar/:id', component: GetComingComponent },
 
-  { path: ':id', loadChildren: () => import('./movie/movie.module').then(m => m.MovieModule) },
+  { path: 'generos', component: GenresComponent },
+
+  { path: 'generos/:genre/:page', component: GenresComponent },
+
+  { path: 'clasificaciones', component: ClassificationsComponent },
+
+  { path: 'clasificaciones/:opcion/:page', component: ClassificationsComponent },
+
+  { path: ':id', component: MovieComponent },
+  
   { path: '**', pathMatch: 'full', redirectTo: '' }
 ];
 

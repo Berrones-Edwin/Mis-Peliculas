@@ -3,7 +3,7 @@
   <div class="container-side-left col-sm-12 col-md-9">
 
     <ng-container *ngIf="moviesTop$ | async as moviesTop;  else loadingTopMovies">
-      <app-grid-card title="Películas más votadas" 
+      <app-grid-card title="Películas más Top" 
                      url="/peliculas/top/1"
                      [itemArray]="moviesTop.results"
                      (item)="detailsMovie($event)"
