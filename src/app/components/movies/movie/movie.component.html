@@ -54,7 +54,7 @@
       <hr>
 
       <!-- Elenco -->
-      <div class="cast" *ngIf="credits$ | async as credits; else loadingCredits">
+      <div class="cast" *ngIf="movie.credits.cast as credits">
         <div class="row mb-4 container-title">
           <h4 class="title col-sm-12 col-md-10">Elenco</h4>
           <span class="container-title-btn col-sm-12 col-md-2">
@@ -62,23 +62,20 @@
           </span>
         </div>
         <div class="container-cast">
-          <div class="card-cast  mr-3" *ngFor="let credit of credits.cast.slice(0, 7)">
+          <div class="card-cast  mr-3" *ngFor="let credit of credits.slice(0, 7)">
             <img class="img-fluid  shadow-lg cast__img" height="120px;" src="{{ credit.profile_path | image}}"
               alt="{{ credit.name }}">
             <p class="cast__name">{{ credit.name }}</p>
           </div>
         </div>
       </div>
-      <ng-template #loadingCredits>
-        <app-loading></app-loading>
-      </ng-template>
 
       <hr>
       <!-- END Elenco -->
 
       <!-- Peliculas Similares -->
 
-      <ng-container  *ngIf="recomendations$ | async as recomendations; else loadingRecomendations"> 
+      <ng-container  *ngIf="movie.recommendations as recomendations "> 
 
         <div class="row mb-4 container-title" >
           <h4 class="title col-sm-12 col-md-10">Recomendaciones</h4>
@@ -110,15 +107,11 @@
         </div>
       </ng-container>
 
-      <ng-template #loadingRecomendations>
-        <app-loading></app-loading>
-      </ng-template>
-
       <!-- END Peliculas Similares -->
       <hr>
       <!-- Reseñas-->
 
-      <ng-container *ngIf="reviews$ | async as review; else loadingReview">
+      <ng-container *ngIf="movie.review as reviews">
 
         <div class="row mb-4 container-title" *ngIf="review.length>0">
           <h4 class="title col-sm-12 col-md-10">Reseñas</h4>
@@ -141,9 +134,6 @@
   
           </div>
       </ng-container>
-      <ng-template #loadingReview>
-        <app-loading></app-loading>
-      </ng-template>
         <!-- End Reseñas-->
 
     </section>

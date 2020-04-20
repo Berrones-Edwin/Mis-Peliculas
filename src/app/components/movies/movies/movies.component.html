@@ -1,42 +1,30 @@
-<div class="row mt-4">
 
-  <div class="container-side-left col-sm-12 col-md-9">
+<ng-container *ngIf="moviesTop$ | async as moviesTop ;  else loadingTopMovies">
+  <app-grid-card title="Películas más Top" 
+                  url="/peliculas/top/1"
+                  [itemArray]="moviesTop.results"
+                  (item)="detailsMovie($event)"
+                  [showPagination]="false">
+  </app-grid-card>
+</ng-container>
 
-    <ng-container *ngIf="moviesTop$ | async as moviesTop;  else loadingTopMovies">
-      <app-grid-card title="Películas más Top" 
-                     url="/peliculas/top/1"
-                     [itemArray]="moviesTop.results"
-                     (item)="detailsMovie($event)"
-                     [showPagination]="false">
-      </app-grid-card>
-    </ng-container>
+<ng-template #loadingTopMovies>
+  <app-loading></app-loading>
+</ng-template>
 
-    <ng-template #loadingTopMovies>
-      <app-loading></app-loading>
-    </ng-template>
+<hr>
 
-    <hr>
 
-    
-    <ng-container *ngIf="moviesPopular$ | async as moviesPopular; else loadingPopularMovies">
-      <app-grid-card title="Las más populares" 
-                     url="/peliculas/popular/1"
-                     [itemArray]="moviesPopular.results"
-                     (item)="detailsMovie($event)"
-                     [showPagination]="false">
-      </app-grid-card>
-    </ng-container>
+<ng-container *ngIf="moviesPopular$ | async as moviesPopular; else loadingPopularMovies">
+  <app-grid-card title="Las más populares" 
+                  url="/peliculas/popular/1"
+                  [itemArray]="moviesPopular.results"
+                  (item)="detailsMovie($event)"
+                  [showPagination]="false">
+  </app-grid-card>
+</ng-container>
 
-    
-    <ng-template #loadingPopularMovies>
-      <app-loading></app-loading>
-    </ng-template>
 
-  </div>
-
-  <div class="container-side-right col-sm-12 col-md-3">
-    <app-side-bar></app-side-bar>
-  </div>
-</div>
-
-<!-- <app-error-404></app-error-404> -->
+<ng-template #loadingPopularMovies>
+  <app-loading></app-loading>
+</ng-template>

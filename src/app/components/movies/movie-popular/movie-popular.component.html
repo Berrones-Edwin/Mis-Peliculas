@@ -1,31 +1,20 @@
-<div class="row mt-4">
-    <div class="container-side-left col-sm-12 col-md-9">
-      
-      <div class="row mb-4">
-  
-        <ng-template #loading>
+<ng-template #loading>
 
-          <app-loading class="offset-lg-4">
-          </app-loading>
-        </ng-template>
+  <app-loading class="offset-lg-4">
+  </app-loading>
+</ng-template>
+
+<ng-container *ngIf="movies$ | async as movies">
   
-        <ng-container *ngIf="movies$ | async as movies">
-          
-          <app-grid-card title="Películas más Populares" 
-                         url="/peliculas/popular/1"
-                         [itemArray]="movies.results"
-                         (item)="detailsMovie($event)"
-                         class="mx-auto"
-                         [showBtnExplore]="false"
-                         [total_results]="movies.total_results"
-                         (number_page)="nextPage($event)"
-                         [page]="id">
-          </app-grid-card>
-          
-        </ng-container>
-      </div>
-    </div>
-    <div class="container-side-left col-sm-12 col-md-3">
-      <app-side-bar></app-side-bar>
-    </div>
-  </div>
+  <app-grid-card title="Películas más Populares" 
+                  url="/peliculas/popular/1"
+                  [itemArray]="movies.results"
+                  (item)="detailsMovie($event)"
+                  class="mx-auto"
+                  [showBtnExplore]="false"
+                  [total_results]="movies.total_results"
+                  (number_page)="nextPage($event)"
+                  [page]="id">
+  </app-grid-card>
+  
+</ng-container>

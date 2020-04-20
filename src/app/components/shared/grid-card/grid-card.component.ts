@@ -11,7 +11,7 @@ import {
   selector: 'app-grid-card',
   templateUrl: './grid-card.component.html',
   styleUrls: ['./grid-card.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GridCardComponent implements OnInit {
 

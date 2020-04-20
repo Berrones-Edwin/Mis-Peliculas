@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InformationRoutingModule } from './information-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
+
+
 import { ContactComponent } from './contact/contact.component';
 import { AboutComponent } from './about/about.component';
 
@@ -13,7 +16,8 @@ import { AboutComponent } from './about/about.component';
   imports: [
     CommonModule,
     SharedModule,
-    InformationRoutingModule
+    InformationRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class InformationModule { }

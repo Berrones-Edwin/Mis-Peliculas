@@ -92,7 +92,8 @@ export class MoviesService {
   // Detalles de una película
   getDetails(movie_id: string) {
 
-    let params = this._globalService.getHeaders();
+    let params = this._globalService.getHeaders()
+                    .append('append_to_response','videos,images,credits,reviews,recommendations');
 
     return this._http.get(`${environment.url}/movie/${movie_id}`, { params })
 
@@ -104,7 +105,8 @@ export class MoviesService {
    */
   getCredits(movie_id: string) {
 
-    let params = this._globalService.getHeaders();
+    let params = this._globalService.getHeaders()
+                    
 
     return this._http.get(`${environment.url}/movie/${movie_id}/credits`, { params })
   }

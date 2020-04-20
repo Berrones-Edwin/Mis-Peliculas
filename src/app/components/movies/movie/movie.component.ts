@@ -46,30 +46,30 @@ export class MovieComponent implements OnInit, OnDestroy {
       // .then((data: any) => this.movie = data)
       // .catch((err) => console.log(err));
 
-    this.getCredits(this.id)
+    // this.getCredits(this.id)
       // .then((data: any) => { this.credits = data.slice(0, 7) })
       // .catch((err) => console.log(err));
 
-    this.getRecommendations(this.id)
+    // this.getRecommendations(this.id)
       // .then((data: any) => {
       //   this.recomendations = data.slice(0, 7);
       // })
       // .catch((err) => console.log(err));
 
-    this.getVideos(this.id)
-      .then((data: any[]) => {
-        if (data.length === 0) {
-          this.btnWatchTrailer = true;
-          return;
-        } else {
-          if (data[0].site === 'YouTube')
-            this.urlTrailerYotube = `https://www.youtube.com/watch?v=${data[0].key}`;
+    // this.getVideos(this.id)
+    //   .then((data: any[]) => {
+    //     if (data.length === 0) {
+    //       this.btnWatchTrailer = true;
+    //       return;
+    //     } else {
+    //       if (data[0].site === 'YouTube')
+    //         this.urlTrailerYotube = `https://www.youtube.com/watch?v=${data[0].key}`;
 
-        }
-      })
-      .catch((err) => console.log(err));
+    //     }
+    //   })
+    //   .catch((err) => console.log(err));
 
-    this.getReviews(this.id)
+    // this.getReviews(this.id)
       // .then((data: any) => {
       //   this.reviews = data;
 

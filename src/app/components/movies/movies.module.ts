@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MoviesRoutingModule } from './movies-routing.module';
 
 // Components
-import { MoviesRoutingModule } from './movies-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { ClassificationsComponent } from './classifications/classifications.component';
 import { GenresComponent } from './genres/genres.component';
@@ -11,6 +12,7 @@ import { MoviePopularComponent } from './movie-popular/movie-popular.component';
 import { MovieTopComponent } from './movie-top/movie-top.component';
 import { MoviesComponent } from './movies/movies.component';
 import { NowPlayingComponent } from './now-playing/now-playing.component';
+
 
 
 @NgModule({
@@ -26,7 +28,8 @@ import { NowPlayingComponent } from './now-playing/now-playing.component';
   ],
   imports: [
     MoviesRoutingModule,
-    SharedModule
+    SharedModule,
+    CommonModule
   ]
 })
 export class MoviesModule { }

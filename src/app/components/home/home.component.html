@@ -1,5 +1,4 @@
-<div class="row mt-4">
-  <div class="container-side-left col-sm-12 col-md-9">
+
 
     <ng-container *ngIf="moviesPopular$ | async as movies; else _loadingMovies">
 
@@ -34,9 +33,3 @@
     <ng-template #_loadingSeries>
       <app-loading></app-loading>
     </ng-template>
-
-  </div>
-  <div class="container-side-left col-sm-12 col-md-3">
-    <app-side-bar></app-side-bar>
-  </div>
-</div>
