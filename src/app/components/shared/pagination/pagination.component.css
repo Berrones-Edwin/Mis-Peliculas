@@ -1,6 +1,11 @@
+.container-pagination{
+    width: 100%;
+    border:1px solid yellow;
+}
+
 .pagination .page-link{
     /* text-align: center; */
-    color:red;
+    color:purple !important;
 }
 .pagination li:active .page-link{
     /* text-align: center; */

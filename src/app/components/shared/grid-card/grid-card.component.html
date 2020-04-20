@@ -26,8 +26,14 @@
 
 </div>
 
-<pagination-controls (pageChange)="pageChange($event)" 
-                    previousLabel="Anterior" 
-                    nextLabel="Siguiente"
-                    *ngIf="showPagination">
-</pagination-controls>
+<!-- <div style="border:2  px solid red;" > -->
+  <pagination-controls class="my-pagination" 
+                      (pageChange)="pageChange($event)" 
+                      previousLabel="Anterior" 
+                      nextLabel="Siguiente"
+                      *ngIf="showPagination"
+                      [responsive]="true"
+                      maxSize="10" 
+  >
+  </pagination-controls>
+<!-- </div> -->

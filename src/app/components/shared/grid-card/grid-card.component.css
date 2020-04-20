@@ -28,7 +28,7 @@
     align-items: center;
     width: 100%;
     flex-wrap: wrap;
-    margin-bottom: 100px;
+    /* margin-bottom: 100px; */
 
 }
 .container-cards .card{
@@ -71,6 +71,36 @@
 
 }
 
+
+.my-pagination /deep/ .ngx-pagination  {
+    /* background: yellow; */
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /* color:#FFF !important; */
+  }
+.my-pagination /deep/ .ngx-pagination .current {
+    /* background: red; 
+    */
+    background-color:#343a40 ;
+    color:#FFF;
+    border-radius: 10px;
+}
+
+.my-pagination  /deep/ .ngx-pagination a:hover,
+.my-pagination .ngx-pagination button:hover{
+    
+    color:#FFF !important;
+ }
+/* .my-pagination  /deep/ .ngx-pagination a:hover, */
+ .ngx-pagination button:hover{
+    
+    background-color:#343a40 ;
+    color:#FFF;
+    border-radius: 10px;
+    text-decoration: none;
+  }
 
 /*---------------------------------------------- */
 /*------------ MODO CELULAR -----------------*/
