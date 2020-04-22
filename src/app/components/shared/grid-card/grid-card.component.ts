@@ -3,15 +3,14 @@ import {
           OnInit, 
           Input, 
           Output, 
-          EventEmitter, 
-          ChangeDetectionStrategy 
+          EventEmitter
         } from '@angular/core';
+import { Genres } from 'src/app/Data/Genres';
 
 @Component({
   selector: 'app-grid-card',
   templateUrl: './grid-card.component.html',
   styleUrls: ['./grid-card.component.css'],
-  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GridCardComponent implements OnInit {
 

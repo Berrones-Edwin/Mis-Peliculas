@@ -1,16 +1,7 @@
 .container-title
 {
-    /* margin-left: auto;
-    margin-right: auto;
-     */
-
      width: 100%;
     margin-top: 1rem;
-    /* border:1px solid red; */
-    /* display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap; */
 
 }
 
@@ -39,7 +30,7 @@
    flex-direction: column;
    cursor: pointer;
    width: 200px;
-   height: 315px;
+   height: 350px;
    margin-bottom: 3rem;
 
 }
@@ -48,8 +39,41 @@
     height:180px;
     width: 125px;
 }
+.container-title-movie{
+    height: 25px;
+    margin-bottom: 1rem;
+    /* width: 100%;
+    border:1px solid red; */
+}
+.card-body{
+    margin-top: 10px;
+    padding:0;
+}
+.card-body .card-title{
+    
+    /* border:1px solid red; */
+    width: 100%;
+    max-width: 100%;
+
+}
+.cards__name{
+    font-size: 14px;
+    text-align: center;
+    word-wrap: break-word;
+    width: 100%;
 
 
+}
+
+.card-footer{
+    font-size: 14px;
+    width: 100%;
+    background-color: transparent;
+    /* padding:5px; */
+    /* height: 20px; */
+    /* 
+    max-height: 20px; */
+}
 
 .card-cast{
     height: 800px;
@@ -62,14 +86,7 @@
     transform: scale(1.1);
 }
 
-.cards__name{
-    font-size: 14px;
-    text-align: center;
-    word-wrap: break-word;
-    width: 125px;
 
-
-}
 
 
 .my-pagination /deep/ .ngx-pagination  {
@@ -81,8 +98,7 @@
     /* color:#FFF !important; */
   }
 .my-pagination /deep/ .ngx-pagination .current {
-    /* background: red; 
-    */
+    
     background-color:#343a40 ;
     color:#FFF;
     border-radius: 10px;

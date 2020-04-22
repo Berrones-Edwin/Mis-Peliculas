@@ -1,84 +1,122 @@
 <ng-container  *ngIf="movie$ | async as movie; else loading">
+
+
   <div class="row mt-4">
 
-    <section class="col-sm-12 col-md-4 mb-3">
+    <section class="poster-container col-sm-12 col-md-12 mb-3 col-lg-4" >
 
-      <img class="img-fluid img-poster mb-4 shadow-lg" 
+      <img class=" mb-4 shadow-lg" 
             src="{{ movie.poster_path | image}}" 
             alt="{{ movie.title }}"
-            title="{{ movie.title }}">
+            title="{{ movie.title }}"
+            width="300"
+            height="500">
 
 
       <div class="container-left-btn">
 
-        <button (click)="addToFavorites()" class="btn btn-outline-danger mr-2">Agregar Favoritos</button>
-
-        <a href="{{ urlTrailerYotube }}" 
-          target="_blank" 
-          class="btn btn-outline-warning"
-          *ngIf="!btnWatchTrailer; else elseTrailer">
-            Mirar Trailer
-        </a>
-
+        <button (click)="addToFavorites()" class="btn btn-outline-danger mr-2">
+            <span><i class="fas fa-heart"></i></span>
+            Favoritos
+        </button>
+        <ng-container  *ngIf="movie && movie.videos.results[0].key">
+          <a href="https://www.youtube.com/watch?v={{ movie.videos.results[0].key }}" 
+            target="_blank" 
+            class="btn btn-outline-warning"
+           >
+              Mirar trailer
+              
+          </a>
+        </ng-container>
+      
         <ng-template #elseTrailer>
-          <button [disabled]="true" class="btn btn-outline-warning watch-trailer">Mirar Trailer</button>
+          <button [disabled]="true" class="btn btn-outline-warning watch-trailer">No tengo Trailer</button>
         </ng-template>
+       
       </div>
 
     </section>
 
-    <section class="col-sm-12 col-md-8">
-      <!-- <h2 class="title">{{ movie.title }}</h2> -->
+    <section class="info-container col-sm-12 col-md-12 col-lg-8">
       <div class="row mb-4 container-title">
-        <h2 class="title col-sm-12 col-md-10">{{movie.title}}</h2>
-        <span class="container-title-btn col-sm-12 col-md-2">
+        <h2  class="title  col-sm-12 col-md-10">{{movie.title}}</h2>
+        <span class="container-title-btn col-sm-12 col-md-2" >
           <button (click)="goBack()" class="btn btn-outline-pink">Regresar</button>
         </span>
       </div>
+       <!-- Sinopsis -->
+       <div>
+        <!-- <h3 class="title">Sinopsis</h3> -->
+        <p class="movie-overview">{{ movie.overview }}</p>
+      </div>
 
-      <h6 class="title">Fecha Lanzamiento: {{ movie.release_date }}</h6>
+      <h6 class="mb-4 title">
+        <span> <i class="fas fa-star"></i>  {{ movie.vote_average }}</span>
+        &nbsp;
+        <span> <i class="fas fa-calendar-alt"></i> {{ movie.release_date }}</span>
+      </h6>
 
-      <h5 class="mb-4 title">Promedio: {{ movie.vote_average }} | Cantidad Votos: {{ movie.vote_count }} </h5>
-
+      <!-- Genero -->
       <div class="container-genres mb-3">
         <button *ngFor="let genre of movie.genres" 
-                class="btn btn-outline-info mr-2">{{genre.name}}</button>
+                class="btn btn-sm btn-dark mr-2">{{genre.name}}</button>
       </div>
 
-      <!-- Sinopsis -->
-      <div>
-        <h4 class="title">Sinopsis</h4>
-        <p>{{ movie.overview }}</p>
-      </div>
+      <!-- End Genero -->
 
       <hr>
 
       <!-- Elenco -->
       <div class="cast" *ngIf="movie.credits.cast as credits">
         <div class="row mb-4 container-title">
-          <h4 class="title col-sm-12 col-md-10">Elenco</h4>
+          <h3 class="title col-sm-12 col-md-10">Elenco</h3>
           <span class="container-title-btn col-sm-12 col-md-2">
             <button class="btn btn-outline-warning">Explorar</button>
           </span>
         </div>
         <div class="container-cast">
-          <div class="card-cast  mr-3" *ngFor="let credit of credits.slice(0, 7)">
-            <img class="img-fluid  shadow-lg cast__img" height="120px;" src="{{ credit.profile_path | image}}"
+          <div class="card-cast" *ngFor="let credit of credits.slice(0, 7)">
+            <img class="img-fluid shadow-lg cast__img" height="120px;" src="{{ credit.profile_path | image}}"
               alt="{{ credit.name }}">
             <p class="cast__name">{{ credit.name }}</p>
           </div>
         </div>
       </div>
 
-      <hr>
-      <!-- END Elenco -->
+    </section>
+    <hr>
 
-      <!-- Peliculas Similares -->
+     <!-- Images -->
+    <section class="col-sm-12 col-md-12 mb-3">
+      
+       <div class="images" *ngIf="movie.images as images">
+        <div class="row mb-4 container-title">
+          <h3 class="title col-sm-12 col-md-10">Posters</h3>
+          <span class="container-title-btn col-sm-12 col-md-2">
+            <button class="btn btn-outline-warning">Explorar</button>
+          </span>
+        </div>
+        <div class="gallery" id="lightgallery"> 
+          <div class="gallery__container" *ngFor="let image of movie.images.posters.slice(0,3)">
+            <a target="_blank" href="{{ image.file_path | image}}">
+              <img class="img-fluid" src="{{ image.file_path | image}}"
+              alt="">
+            </a>
+          </div>
+          
+        </div>
+      </div>
+      <!--End  Images -->
+    </section>
+    <!-- END Images -->
 
-      <ng-container  *ngIf="movie.recommendations as recomendations "> 
+    <div class="col-sm-12 col-md-12">
+       <!-- Peliculas Similares -->
+
+       <ng-container  *ngIf="movie.recommendations as recomendations "> 
 
         <div class="row mb-4 container-title" >
-          <h4 class="title col-sm-12 col-md-10">Recomendaciones</h4>
+          <h3 class="title col-sm-12 col-md-10">Recomendaciones</h3>
           <span class="container-title-btn col-sm-12 col-md-2">
             <button class="btn btn-outline-warning">Explorar</button>
           </span>
@@ -114,7 +152,7 @@
       <ng-container *ngIf="movie.review as reviews">
 
         <div class="row mb-4 container-title" *ngIf="review.length>0">
-          <h4 class="title col-sm-12 col-md-10">Reseñas</h4>
+          <h3 class="title col-sm-12 col-md-10">Reseñas</h3>
           <span class="container-title-btn col-sm-12 col-md-2">
             <button class="btn btn-outline-warning">Explorar</button>
           </span>
@@ -135,8 +173,7 @@
           </div>
       </ng-container>
         <!-- End Reseñas-->
-
-    </section>
+    </div>
   </div>
 </ng-container>
 

@@ -94,88 +94,9 @@ export class MovieComponent implements OnInit, OnDestroy {
 
     this.movie$ = this._moviesService.getDetails(id);
 
-    // return new Promise((resolve, reject) => {
-
-    //   this._moviesService.getDetails(id)
-    //     .pipe(
-    //       takeUntil(this.unsubscribe$)
-    //     )
-    //     .subscribe((data: any) => {
-    //       if (data) resolve(data)
-    //       else reject();
-    //     },
-    //       error => reject(error));
-    // })
   }
-  getCredits(id: string) {
-
-    this.credits$ = this._moviesService.getCredits(id)
-
-    // return new Promise((resolve, reject) => {
-
-    //   this._moviesService.getCredits(id)
-    //     .pipe(
-    //       map((data) => data['cast']),
-    //       takeUntil(this.unsubscribe$)
-    //     )
-    //     .subscribe((data: any) => {
-    //       if (data) resolve(data)
-    //       else reject();
-    //     },
-    //       error => reject(error));
-    // })
-  }
-  getVideos(id: string) {
-
-    return new Promise((resolve, reject) => {
-
-      this._moviesService.getVideos(id)
-        .pipe(
-          map((data) => data['results']),
-          takeUntil(this.unsubscribe$)
-        )
-        .subscribe((data: any) => {
-          if (data) resolve(data)
-          else reject();
-        },
-          error => reject(error));
-    })
-  }
-  getRecommendations(id: string) {
-
-    this.recomendations$ =this._moviesService.getRecommendations(id);
-    // return new Promise((resolve, reject) => {
-
-    //   this._moviesService.getRecommendations(id)
-    //     .pipe(
-    //       map((data) => data['results']),
-    //       takeUntil(this.unsubscribe$)
-    //     )
-    //     .subscribe((data: any) => {
-    //       if (data) resolve(data)
-    //       else reject();
-    //     },
-    //       error => reject(error));
-    // })
-  }
-  getReviews(id: string) {
-
-    this.reviews$ = this._moviesService.getReviews(id);
-
-    // return new Promise((resolve, reject) => {
-
-    //   this._moviesService.getReviews(id)
-    //     .pipe(
-    //       map((data) => data['results']),
-    //       takeUntil(this.unsubscribe$)
-    //     )
-    //     .subscribe((data: any) => {
-    //       if (data) resolve(data)
-    //       else reject();
-    //     },
-    //       error => reject(error));
-    // })
-  }
+  
+  
 
   goBack() {
     this._location.back();
@@ -186,5 +107,7 @@ export class MovieComponent implements OnInit, OnDestroy {
     // this.unsubscribe$.next();
     // this.unsubscribe$.complete();
   }
+
+    
 
 }

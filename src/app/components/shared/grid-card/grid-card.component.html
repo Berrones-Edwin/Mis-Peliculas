@@ -16,8 +16,22 @@
           title="{{ (movie.title != null ) ?  movie.title : movie.name }}">
         <div class="card-body">
           <!-- <br> -->
-          <h6 class="card-title cards__name">{{ (movie.title != null ) ?  movie.title : movie.name }}</h6>
+          <div class="container-title-movie">
+            <h6 class="card-title cards__name">{{ (movie.title != null ) ?  movie.title : movie.name }}</h6>
+          </div>
+        
   
+        </div>
+        <div class="txt-sm-left card-footer text-muted">
+          <span>
+            <i class="fas fa-star"></i>
+            {{ movie.vote_average }}
+          </span>
+          <br>
+          <span>
+            <i class="fas fa-calendar-alt"></i>
+            {{ (movie.release_date === undefined )  ? movie.first_air_date : movie.release_date }}
+          </span>
         </div>
   
       </div>
