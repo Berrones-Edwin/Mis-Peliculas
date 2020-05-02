@@ -80,3 +80,53 @@
     <!-- </div> -->
   </div>
 </nav>
+
+<!-- 
+
+
+
+   
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 style="color:#000;" class="modal-title" id="exampleModalLabel">Mega - Pelis</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="color:#000;">
+          <p><b>Nota Importante:</b> Hola y bienvenidos a todos los visitantes de <b>Mega-Pelis</b> antes de
+            <b>iniciar sesion / registrarse</b>
+            le informamos que nosotros hacemos uso del inicio de sesion de <b>TMDB</b>. </p>
+          <hr>
+          <p>
+            Si aún no cuenta con sus crendenciales
+            lo invitamos a registrarse pulsando en el boton de <i>Registro</i>. Esto se hace con el fin de proteger
+            sus datos y que una tercera persona haga mal uso de ellos. Gracias por su atención y esperemos que
+            disfrute su estancia en <b>Mega-Pelis</b>.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <a href="https://www.themoviedb.org/account/signup" target="_blank" class="btn btn-primary">Registro</a>
+          <button type="button" class="btn btn-primary">Iniciar Sesión</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <ng-container  *ngIf="movie && movie.video.results[0].key">
+      <a href="https://www.youtube.com/watch?v={{ movie.video.results[0].key }}" 
+        target="_blank" 
+        class="btn btn-outline-warning"
+       >
+          Mirar Trailer
+      </a>
+    </ng-container>
+  
+    <ng-template #elseTrailer>
+      <button [disabled]="true" class="btn btn-outline-warning watch-trailer">Mirar Trailer</button>
+    </ng-template>
+ -->

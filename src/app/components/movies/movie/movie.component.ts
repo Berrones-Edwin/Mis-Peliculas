@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MoviesService } from 'src/app/services/movies.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
 import { Location } from '@angular/common';
@@ -28,58 +28,30 @@ export class MovieComponent implements OnInit, OnDestroy {
   credits$: Observable<any>;
   recomendations$: Observable<any>;
   reviews$: Observable<any>;
+  images$: Observable<any>;
 
 
   constructor(
     private _moviesService: MoviesService,
     private _activatedRouter: ActivatedRoute,
     private _location: Location,
-    private _authService: AuthService
-  ) { }
+    private _authService: AuthService,
+    private _router:Router
+  ) { 
+    this.id = this._activatedRouter.snapshot.params['id'];
+  }
 
   ngOnInit() {
 
 
-    this.id = this._activatedRouter.snapshot.params['id'];
+    this.getDetails(this.id);
+    this.getImages(this.id)
 
-    this.getDetails(this.id)
-      // .then((data: any) => this.movie = data)
-      // .catch((err) => console.log(err));
-
-    // this.getCredits(this.id)
-      // .then((data: any) => { this.credits = data.slice(0, 7) })
-      // .catch((err) => console.log(err));
-
-    // this.getRecommendations(this.id)
-      // .then((data: any) => {
-      //   this.recomendations = data.slice(0, 7);
-      // })
-      // .catch((err) => console.log(err));
-
-    // this.getVideos(this.id)
-    //   .then((data: any[]) => {
-    //     if (data.length === 0) {
-    //       this.btnWatchTrailer = true;
-    //       return;
-    //     } else {
-    //       if (data[0].site === 'YouTube')
-    //         this.urlTrailerYotube = `https://www.youtube.com/watch?v=${data[0].key}`;
-
-    //     }
-    //   })
-    //   .catch((err) => console.log(err));
-
-    // this.getReviews(this.id)
-      // .then((data: any) => {
-      //   this.reviews = data;
-
-      // })
-      // .catch((err) => console.log(err));
   }
 
   addToFavorites() {
     console.log('click');
-    
+
     if (this._authService.session_id === "" || this._authService.session_id === null || this._authService.session_id === undefined) {
       Swal.fire({
         title: 'Ocurrio un error',
@@ -92,11 +64,35 @@ export class MovieComponent implements OnInit, OnDestroy {
 
   getDetails(id: string) {
 
+    this.movie$ = null;
+
     this.movie$ = this._moviesService.getDetails(id);
 
   }
-  
-  
+
+  getImages(id: string) {
+
+    this.images$ = null;
+    this.images$ = this._moviesService.getImages(id);
+
+  }
+
+
+  detailsMovie(movie) {
+    
+    this._router.navigate([
+      'peliculas',
+      movie['id']
+    ]).then(()=>{
+
+      this.id = movie['id']
+      this.getDetails(this.id);
+      this.getImages(this.id)
+      
+    })
+
+  }
+
 
   goBack() {
     this._location.back();
@@ -108,6 +104,6 @@ export class MovieComponent implements OnInit, OnDestroy {
     // this.unsubscribe$.complete();
   }
 
-    
+
 
 }

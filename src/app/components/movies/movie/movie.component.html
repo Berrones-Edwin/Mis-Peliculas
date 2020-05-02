@@ -19,13 +19,12 @@
             <span><i class="fas fa-heart"></i></span>
             Favoritos
         </button>
-        <ng-container  *ngIf="movie && movie.videos.results[0].key">
+        <ng-container  *ngIf="movie.videos.results.length>0 ">
           <a href="https://www.youtube.com/watch?v={{ movie.videos.results[0].key }}" 
             target="_blank" 
             class="btn btn-outline-warning"
            >
               Mirar trailer
-              
           </a>
         </ng-container>
       
@@ -46,7 +45,7 @@
       </div>
        <!-- Sinopsis -->
        <div>
-        <!-- <h3 class="title">Sinopsis</h3> -->
+       
         <p class="movie-overview">{{ movie.overview }}</p>
       </div>
 
@@ -87,66 +86,55 @@
     <hr>
 
      <!-- Images -->
-    <section class="col-sm-12 col-md-12 mb-3">
-      
-       <div class="images" *ngIf="movie.images as images">
-        <div class="row mb-4 container-title">
+    <section class="col-sm-12 col-md-12 mb-5">
+      <!-- *ngIf="movie$ | async as movie; else loading"> -->
+       <div class="images" *ngIf="images$ | async as  image; else loadingImage  ">
+        <div class="row mb-4 container-title" *ngIf="image.posters.length > 0  ">
+
           <h3 class="title col-sm-12 col-md-10">Posters</h3>
-          <span class="container-title-btn col-sm-12 col-md-2">
-            <button class="btn btn-outline-warning">Explorar</button>
-          </span>
         </div>
-        <div class="gallery" id="lightgallery"> 
-          <div class="gallery__container" *ngFor="let image of movie.images.posters.slice(0,3)">
-            <a target="_blank" href="{{ image.file_path | image}}">
-              <img class="img-fluid" src="{{ image.file_path | image}}"
+        <div class="gallery mb-2" id="lightgallery"> 
+          <div class="gallery__container" *ngFor="let poster of image.posters">
+            <a target="_blank" href="{{ poster.file_path | image}}">
+              <img class="img-fluid" src="{{ poster.file_path | image}}"
               alt="">
             </a>
+
+          </div>
+          
+        </div>
+        <div class="gallery" *ngIf="image.backdrops.length > 0  " id="lightgallery"> 
+          <div class="gallery__container" *ngFor="let poster of image.backdrops">
+            <a target="_blank" href="{{ poster.file_path | image}}">
+              <img class="img-fluid" src="{{ poster.file_path | image}}"
+              alt="">
+            </a>
+
           </div>
           
         </div>
       </div>
-      <!--End  Images -->
+
+      <ng-template #loadingImage>
+        <app-loading></app-loading>
+      </ng-template>
     </section>
     <!-- END Images -->
 
+    <!-- Peliculas Similares -->
     <div class="col-sm-12 col-md-12">
-       <!-- Peliculas Similares -->
 
-       <ng-container  *ngIf="movie.recommendations as recomendations "> 
-
-        <div class="row mb-4 container-title" >
-          <h3 class="title col-sm-12 col-md-10">Recomendaciones</h3>
-          <span class="container-title-btn col-sm-12 col-md-2">
-            <button class="btn btn-outline-warning">Explorar</button>
-          </span>
-        </div>
-  
-        <div style="margin-bottom:200px;">
-  
-          <div class="container-cast" *ngIf="recomendations.results.length >= 2; else movie">
-  
-            <!-- Tiene  2 o más recomendaciones -->
-            
-            <div class="card-cast mr-3" *ngFor="let r of recomendations.results.slice(0,7)">
-              <img src="{{ r.poster_path | image}}" class="img-fluid   shadow-lg cast__img" alt="{{ r.title }}">
-              <p class="cast__name">{{r.title}}</p>
-            </div>
-          </div>
-  
-          <ng-template #movie>
-            <!-- Tiene 1 recomendacion -->
-            <div class="card-cast" *ngIf="recomendations.results.length != 0">
-              <img src="{{ recomendations[0].poster_path | image}}" class=" shadow-lg" alt="{{ recomendations[0].title }}"
-                class="img-fluid  mr-3 shadow-lg cast__img">
-              <p class="cast__name">{{recomendations[0].title}}</p>
-            </div>
-          </ng-template>
-        </div>
+       <ng-container  *ngIf="movie.recommendations as recommendations "> 
+        
+        <app-grid-card title="Recomendaciones" 
+                      [itemArray]="recommendations.results.slice(0,5)"
+                      (item)="detailsMovie($event)"
+                      [showPagination]="false">
+        </app-grid-card>
       </ng-container>
-
       <!-- END Peliculas Similares -->
       <hr>
+
       <!-- Reseñas-->
 
       <ng-container *ngIf="movie.review as reviews">

@@ -93,7 +93,7 @@ export class MoviesService {
   getDetails(movie_id: string) {
 
     let params = this._globalService.getHeaders()
-                    .append('append_to_response','videos,images,credits,reviews,recommendations');
+                    .append('append_to_response','videos,credits,reviews,recommendations');
 
     return this._http.get(`${environment.url}/movie/${movie_id}`, { params })
 
@@ -135,6 +135,14 @@ export class MoviesService {
     let params = this._globalService.getHeaders();
 
     return this._http.get(`${environment.url}/movie/${movie_id}/recommendations`, { params })
+  }
+  // Lista de recomendaciones para una pelicula
+  getImages(movie_id: string) {
+
+
+    let params = this._globalService.getHeaders();
+
+    return this._http.get(`${environment.url}/movie/${movie_id}/images`, { params })
   }
 
 
