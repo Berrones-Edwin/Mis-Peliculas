@@ -4,7 +4,9 @@
   </app-loading>
 </ng-template>
 
-<ng-container *ngIf="movies$ | async as movies">
+<ng-container *ngIf="movies$ | async as movies; else loading">
+
+  <ng-container *ngIf="movies.results.length > 0; else nodata">
   
   <app-grid-card title="En cartelera en este mes" 
                   url="/peliculas/ahora-cines/1"
@@ -16,5 +18,10 @@
                   (number_page)="nextPage($event)"
                   [page]="id">
   </app-grid-card>
+</ng-container>
+
+<ng-template #nodata>
+  <p>No hay peliculas en cartelera</p>
+</ng-template>
   
 </ng-container>

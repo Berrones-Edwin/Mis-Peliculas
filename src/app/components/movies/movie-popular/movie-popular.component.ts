@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { MoviesService } from 'src/app/services/movies.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -12,7 +12,7 @@ export class MoviePopularComponent implements OnInit {
 
   id: string = '1';
   movies$: Observable<any>;
-  
+
 
   constructor(
     private _movieService: MoviesService,

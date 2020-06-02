@@ -9,6 +9,7 @@ import { MoviePopularComponent } from './movie-popular/movie-popular.component';
 import { MovieTopComponent } from './movie-top/movie-top.component';
 import { MoviesComponent } from './movies/movies.component';
 import { NowPlayingComponent } from './now-playing/now-playing.component';
+import { RecommendationsComponent } from './recommendations/recommendations.component';
 
 
 const routes: Routes = [
@@ -29,9 +30,11 @@ const routes: Routes = [
   { path: 'clasificaciones', component: ClassificationsComponent },
 
   { path: 'clasificaciones/:opcion/:page', component: ClassificationsComponent },
+  
+  { path: ':id/recomendaciones/:page', component: RecommendationsComponent },
 
   { path: ':id', component: MovieComponent },
-  
+
   { path: '**', pathMatch: 'full', redirectTo: '' }
 ];
 

@@ -1,18 +1,42 @@
-<form action="" method="post">
-  <div class="form-group">
-    <label for="name">Nombre</label>
-    <input class="form-control" type="text" name="name" autocomplete="off" id="name" >
+
+<div class="card bg-dark">
+  <div class="card-header">
+    <h4 class="card-title">Formulario de Contacto</h4>
   </div>
-  <div class="form-group">
-    <label for="email">Correo Electronico</label>
-    <input class="form-control" type="enail" name="email" autocomplete="off" id="email" >
+  <div class="card-body">
+    <p>Este formulario es con fin de:</p>
+    <ul>
+      <li>Enviar Sugerencias para mejorar nuestro sitio web.</li>
+      <li>Aclarar y resolver tus dudas.</li>
+      <li>Informarnos sobre errores que esta presentando la web y asì poder resolverlos lo más pronto posible.</li>
+      <li>Los datos recolectados seran totalmente confidenciales y no seran usados por terceras personas.</li>
+      <li><b>Nota: </b>LLenar todos los campos del formulario.</li>
+    </ul>
+    <form action="" [formGroup]="form" method="post">
+     
+      <div class="row">
+        <div class="form-group col-sm-12 col-md-6">
+          <label for="name">Nombre Completo</label>
+          <input class="form-control" 
+                  type="text" 
+                  name="name" 
+                  placeholder="Poner su nombre completo." autocomplete="off" 
+                  id="name" 
+                  formControlName="name">
+        </div>
+        <div class="form-group col-sm-12 col-md-6">
+          <label for="email">Correo Electronico</label>
+          <input class="form-control" type="enail" name="email" placeholder="Poner un correo electronico válido " autocomplete="off" id="email" >
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="subject">Asunto</label>
+        <textarea class="form-control" name="subject" id="subject" cols="30" rows="10"></textarea>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-secondary">Enviar</button>
+      </div>
+      
+    </form>
   </div>
-  <div class="form-group">
-    <label for="subject">Asunto</label>
-    <textarea class="form-control" name="subject" id="subject" cols="30" rows="10"></textarea>
-  </div>
-  <div class="form-group">
-    <button class="btn-btn-primary">Enviar</button>
-  </div>
-  
-</form>
+</div>

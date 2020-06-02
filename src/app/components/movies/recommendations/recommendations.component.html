@@ -1,0 +1,21 @@
+<ng-template #loading>
+
+    <app-loading class="offset-lg-4">
+    </app-loading>
+  </ng-template>
+  
+  <ng-container *ngIf="movies$ | async as movies">
+    
+    <app-grid-card title="Películas Similares" 
+                    url="/peliculas/recomendaciones/1"
+                    [itemArray]="movies.results"
+                    (item)="detailsMovie($event)"
+                    class="mx-auto"
+                    [showBtnExplore]="false"
+                    [total_results]="movies.total_results"
+                    (number_page)="nextPage($event)"
+                    [page]="page">
+    </app-grid-card>
+    
+  </ng-container>
+  

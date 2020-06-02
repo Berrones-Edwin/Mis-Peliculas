@@ -14,8 +14,6 @@ import Swal from 'sweetalert2';
 })
 export class MovieComponent implements OnInit, OnDestroy {
 
-  private unsubscribe$ = new Subject<void>();
-
   id: string;
   movie: any[] = [];
   credits: any[] = [];
@@ -50,7 +48,6 @@ export class MovieComponent implements OnInit, OnDestroy {
   }
 
   addToFavorites() {
-    console.log('click');
 
     if (this._authService.session_id === "" || this._authService.session_id === null || this._authService.session_id === undefined) {
       Swal.fire({
@@ -100,8 +97,7 @@ export class MovieComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
 
-    // this.unsubscribe$.next();
-    // this.unsubscribe$.complete();
+   
   }
 
 

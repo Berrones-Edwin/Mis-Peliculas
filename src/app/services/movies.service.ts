@@ -84,6 +84,8 @@ export class MoviesService {
     return this._http.get(`${environment.url}/search/movie`, { params });
   }
 
+ 
+
 
   /**
    * METODOS PARA UNA PELICULA

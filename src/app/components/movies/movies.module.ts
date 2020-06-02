@@ -12,6 +12,7 @@ import { MoviePopularComponent } from './movie-popular/movie-popular.component';
 import { MovieTopComponent } from './movie-top/movie-top.component';
 import { MoviesComponent } from './movies/movies.component';
 import { NowPlayingComponent } from './now-playing/now-playing.component';
+import { RecommendationsComponent } from './recommendations/recommendations.component';
 
 
 
@@ -24,7 +25,8 @@ import { NowPlayingComponent } from './now-playing/now-playing.component';
     MoviePopularComponent,
     MovieTopComponent,
     MoviesComponent,
-    NowPlayingComponent
+    NowPlayingComponent,
+    RecommendationsComponent
   ],
   imports: [
     MoviesRoutingModule,
