@@ -18,7 +18,7 @@ export class AuthGuard implements CanLoad {
     segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
 
 
-    if (this._authService.session_id === null) {
+    if (this._authService.token === '') {
 
 
       Swal.fire({

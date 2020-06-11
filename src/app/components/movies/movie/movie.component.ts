@@ -34,8 +34,8 @@ export class MovieComponent implements OnInit, OnDestroy {
     private _activatedRouter: ActivatedRoute,
     private _location: Location,
     private _authService: AuthService,
-    private _router:Router
-  ) { 
+    private _router: Router
+  ) {
     this.id = this._activatedRouter.snapshot.params['id'];
   }
 
@@ -49,7 +49,7 @@ export class MovieComponent implements OnInit, OnDestroy {
 
   addToFavorites() {
 
-    if (this._authService.session_id === "" || this._authService.session_id === null || this._authService.session_id === undefined) {
+    if (this._authService.token === "" || this._authService.token === null || this._authService.token === undefined) {
       Swal.fire({
         title: 'Ocurrio un error',
         text: 'Debe de iniciar sesión para realizar esta acción.',
@@ -76,16 +76,16 @@ export class MovieComponent implements OnInit, OnDestroy {
 
 
   detailsMovie(movie) {
-    
+
     this._router.navigate([
       'peliculas',
       movie['id']
-    ]).then(()=>{
+    ]).then(() => {
 
       this.id = movie['id']
       this.getDetails(this.id);
       this.getImages(this.id)
-      
+
     })
 
   }
@@ -97,7 +97,7 @@ export class MovieComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
 
-   
+
   }
 
 

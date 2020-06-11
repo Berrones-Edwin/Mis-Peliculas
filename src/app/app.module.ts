@@ -21,11 +21,11 @@ import { SharedModule } from './components/shared/shared.module';
     SharedModule
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: GlobalService,
-      multi: true
-    }
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: GlobalService,
+    //   multi: true
+    // }
   ],
   bootstrap: [AppComponent]
 })

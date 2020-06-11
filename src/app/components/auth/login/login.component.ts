@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
+import { responseLogin } from 'src/app/interfaces/ResponseLogin.interface';
 
 
 @Component({
@@ -11,12 +13,27 @@ export class LoginComponent implements OnInit {
 
   public form: FormGroup;
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private _authService: AuthService
   ) { }
 
+  // https://stackoverflow.com/questions/60169694/java-rest-call-get-url-neterr-failed
   ngOnInit(): void {
 
     this.createForm();
+  }
+
+  login(form: FormGroup) {
+
+    const { email, password } = form.value;
+
+    this._authService.login(email, password).subscribe((data: responseLogin) => {
+
+      if (data) {
+        localStorage.setItem('user', JSON.stringify(data.user[0]));
+        localStorage.setItem('token', data.token);
+      }
+    });
   }
 
   createForm() {
@@ -32,7 +49,7 @@ export class LoginComponent implements OnInit {
   get emailIsValid() {
     return this.email.valid && this.email.touched;
   }
-  get emailIsInalid() {
+  get emailIsInvalid() {
     return this.email.invalid && this.email.touched;
   }
   get password() {
@@ -41,7 +58,7 @@ export class LoginComponent implements OnInit {
   get passwordIsValid() {
     return this.password.valid && this.password.touched;
   }
-  get passwordIsInalid() {
+  get passwordIsInvalid() {
     return this.password.invalid && this.password.touched;
   }
 

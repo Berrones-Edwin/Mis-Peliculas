@@ -37,7 +37,7 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/info/acerca" routerLinkActive="active">Acerca de</a>
       </li>
-      <li class="nav-item" *ngIf="_authService.session_id != null">
+      <li class="nav-item" *ngIf="_authService.token != null">
         <a class="nav-link" routerLink="/auth/mi-perfil" routerLinkActive="active">Mi perfil</a>
       </li>
     </ul>
