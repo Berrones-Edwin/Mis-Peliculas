@@ -1,44 +1,104 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { userResponseLogin } from '../interfaces/ResponseLogin.interface';
-import { Router } from '@angular/router';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpParams, HttpHeaders } from "@angular/common/http";
+import { Router } from "@angular/router";
+import { BehaviorSubject, Observable } from "rxjs";
+import { map } from "rxjs/operators";
 
+import { JwtHelperService } from "@auth0/angular-jwt";
+import jwt_decode from "jwt-decode";
+
+import { environment } from "src/environments/environment";
+
+import { userLogin, responseLogin } from "../interfaces/auth/response-login";
+import { ResponseRegisterUser } from "../interfaces/auth/response-register";
+
+const helper = new JwtHelperService();
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class AuthService {
+  private user: BehaviorSubject<userLogin>;
 
-  public token: string = '';
-  public user: userResponseLogin;
-
-  constructor(
-    private _http: HttpClient,
-    private _router: Router
-  ) {
-
-    if (localStorage.getItem('token') !== null || localStorage.getItem('token') !== undefined) {
-      this.token = localStorage.getItem('token');
-      this.user = JSON.parse(localStorage.getItem('user'));
-    }
+  constructor(private _http: HttpClient, private _router: Router) {
+    this.user = new BehaviorSubject<userLogin>(
+      JSON.parse(localStorage.getItem("user"))
+    );
   }
 
-  login(email: string, password: string) {
-    let headers = new HttpHeaders()
-    headers.append('Content-Type', 'application/json');
+  public get UserData(): userLogin {
+    return this.user.value;
+  }
+  login(email: string, password: string): Observable<responseLogin> {
+    let headers = new HttpHeaders();
+    headers.append("Content-Type", "application/json");
 
-    const params = new HttpParams()
-    params.append('email', email)
-    params.append('password', password)
+    return this._http
+      .post<responseLogin>(
+        `${environment.urlApi}auth/login`,
+        { email, password },
+        { headers }
+      )
+      .pipe(
+        map((res) => {
+          if (res.exito === 1) {
+            this.saveDataLocalStorage(res.token, JSON.stringify(res.user[0]));
+            this.user.next(res.user[0]);
+          }
+          return res;
+        })
+      );
+  }
+  
+  register(
+    name: string,
+    lastname: string,
+    email: string,
+    password: string,
+    avatar: string
+  ): Observable<ResponseRegisterUser> {
+    let headers = new HttpHeaders();
+    headers.append("Content-Type", "application/json");
 
-    return this._http.post(`${environment.urlApi}auth/login`, { 'email': email, 'password': password }, { headers });
+    return this._http
+      .post<ResponseRegisterUser>(
+        `${environment.urlApi}auth/login`,
+        {name,lastname, email, password,avatar },
+        { headers }
+      )
+      .pipe(
+        map((res) => {
+          if(res.user){
+            this.saveDataLocalStorage(res.token, JSON.stringify(res.user));
+            this.user.next(res.user);
+            
+          }
+          return res;
+        })
+      );
+  }
+
+  saveDataLocalStorage(token: string, user: string) {
+    localStorage.setItem("token", token);
+    localStorage.setItem("user", user);
+  }
+
+  isAuth(): boolean {
+    const token = localStorage.getItem("token");
+
+    if (helper.isTokenExpired(token) || !localStorage.getItem("token")) {
+      return false;
+    }
+    return true;
+  }
+
+  decodeToken(): userLogin {
+    const token = localStorage.getItem("token");
+    return token ? jwt_decode(token) : null;
   }
 
   logout() {
-    this.token = "";
-    this.user = null;
     localStorage.clear();
-    this._router.navigate(['/']);
+    this.user.next(null);
+    this._router.navigate(["/"]);
   }
-
 }

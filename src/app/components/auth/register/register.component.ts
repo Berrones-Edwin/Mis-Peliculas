@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import { responseLogin } from 'src/app/interfaces/ResponseLogin.interface';
+import { responseLogin } from 'src/app/interfaces/auth/response-login';
 
 @Component({
   selector: 'app-register',

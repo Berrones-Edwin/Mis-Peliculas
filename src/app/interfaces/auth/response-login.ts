@@ -1,12 +1,12 @@
 export interface responseLogin {
 
     "token": string;
-    "user": userResponseLogin[];
+    "user": Array<userLogin>;
+    "exito": number;
 
 }
 
-
-export interface userResponseLogin {
+export interface userLogin {
     "id": number;
     "name": string;
     "lastname": string;
