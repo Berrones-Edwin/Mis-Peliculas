@@ -1,7 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Location } from "@angular/common";
+
 import { AuthService } from "src/app/services/auth.service";
 import { responseLogin } from "src/app/interfaces/auth/response-login";
+import { GlobalService } from "src/app/services/global.service";
 
 @Component({
   selector: "app-login",
@@ -12,7 +15,9 @@ export class LoginComponent implements OnInit {
   public form: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
-    private _authService: AuthService
+    private _authService: AuthService,
+    private _globalService: GlobalService,
+    private _location: Location
   ) {}
 
   // https://stackoverflow.com/questions/60169694/java-rest-call-get-url-neterr-failed
@@ -21,15 +26,20 @@ export class LoginComponent implements OnInit {
   }
 
   login(form: FormGroup) {
-    
     const { email, password } = form.value;
 
     this._authService
       .login(email, password)
       .subscribe((data: responseLogin) => {
-        if (data.exito ===1) {
-          // recuperar la ultima ruta en que se encuentra
-          // navegar a dicha ruta
+
+        if (data.exito === 1) {
+          this._globalService
+            .sweetAlert(
+              "Bienvenido",
+              "Has iniciado sesión correctamente",
+              "success"
+            )
+            .then(() => this._location.back());
         }
       });
   }

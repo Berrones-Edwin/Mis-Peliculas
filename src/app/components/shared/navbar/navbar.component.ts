@@ -12,22 +12,21 @@ import { Subject } from 'rxjs';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
 
-  private unsubscribe$ = new Subject<void>();
-
+ 
+  isAuth:boolean;
   constructor(
     public _authService: AuthService
   ) {
    
   }
   ngOnInit() {
-
+    this.isAuth = this._authService.isAuth() 
   }
 
  
   ngOnDestroy() {
 
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
+  
   }
 
 

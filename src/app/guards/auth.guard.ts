@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanLoad, Route, UrlSegment, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { CanLoad, Route, UrlSegment, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanActivateChild } from '@angular/router';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
 import { AuthService } from '../services/auth.service';
@@ -18,7 +18,7 @@ export class AuthGuard implements CanLoad {
     segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
 
 
-    if (this._authService.token === '') {
+    if (!this._authService.isAuth()) {
 
 
       Swal.fire({

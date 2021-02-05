@@ -1,24 +1,23 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MoviesService } from 'src/app/services/movies.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { map, takeUntil } from 'rxjs/operators';
-import { Subject, Observable } from 'rxjs';
-import { Location } from '@angular/common';
-import { AuthService } from 'src/app/services/auth.service';
-import Swal from 'sweetalert2';
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { MoviesService } from "src/app/services/movies.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { map, takeUntil } from "rxjs/operators";
+import { Subject, Observable } from "rxjs";
+import { Location } from "@angular/common";
+import { AuthService } from "src/app/services/auth.service";
+import Swal from "sweetalert2";
 
 @Component({
-  selector: 'app-movie',
-  templateUrl: './movie.component.html',
-  styleUrls: ['./movie.component.css']
+  selector: "app-movie",
+  templateUrl: "./movie.component.html",
+  styleUrls: ["./movie.component.css"],
 })
 export class MovieComponent implements OnInit, OnDestroy {
-
   id: string;
   movie: any[] = [];
   credits: any[] = [];
   recomendations: any[] = [];
-  reviews: any[] = []
+  reviews: any[] = [];
   urlTrailerYotube: string;
   btnWatchTrailer: boolean = false;
 
@@ -28,7 +27,6 @@ export class MovieComponent implements OnInit, OnDestroy {
   reviews$: Observable<any>;
   images$: Observable<any>;
 
-
   constructor(
     private _moviesService: MoviesService,
     private _activatedRouter: ActivatedRoute,
@@ -36,70 +34,55 @@ export class MovieComponent implements OnInit, OnDestroy {
     private _authService: AuthService,
     private _router: Router
   ) {
-    this.id = this._activatedRouter.snapshot.params['id'];
+    this.id = this._activatedRouter.snapshot.params["id"];
   }
 
   ngOnInit() {
-
-
     this.getDetails(this.id);
-    this.getImages(this.id)
-
+    this.getImages(this.id);
   }
 
   addToFavorites() {
-
-    if (this._authService.token === "" || this._authService.token === null || this._authService.token === undefined) {
+    if (!this._authService.isAuth()) {
       Swal.fire({
-        title: 'Ocurrio un error',
-        text: 'Debe de iniciar sesión para realizar esta acción.',
-        type: 'error',
-        confirmButtonText: 'Aceptar'
-      })
+        text:
+          "Para realizar esta acción debes haber iniciado sesión. ¿Deseas iniciar sesión?",
+        showCancelButton: true,
+        confirmButtonText: "Aceptar",
+        cancelButtonText: "Cancelar",
+        type: "question",
+      }).then((result) => {
+        if (result.value)
+          setTimeout(
+            () => this._router.navigate(["/auth/inicio-sesion"]),
+            1500
+          );
+      });
     }
   }
 
   getDetails(id: string) {
-
     this.movie$ = null;
 
     this.movie$ = this._moviesService.getDetails(id);
-
   }
 
   getImages(id: string) {
-
     this.images$ = null;
     this.images$ = this._moviesService.getImages(id);
-
   }
-
 
   detailsMovie(movie) {
-
-    this._router.navigate([
-      'peliculas',
-      movie['id']
-    ]).then(() => {
-
-      this.id = movie['id']
+    this._router.navigate(["peliculas", movie["id"]]).then(() => {
+      this.id = movie["id"];
       this.getDetails(this.id);
-      this.getImages(this.id)
-
-    })
-
+      this.getImages(this.id);
+    });
   }
-
 
   goBack() {
     this._location.back();
   }
 
-  ngOnDestroy() {
-
-
-  }
-
-
-
+  ngOnDestroy() {}
 }

@@ -1,106 +1,174 @@
 <div class="d-flex justify-content-center">
-    <div class="card" style="color:#000; width: 22rem;">
-        <div class="card-header">
-            <h3 class="text-center card-title">Registro</h3>
-        </div>
-        <div class="card-body">
-            <form [formGroup]="form" (ngSubmit)="login(form)">
-                <!-- Name -->
-                <div class="form-group"
-                    [class.error]="nameIsInvalid">
-                    <label for="exampleInputEmail1">Nombre</label>
-                    <input type="name" 
-                            class="form-control" 
-                            id="exampleInputEmail1"
-                            formControlName="name"
-                            autocomplete="off"
-                            [class.is-invalid]="nameIsInvalid"
-                            [class.is-valid]="nameIsValid"
-                    >
-                    <ng-container *ngIf="name.errors && name.touched">
-                        <div class="invalid-feedback"
-                            *ngIf="name.hasError('required')">
-                            Este Campo es obligatorio
-                        </div>
-                    </ng-container>
-                </div>
-               <!-- Email -->
-                <div class="form-group"
-                    [class.error]="emailIsInvalid">
-                    <label for="exampleInputEmail1">Correo Electronico</label>
-                    <input type="email" 
-                            class="form-control" 
-                            id="exampleInputEmail1"
-                            formControlName="email"
-                            autocomplete="off"
-                            [class.is-invalid]="emailIsInvalid"
-                            [class.is-valid]="emailIsValid"
-                    >
-                    <ng-container *ngIf="email.errors && email.touched">
-                        <div class="invalid-feedback"
-                            *ngIf="email.hasError('required')">
-                            Este Campo es obligatorio
-                        </div>
-                    </ng-container>
-                </div>
-               <!-- Password -->
-                <div class="form-group "
-                    [class.error]="passwordIsInvalid"
-                >
-                    <label class="text-center" for="password">Password</label>
-                    <input type="password" 
-                            class="form-control" 
-                            id="password"
-                            formControlName="password"
-                            autocomplete="off"
-                            [class.is-invalid]="passwordIsInvalid"
-                            [class.is-valid]="passwordIsValid"
-                    >
-                    <ng-container *ngIf="password.errors && password.touched">
-                        <div class="invalid-feedback"
-                            *ngIf="password.hasError('required')">
-                            Este Campo es obligatorio
-                        </div>
-                        <div class="invalid-feedback"
-                            *ngIf="password.hasError('minlength')">
-                            Este campo debe de tener minimo {{ password.errors.minlength.requiredLength }}
-                        </div>
-                    </ng-container>
-                </div>
-               <!-- Repeat Password -->
-                <div class="form-group "
-                    [class.error]="repeat_passwordIsInvalid"
-                >
-                    <label class="text-center" for="repeat_password">Password</label>
-                    <input type="repeat_password" 
-                            class="form-control" 
-                            id="repeat_password"
-                            formControlName="repeat_password"
-                            autocomplete="off"
-                            [class.is-invalid]="repeat_passwordIsInvalid"
-                            [class.is-valid]="repeat_passwordIsValid"
-                    >
-                    <ng-container *ngIf="repeat_password.errors && repeat_password.touched">
-                        <div class="invalid-feedback"
-                            *ngIf="repeat_password.hasError('required')">
-                            Este Campo es obligatorio
-                        </div>
-                        <div class="invalid-feedback"
-                            *ngIf="password.hasError('minlength')">
-                            Este campo debe de tener minimo {{ password.errors.minlength.requiredLength }}
-                        </div>
-                    </ng-container>
-                </div>
-               
-                <button [disabled]="form.invalid" 
-                        type="submit" 
-                        class="mb-2 btn btn-primary btn-block">
-                        Entrar
-                </button>
-                <div class="text-center">
-                    <a href="">Registrarse</a>
-                </div>
-            </form>
-        </div>
+  <div class="card" style="color: #000; width: 22rem">
+    <div class="card-header">
+      <h3 class="text-center card-title">Registro</h3>
     </div>
+    <div class="card-body">
+      <form
+        [formGroup]="form"
+        enctype="multipart/form-data"
+        (ngSubmit)="register(form)"
+      >
+        <div class="row">
+          <!-- Name -->
+          <div
+            class="form-group col-md-6 col-sm-12"
+            [class.error]="nameIsInvalid"
+          >
+            <label for="exampleInputEmail1">Nombre</label>
+            <input
+              type="name"
+              class="form-control"
+              id="name"
+              formControlName="name"
+              autocomplete="off"
+              [class.is-invalid]="nameIsInvalid"
+              [class.is-valid]="nameIsValid"
+            />
+            <ng-container *ngIf="name.errors && name.touched">
+              <div class="invalid-feedback" *ngIf="name.hasError('required')">
+                Este Campo es obligatorio
+              </div>
+            </ng-container>
+          </div>
+          <!-- Lastname -->
+          <div
+            class="form-group col-md-6 col-sm-12"
+            [class.error]="nameIsInvalid"
+          >
+            <label for="exampleInputEmail1">Apellidos</label>
+            <input
+              type="lastName"
+              class="form-control"
+              id="lastName"
+              formControlName="lastName"
+              autocomplete="off"
+              [class.is-invalid]="lastNameIsInvalid"
+              [class.is-valid]="lastNameIsValid"
+            />
+            <ng-container *ngIf="lastName.errors && lastName.touched">
+              <div
+                class="invalid-feedback"
+                *ngIf="lastName.hasError('required')"
+              >
+                Este Campo es obligatorio
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <!-- Email -->
+        <div class="form-group" [class.error]="emailIsInvalid">
+          <label for="exampleInputEmail1">Correo Electronico</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            formControlName="email"
+            autocomplete="off"
+            [class.is-invalid]="emailIsInvalid"
+            [class.is-valid]="emailIsValid"
+          />
+          <ng-container *ngIf="email.errors && email.touched">
+            <div class="invalid-feedback" *ngIf="email.hasError('required')">
+              Este Campo es obligatorio
+            </div>
+          </ng-container>
+        </div>
+        <!-- Password -->
+        <div class="form-group" [class.error]="passwordIsInvalid">
+          <label class="text-center" for="password">Contraseña</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            formControlName="password"
+            autocomplete="off"
+            [class.is-invalid]="passwordIsInvalid"
+            [class.is-valid]="passwordIsValid"
+          />
+          <ng-container *ngIf="password.errors && password.touched">
+            <div class="invalid-feedback" *ngIf="password.hasError('required')">
+              Este Campo es obligatorio
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="password.hasError('minlength')"
+            >
+              Este campo debe de tener minimo
+              {{ password.errors.minlength.requiredLength }}
+            </div>
+          </ng-container>
+        </div>
+        <!-- Repeat Password -->
+        <div class="form-group" [class.error]="repeat_passwordIsInvalid">
+          <label class="text-center" for="repeat_password"
+            >Repetir Contraseña</label
+          >
+          <input
+            type="password"
+            class="form-control"
+            id="repeat_password"
+            formControlName="repeat_password"
+            autocomplete="off"
+            [class.is-invalid]="repeat_passwordIsInvalid"
+            [class.is-valid]="repeat_passwordIsValid"
+          />
+          <ng-container
+            *ngIf="repeat_password.errors && repeat_password.touched"
+          >
+            <div
+              class="invalid-feedback"
+              *ngIf="repeat_password.hasError('required')"
+            >
+              Este Campo es obligatorio
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="password.hasError('minlength')"
+            >
+              Este campo debe de tener minimo
+              {{ password.errors.minlength.requiredLength }}
+            </div>
+          </ng-container>
+        </div>
+        <!-- Avatar -->
+        <!-- Password -->
+        <div class="form-group" [class.error]="avatarIsInvalid">
+          <label class="text-center" for="avatar">Avatar</label>
+          <input
+            type="file"
+            class="form-control"
+            id="avatar"
+            (change) ="handleImage($event)"
+            formControlName="avatar"
+            autocomplete="off"
+            [class.is-invalid]="avatarIsInvalid"
+            [class.is-valid]="avatarIsValid"
+            accept="image/*"
+          />
+          <ng-container *ngIf="avatar.errors && avatar.touched">
+            <div class="invalid-feedback" *ngIf="avatar.hasError('required')">
+              Este Campo es obligatorio
+            </div>
+            <div class="invalid-feedback" *ngIf="avatar.hasError('minlength')">
+              Este campo debe de tener minimo
+              {{ avatar.errors.minlength.requiredLength }}
+            </div>
+          </ng-container>
+        </div>
+
+        <button
+          [disabled]="form.invalid"
+          type="submit"
+          class="mb-2 btn btn-primary btn-block"
+        >
+          Registrar
+        </button>
+        <div class="text-center">
+          <a routerLink="/auth/inicio-sesion">Ya tengo cuenta.</a>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
+<img [src]="image" alt="" srcset="">

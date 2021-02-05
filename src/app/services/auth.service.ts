@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpParams, HttpHeaders } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { BehaviorSubject, Observable } from "rxjs";
-import { map } from "rxjs/operators";
+import { catchError, map } from "rxjs/operators";
 
 import { JwtHelperService } from "@auth0/angular-jwt";
 import jwt_decode from "jwt-decode";
@@ -11,6 +11,8 @@ import { environment } from "src/environments/environment";
 
 import { userLogin, responseLogin } from "../interfaces/auth/response-login";
 import { ResponseRegisterUser } from "../interfaces/auth/response-register";
+import { TrackHttpError } from "../interfaces/error/track-http-error";
+import { GlobalService } from "./global.service";
 
 const helper = new JwtHelperService();
 @Injectable({
@@ -19,7 +21,11 @@ const helper = new JwtHelperService();
 export class AuthService {
   private user: BehaviorSubject<userLogin>;
 
-  constructor(private _http: HttpClient, private _router: Router) {
+  constructor(
+    private _http: HttpClient,
+    private _router: Router,
+    private _globalService: GlobalService
+  ) {
     this.user = new BehaviorSubject<userLogin>(
       JSON.parse(localStorage.getItem("user"))
     );
@@ -28,7 +34,10 @@ export class AuthService {
   public get UserData(): userLogin {
     return this.user.value;
   }
-  login(email: string, password: string): Observable<responseLogin> {
+  login(
+    email: string,
+    password: string
+  ): Observable<responseLogin | TrackHttpError> {
     let headers = new HttpHeaders();
     headers.append("Content-Type", "application/json");
 
@@ -45,35 +54,48 @@ export class AuthService {
             this.user.next(res.user[0]);
           }
           return res;
-        })
+        }),
+        catchError((err) => this._globalService.handleHttpError(err))
       );
   }
-  
+
   register(
     name: string,
     lastname: string,
     email: string,
     password: string,
-    avatar: string
-  ): Observable<ResponseRegisterUser> {
+    avatar?: File
+  ): Observable<ResponseRegisterUser | TrackHttpError> {
     let headers = new HttpHeaders();
     headers.append("Content-Type", "application/json");
 
+    const data = new FormData()
+    data.append('name',name)
+    data.append('lastname',lastname)
+    data.append('email',email)
+    data.append('password',password)
+    data.append('avatar',avatar)
+
+      console.log(data.get('avatar'));
+      
+    
+    
+    
     return this._http
       .post<ResponseRegisterUser>(
-        `${environment.urlApi}auth/login`,
-        {name,lastname, email, password,avatar },
+        `${environment.urlApi}auth/register`,
+        data,
         { headers }
       )
       .pipe(
         map((res) => {
-          if(res.user){
+          if (res.user) {
             this.saveDataLocalStorage(res.token, JSON.stringify(res.user));
             this.user.next(res.user);
-            
           }
           return res;
-        })
+        }),
+        catchError((err) => this._globalService.handleHttpError(err))
       );
   }
 

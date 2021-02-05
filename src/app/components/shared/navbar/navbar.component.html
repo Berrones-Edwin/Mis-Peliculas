@@ -1,7 +1,14 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-secondary mb-3" >
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary mb-3">
   <a class="navbar-brand" routerLink="/inicio">Mis Películas</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -11,50 +18,114 @@
         <a class="nav-link" routerLink="/" routerLinkActive="active">Inicio</a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a
+          class="nav-link dropdown-toggle"
+          id="navbarDropdown"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
           Películas
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" routerLink="/peliculas">Inicio</a>
-          <a class="dropdown-item" routerLinkActive="active" routerLink="/peliculas/popular/1">Populares</a>
-          <a class="dropdown-item" routerLinkActive="active" routerLink="/peliculas/top/1"> Más Top</a>
-          <a class="dropdown-item" routerLinkActive="active" routerLink="/peliculas/ahora-cines/1"> Ahora Cines</a>
-          <a class="dropdown-item" routerLinkActive="active" routerLink="/peliculas/proximo-estrenar/1"> Próximo a estrenar</a>
+          <a
+            class="dropdown-item"
+            routerLinkActive="active"
+            routerLink="/peliculas/popular/1"
+            >Populares</a
+          >
+          <a
+            class="dropdown-item"
+            routerLinkActive="active"
+            routerLink="/peliculas/top/1"
+          >
+            Más Top</a
+          >
+          <a
+            class="dropdown-item"
+            routerLinkActive="active"
+            routerLink="/peliculas/ahora-cines/1"
+          >
+            Ahora Cines</a
+          >
+          <a
+            class="dropdown-item"
+            routerLinkActive="active"
+            routerLink="/peliculas/proximo-estrenar/1"
+          >
+            Próximo a estrenar</a
+          >
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" routerLinkActive="active" routerLink="/peliculas/generos">Generos</a>
-          <a class="dropdown-item" routerLinkActive="active" routerLink="/peliculas/clasificaciones">Clasificaciones</a>
+          <a
+            class="dropdown-item"
+            routerLinkActive="active"
+            routerLink="/peliculas/generos"
+            >Generos</a
+          >
+          <a
+            class="dropdown-item"
+            routerLinkActive="active"
+            routerLink="/peliculas/clasificaciones"
+            >Clasificaciones</a
+          >
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/series" routerLinkActive="active">Series</a>
+        <a class="nav-link" routerLink="/series" routerLinkActive="active"
+          >Series</a
+        >
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/buscar" routerLinkActive="active">Explorar</a>
+        <a class="nav-link" routerLink="/buscar" routerLinkActive="active"
+          >Explorar</a
+        >
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/info/contacto" routerLinkActive="active">Contacto</a>
+        <a
+          class="nav-link"
+          routerLink="/info/contacto"
+          routerLinkActive="active"
+          >Contacto</a
+        >
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/info/acerca" routerLinkActive="active">Acerca de</a>
+        <a class="nav-link" routerLink="/info/acerca" routerLinkActive="active"
+          >Acerca de</a
+        >
       </li>
-      <li class="nav-item" *ngIf="_authService.token != null">
-        <a class="nav-link" routerLink="/auth/mi-perfil" routerLinkActive="active">Mi perfil</a>
+      <li class="nav-item" *ngIf="isAuth">
+        <a
+          class="nav-link"
+          routerLink="/profile"
+          routerLinkActive="active"
+          >Mi perfil</a
+        >
       </li>
     </ul>
-    <div class="my-1 my-lg-0 mr-3">
+    <div class="my-1 my-lg-0 mr-3" *ngIf="!isAuth">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-           <a class="nav-link" routerLink="/auth/inicio-sesion" routerLinkActive="active" >Iniciar sesión</a> 
-          <!-- <i class="fas fa-align-justify"></i> -->
+          <a
+            class="nav-link"
+            routerLink="/auth/inicio-sesion"
+            routerLinkActive="active"
+            >Iniciar sesión</a
+          >
         </li>
-        
       </ul>
     </div>
     <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+      <input
+        class="form-control mr-sm-2"
+        type="search"
+        placeholder="Buscar"
+        aria-label="Search"
+      />
     </form>
-  
-      <!-- <button *ngIf="_authService.session_id === null; else logout" (click)="login()"
+
+    <!-- <button *ngIf="_authService.session_id === null; else logout" (click)="login()"
         class="btn btn-outline-purple my-2 my-sm-0">Iniciar Sesion</button>
         
       <ng-template #logout>
@@ -62,16 +133,6 @@
         <button (click)="cancelUser()" class="btn btn-outline-purple my-2 my-sm-0">Cerrar sesión</button>
       </ng-template> -->
 
-
     <!-- </div> -->
   </div>
 </nav>
-
-
-
-
-
-   
-    
-  
-  

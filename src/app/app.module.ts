@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 
 import { GlobalService } from './interceptors/global.service';
 import { SharedModule } from './components/shared/shared.module';
+import { ProfileModule } from './components/profile/profile.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SharedModule } from './components/shared/shared.module';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    ProfileModule
   ],
   providers: [
     // {
