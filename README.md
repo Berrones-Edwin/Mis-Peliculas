@@ -1,27 +1,50 @@
-# AppPeliculas
+# Mis Peliculas
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.5.
+Mega-Pelis is a website that allows you to easily information about your favorites movies and series. <br>
+Mega-Pelis es un sitio web que te permite obtener
+fácilmente información de tus películas y series
+favoritas.
 
-## Development server
+## Technologies | Tecnologías 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- Angular
+- Bootstrap
+- [API TMDB](https://www.themoviedb.org/documentation/api/discover)
+- LAravel
+- MySQL
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Demo
 
-## Build
+If you want to see the demo of this proyect deployed, you can visit [Demo of the proyect](https://github.com/Berrones-Edwin/Mis-Peliculas)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Si tu quieres puedes ver el demo del proyecto ya desplegado, visitame [Demo of the proyect](https://github.com/Berrones-Edwin/Mis-Peliculas)
 
-## Running unit tests
+## Installation | Instalación
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+To install and run this proyect just type and execute <br>
+Para instalar y ejecutar el proyecto 
 
-## Running end-to-end tests
+```bash
+git clone (https://github.com/Berrones-Edwin/Mis-Peliculas
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+```bash
+npm install
+```
+```bash
+Steps change API Key
 
-## Further help
+- open file global.service.ts (app/services/global.service)
+- put your api key TMDB
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+```bash
+ng serve
+```
+
+## Preview
+
+![](https://user-images.githubusercontent.com/44040730/107075006-24d7eb00-67af-11eb-9b77-61ff78ccbb57.png)
+
