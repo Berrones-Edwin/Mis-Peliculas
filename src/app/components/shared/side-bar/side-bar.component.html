@@ -1,73 +1,75 @@
-<div class="section-left">
-  <h6 class="title">Busqueda</h6>
-  <form action="">
-    <div class="mb-3">
-      <input type="text" #termino autocomplete="off" class="form-control" placeholder="Películas, Series, Etc..."
-        (keyup.enter)="buscar(termino.value)">
-    </div>
-    <button class="btn btn-secondary" type="button" (click)="buscar(termino.value)">Buscar</button>
-  </form>
-</div>
-<hr>
-
 <!-- <div class="section-left">
-  <h5 class="title">Quizas te pueda interesar</h5>
-  <ul>
-    <li style="cursor: pointer;">
-      <a class="interest__link" routerLink="/peliculas/interesar/1/1"> Películas más populares
-        para niños</a>
-    </li>
-    <li style="cursor: pointer;"><a class="interest__link" routerLink="/peliculas/interesar/2/1">¿Cuáles son las mejores
-        películas del año pasado?</a></li>
-    <li style="cursor: pointer;"><a class="interest__link" routerLink="/peliculas/interesar/3/1">¿Cuáles son las
-        películas
-        mejor valoradas con clasificación R?</a></li>
-    <li style="cursor: pointer;"><a class="interest__link" routerLink="/peliculas/interesar/4/1">¿Cuáles son los mejores
-        dramas que se estrenaron este año?</a></li>
-  </ul>
-</div>
-<hr> -->
-
-<div class="section-left">
   <h6 class="title">Listado de Géneros de Series</h6>
   <ul class="row container-genres">
     <span class="col-md-6 col-sm-12 mb-2" *ngFor="let genre of genresSeries">
-      <li class=" btn btn-sm btn-outline-orange btn-block" [textContent]="genre.name" style="list-style: none;">
-      </li>
+      <li
+        class="btn btn-sm btn-outline-orange btn-block"
+        [textContent]="genre.name"
+        style="list-style: none"
+      ></li>
     </span>
   </ul>
 </div>
-<hr>
+<hr /> -->
 <div class="section-left">
-  <a routerLink="/peliculas/generos" class="title title-genres mb-5" data-toggle="tooltip" data-placement="top"
-    title="Conocer Listado Completo de Generos">
+  <a
+    routerLink="/peliculas/generos"
+    class="title title-genres mb-5"
+    data-toggle="tooltip"
+    data-placement="top"
+    title="Conocer Listado Completo de Generos"
+  >
     Listado de Géneros de Películas
   </a>
   <ul class="row container-genres mt-3">
     <span class="col-md-6 col-sm-12 mb-2" *ngFor="let genre of genresMovies">
-      <li style="list-style: none;">
-        <a class=" btn btn-sm btn-outline-teal btn-block" routerLink="/peliculas/generos/{{ genre.id }}/1"
-          [textContent]="genre.name"></a>
+      <li style="list-style: none">
+        <a
+          class="btn btn-sm btn-outline-teal btn-block"
+          routerLink="/peliculas/generos/{{ genre.id }}/1"
+          [textContent]="genre.name"
+        ></a>
       </li>
     </span>
     <!-- <li class="btn  btn-outline-teal btn-block"> <a> Ver lista completa </a></li> -->
   </ul>
 </div>
-<hr>
-<div class="section-left">
+<!-- <hr /> -->
+<!-- Reds Sociales -->
+<!-- <div class="section-left">
   <h6 class="title">Redes Sociales</h6>
   <div class="social-media">
     <a class="social-media__link" href="">
-      <img class="social-media__img" title="facebook" src="assets/img/fb.png" alt="facebook">
+      <img
+        class="social-media__img"
+        title="facebook"
+        src="assets/img/fb.png"
+        alt="facebook"
+      />
     </a>
     <a class="social-media__link" href="">
-      <img class="social-media__img" title="Instagram" src="assets/img/ig.png" alt="Instagram">
+      <img
+        class="social-media__img"
+        title="Instagram"
+        src="assets/img/ig.png"
+        alt="Instagram"
+      />
     </a>
     <a class="social-media__link" href="">
-      <img class="social-media__img" title="Linkedin" src="assets/img/in.png" alt="Linkedin">
+      <img
+        class="social-media__img"
+        title="Linkedin"
+        src="assets/img/in.png"
+        alt="Linkedin"
+      />
     </a>
     <a class="social-media__link" href="">
-      <img class="social-media__img" title="Twitter" src="assets/img/twitter.png" alt="Twitter">
+      <img
+        class="social-media__img"
+        title="Twitter"
+        src="assets/img/twitter.png"
+        alt="Twitter"
+      />
     </a>
   </div>
-</div>
+</div> -->

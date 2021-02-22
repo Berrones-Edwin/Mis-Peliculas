@@ -1,35 +1,29 @@
+<ng-container *ngIf="moviesPopular$ | async as movies; else _loadingMovies">
+  <app-grid-card
+    title="Películas más populares"
+    [itemArray]="movies.results.slice(0, 15)"
+    url="/peliculas/popular/1"
+    (item)="detailsMovie($event)"
+    [showPagination]="false"
+  >
+  </app-grid-card>
+</ng-container>
+<ng-template #_loadingMovies>
+  <app-loading></app-loading>
+</ng-template>
 
+<hr />
 
-    <ng-container *ngIf="moviesPopular$ | async as movies; else _loadingMovies">
-
-      <app-grid-card 
-                      title="Películas más populares" 
-                      [itemArray]="movies.results.slice(0,15)" 
-                      url="/peliculas/popular/1"
-                      (item)="detailsMovie($event)" 
-                      [showPagination]="false">
-      </app-grid-card>
-
-    </ng-container>
-    <ng-template #_loadingMovies>
-
-      <app-loading></app-loading>
-    </ng-template>
-
-
-    <hr>
-
-    <ng-container *ngIf="seriesPopular$ | async as series; else _loadingSeries">
-
-      <app-grid-card 
-                    title="Series más populares" 
-                    [itemArray]="series.results.slice(0,15)" 
-                    (item)="detailsMovie($event)" 
-                    [showPagination]="false"
-                     [showBtnExplore]="false">
-      </app-grid-card>
-
-    </ng-container>
-    <ng-template #_loadingSeries>
-      <app-loading></app-loading>
-    </ng-template>
+<ng-container *ngIf="seriesPopular$ | async as series; else _loadingSeries">
+  <app-grid-card
+    title="Series más populares"
+    [itemArray]="series.results.slice(0, 15)"
+    (item)="detailsMovie($event)"
+    [showPagination]="false"
+    [showBtnExplore]="false"
+  >
+  </app-grid-card>
+</ng-container>
+<ng-template #_loadingSeries>
+  <app-loading></app-loading>
+</ng-template>

@@ -25,11 +25,5 @@ export class SideBarComponent implements OnInit {
     this.genresSeries = Genres.TV;
   }
 
-  buscar(termino: string){
-    this._router.navigate([
-      'buscar',
-      termino
-    ]);
-  }
 
 }
