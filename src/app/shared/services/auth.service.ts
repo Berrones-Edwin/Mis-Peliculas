@@ -9,10 +9,13 @@ import jwt_decode from "jwt-decode";
 
 import { environment } from "src/environments/environment";
 
-import { userLogin, responseLogin } from "../interfaces/auth/response-login";
-import { ResponseRegisterUser } from "../interfaces/auth/response-register";
-import { TrackHttpError } from "../interfaces/error/track-http-error";
+// import { userLogin, responseLogin } from "../../interfaces/auth/response-login";
+// import { ResponseRegisterUser } from "../../interfaces/auth/response-register";
+// import { TrackHttpError } from "../../interfaces/error/track-http-error";
 import { GlobalService } from "./global.service";
+import { responseLogin, userLogin } from "../interfaces/auth/response-login";
+import { TrackHttpError } from "../interfaces/error/track-http-error";
+import { ResponseRegisterUser } from "../interfaces/auth/response-register";
 
 const helper = new JwtHelperService();
 @Injectable({

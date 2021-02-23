@@ -4,7 +4,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 // Variables Globlas
 import { environment } from 'src/environments/environment';
 import { GlobalService } from './global.service';
-import { Calendar } from '../interfaces/Calendar.interface';
 
 
 

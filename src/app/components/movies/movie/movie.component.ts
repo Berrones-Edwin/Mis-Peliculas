@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { MoviesService } from "src/app/services/movies.service";
+import { MoviesService } from "src/app/shared/services/movies.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { map, takeUntil } from "rxjs/operators";
 import { Subject, Observable } from "rxjs";
 import { Location } from "@angular/common";
-import { AuthService } from "src/app/services/auth.service";
+import { AuthService } from "src/app/shared/services/auth.service";
 import Swal from "sweetalert2";
 
 @Component({

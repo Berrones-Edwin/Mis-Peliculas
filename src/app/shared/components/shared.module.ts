@@ -13,9 +13,11 @@ import { PaginationComponent } from "./pagination/pagination.component";
 import { MaintenanceComponent } from "./maintenance/maintenance.component";
 import { ErrorComponent } from "./error/error.component";
 // Pipes
-import { ImagePipe } from "src/app/pipes/image.pipe";
+import { ImagePipe } from "src/app/shared/pipes/image.pipe";
 import { Error404Component } from "./error404/error404.component";
 import { SideBarComponent } from "./side-bar/side-bar.component";
+
+
 const COMPONENTS = [
   FooterComponent,
   HeaderComponent,

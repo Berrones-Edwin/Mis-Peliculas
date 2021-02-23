@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService } from 'src/app/services/home.service';
+import { HomeService } from 'src/app/shared/services/home.service';
 import { Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MoviesRoutingModule } from './movies-routing.module';
 
 // Components
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '../../shared/components/shared.module';
 import { ClassificationsComponent } from './classifications/classifications.component';
 import { GenresComponent } from './genres/genres.component';
 import { GetComingComponent } from './get-coming/get-coming.component';

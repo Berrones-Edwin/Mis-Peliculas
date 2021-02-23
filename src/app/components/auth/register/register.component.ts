@@ -4,8 +4,8 @@ import { Location } from "@angular/common";
 
 import { ResponseRegisterUser } from "src/app/interfaces/auth/response-register";
 
-import { AuthService } from "src/app/services/auth.service";
-import { GlobalService } from "src/app/services/global.service";
+import { AuthService } from "src/app/shared/services/auth.service";
+import { GlobalService } from "src/app/shared/services/global.service";
 
 @Component({
   selector: "app-register",

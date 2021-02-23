@@ -3,8 +3,8 @@ import { HttpClient } from "@angular/common/http";
 
 import { environment } from "src/environments/environment";
 
-import { AllList } from "../interfaces/profile/List/all-list.interface";
-import { TrackHttpError } from "../interfaces/error/track-http-error";
+import { AllList } from "../../interfaces/profile/List/all-list.interface";
+import { TrackHttpError } from "../../interfaces/error/track-http-error";
 import { Observable } from "rxjs/internal/Observable";
 import { catchError } from "rxjs/internal/operators/catchError";
 import { GlobalService } from "./global.service";

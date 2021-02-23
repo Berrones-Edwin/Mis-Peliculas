@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { classifications } from 'src/app/Data/classifications';
-import { MoviesService } from 'src/app/services/movies.service';
+import { classifications } from '../../../shared/Data/classifications';
+import { MoviesService } from 'src/app/shared/services/movies.service';
 import { Subject, Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 

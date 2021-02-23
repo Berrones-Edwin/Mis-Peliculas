@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { DatesInterface } from "../interfaces/Dates.interface";
+import { DatesInterface } from "../../interfaces/Dates.interface";
 import { HttpErrorResponse, HttpParams } from "@angular/common/http";
 
 import Swal from "sweetalert2";

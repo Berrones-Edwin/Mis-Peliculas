@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {  Observable } from 'rxjs';
 
-import { MoviesService } from 'src/app/services/movies.service';
+import { MoviesService } from 'src/app/shared/services/movies.service';
 
 @Component({
   selector: 'app-movie-top',

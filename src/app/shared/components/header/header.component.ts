@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MoviesService } from 'src/app/services/movies.service';
+import { MoviesService } from 'src/app/shared/services/movies.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 

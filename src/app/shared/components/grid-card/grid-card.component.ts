@@ -5,7 +5,6 @@ import {
           Output, 
           EventEmitter
         } from '@angular/core';
-import { Genres } from 'src/app/Data/Genres';
 
 @Component({
   selector: 'app-grid-card',

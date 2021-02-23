@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 // Interfaces
-import { DatesInterface } from '../interfaces/Dates.interface';
+
 import { MoviesService } from './movies.service';
 import { GlobalService } from './global.service';
 import { SeriesService } from './series.service';
@@ -11,7 +11,6 @@ import { SeriesService } from './series.service';
 })
 export class HomeService {
 
-  myDates: DatesInterface = { firstDate: '', lastDate: '' };
   private apiKey = '';
 
   constructor(

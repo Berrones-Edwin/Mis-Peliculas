@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MoviesService } from 'src/app/services/movies.service';
+import { MoviesService } from 'src/app/shared/services/movies.service';
 import { Subject, Observable } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 

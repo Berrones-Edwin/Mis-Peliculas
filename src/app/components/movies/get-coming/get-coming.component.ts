@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MoviesService } from 'src/app/services/movies.service';
+import { MoviesService } from 'src/app/shared/services/movies.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Calendar } from 'src/app/interfaces/Calendar.interface';
+import { Calendar } from '../../../shared/interfaces/Calendar.interface';
 
 
 

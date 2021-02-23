@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HomeService } from 'src/app/services/home.service';
+import { HomeService } from 'src/app/shared/services/home.service';
 import { map, takeUntil } from "rxjs/operators";
 import { Subject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { Genres } from 'src/app/Data/Genres';
-import { MoviesService } from 'src/app/services/movies.service';
+import { Genres } from '../../shared/Data/Genres';
+import { MoviesService } from 'src/app/shared/services/movies.service';
 import Swal from 'sweetalert2';
 
 @Component({
