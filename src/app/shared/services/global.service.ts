@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { DatesInterface } from "../../interfaces/Dates.interface";
 import { HttpErrorResponse, HttpParams } from "@angular/common/http";
 
 import Swal from "sweetalert2";
@@ -8,6 +7,7 @@ import { dataCalendar } from "../Data/calendar";
 import { Calendar } from "../interfaces/Calendar.interface";
 import { Observable, throwError } from "rxjs";
 import { TrackHttpError } from "../interfaces/error/track-http-error";
+import { DatesInterface } from "../interfaces/Dates.interface";
 
 @Injectable({
   providedIn: "root",

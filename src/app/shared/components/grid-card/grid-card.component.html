@@ -1,53 +1,69 @@
 <div class="row mb-4 container-title">
   <h4 class="title col-sm-12 col-md-10">{{ title }}</h4>
   <span class="col-sm-12 col-md-2 container-btn-explore">
-    <button *ngIf="showBtnExplore" routerLink="{{ url }}" class="btn btn-outline-warning btn-explore">Explorar</button>
+    <button
+      *ngIf="showBtnExplore"
+      routerLink="{{ url }}"
+      class="btn btn-outline-warning btn-explore"
+    >
+      Explorar
+    </button>
   </span>
 </div>
 <div class="row container-cards">
-
-  <ng-container   *ngFor="let movie of itemArray | paginate:{ itemsPerPage:20,currentPage:page,totalItems:total_results} ">
-    
+  <ng-container
+    *ngFor="
+      let movie of itemArray
+        | paginate
+          : { itemsPerPage: 20, currentPage: page, totalItems: total_results }
+    "
+  >
     <!-- <div class="col-md-3 "> -->
-      <div class="card bg-dark"  (click)="details(movie)">
-        <br>
-        <img [src]="movie.poster_path | image" class="img-fluid shadow-lg card-img-top"
-                alt="{{ (movie.title != null ) ?  movie.title : movie.name }}"
-          title="{{ (movie.title != null ) ?  movie.title : movie.name }}">
-        <div class="card-body">
-          <!-- <br> -->
-          <div class="container-title-movie">
-            <h6 class="card-title cards__name">{{ (movie.title != null ) ?  movie.title : movie.name }}</h6>
-          </div>
-        
-  
+    <div class="card bg-dark" (click)="details(movie)">
+      <br />
+      <img
+        [src]="movie.poster_path | image"
+        class="img-fluid shadow-lg card-img-top"
+        alt="{{ movie.title != null ? movie.title : movie.name }}"
+        title="{{ movie.title != null ? movie.title : movie.name }}"
+      />
+      <div class="card-body">
+        <!-- <br> -->
+        <div class="container-title-movie">
+          <h6 class="card-title cards__name">
+            {{ movie.title != null ? movie.title : movie.name }}
+          </h6>
         </div>
-        <div class="txt-sm-left card-footer text-muted">
-          <span>
-            <i class="fas fa-star"></i>
-            {{ movie.vote_average }}
-          </span>
-          <br>
-          <span>
-            <i class="fas fa-calendar-alt"></i>
-            {{ (movie.release_date === undefined )  ? movie.first_air_date : movie.release_date }}
-          </span>
-        </div>
-  
       </div>
-      <!-- </div> -->
-    </ng-container>
-
+      <div class="txt-sm-left card-footer text-muted">
+        <span>
+          <i class="fas fa-star"></i>
+          {{ movie.vote_average }}
+        </span>
+        <br />
+        <span>
+          <i class="fas fa-calendar-alt"></i>
+          {{
+            movie.release_date === undefined
+              ? movie.first_air_date
+              : movie.release_date
+          }}
+        </span>
+      </div>
+    </div>
+    <!-- </div> -->
+  </ng-container>
 </div>
 
 <!-- <div style="border:2  px solid red;" > -->
-  <pagination-controls class="my-pagination" 
-                      (pageChange)="pageChange($event)" 
-                      previousLabel="Anterior" 
-                      nextLabel="Siguiente"
-                      *ngIf="showPagination"
-                      [responsive]="true"
-                      maxSize="10" 
-  >
-  </pagination-controls>
+<pagination-controls
+  class="my-pagination"
+  (pageChange)="pageChange($event)"
+  previousLabel="Anterior"
+  nextLabel="Siguiente"
+  *ngIf="showPagination"
+  [responsive]="true"
+  maxSize="10"
+>
+</pagination-controls>
 <!-- </div> -->

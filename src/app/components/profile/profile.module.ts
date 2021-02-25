@@ -2,15 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ProfileRoutingModule } from './profile-routing.module';
-import { PagesComponent } from './pages/pages.component';
 import { ProfileComponent } from './profile/profile.component';
+import { SharedModule } from 'src/app/shared/components/shared.module';
 
 
 @NgModule({
-  declarations: [PagesComponent,ProfileComponent],
+  declarations: [ProfileComponent],
   imports: [
     CommonModule,
-    ProfileRoutingModule
+    ProfileRoutingModule,
+    SharedModule
   ]
 })
 export class ProfileModule { }

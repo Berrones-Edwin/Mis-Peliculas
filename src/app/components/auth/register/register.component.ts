@@ -2,10 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { Location } from "@angular/common";
 
-import { ResponseRegisterUser } from "src/app/interfaces/auth/response-register";
 
 import { AuthService } from "src/app/shared/services/auth.service";
 import { GlobalService } from "src/app/shared/services/global.service";
+import { ResponseRegisterUser } from "src/app/shared/interfaces/auth/response-register";
 
 @Component({
   selector: "app-register",

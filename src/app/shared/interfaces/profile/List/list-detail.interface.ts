@@ -12,5 +12,6 @@ export interface ListDetail {
     created_at: string;
     updated_at: string;
     items: Array<Item>;
+    
   }
 }

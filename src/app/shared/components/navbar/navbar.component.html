@@ -95,44 +95,37 @@
           >Acerca de</a
         >
       </li>
-      <li class="nav-item" *ngIf="isAuth">
+      <li class="nav-item dropdown" *ngIf="this._authService.isAuth()">
         <a
-          class="nav-link"
-          routerLink="/profile"
-          routerLinkActive="active"
-          >Mi perfil</a
+          class="nav-link dropdown-toggle"
+          id="navbarDropdown"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
         >
+          Mi Perfil
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="/profile">Dashboard</a>
+          <a class="dropdown-item" routerLink="/profile/mis-catalogos"> Catalogos</a>
+          <a class="dropdown-item" routerLink="/profile/favoritos"> Favoritos</a>
+        </div>
       </li>
     </ul>
-    <div class="my-1 my-lg-0 mr-3" *ngIf="!isAuth">
+
+    <div class="my-1 my-lg-0 mr-3">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLink="/auth/inicio-sesion"
-            routerLinkActive="active"
+        <li class="nav-item" *ngIf="this._authService.isAuth()">
+          <a (click)="logout()" class="nav-link">Cerrar sesión</a>
+        </li>
+
+        <li class="nav-item" *ngIf="!this._authService.isAuth()">
+          <a class="nav-link" routerLink="/auth/inicio-sesion"
             >Iniciar sesión</a
           >
         </li>
       </ul>
     </div>
-    <!-- <form class="form-inline my-2 my-lg-0">
-      <input
-        class="form-control mr-sm-2"
-        type="search"
-        placeholder="Buscar"
-        aria-label="Search"
-      />
-    </form> -->
-
-    <!-- <button *ngIf="_authService.session_id === null; else logout" (click)="login()"
-        class="btn btn-outline-purple my-2 my-sm-0">Iniciar Sesion</button>
-        
-      <ng-template #logout>
-
-        <button (click)="cancelUser()" class="btn btn-outline-purple my-2 my-sm-0">Cerrar sesión</button>
-      </ng-template> -->
-
-    <!-- </div> -->
   </div>
 </nav>

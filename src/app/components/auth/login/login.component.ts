@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Location } from "@angular/common";
 
 import { AuthService } from "src/app/shared/services/auth.service";
-import { responseLogin } from "src/app/interfaces/auth/response-login";
 import { GlobalService } from "src/app/shared/services/global.service";
+import { responseLogin } from "src/app/shared/interfaces/auth/response-login";
 
 @Component({
   selector: "app-login",

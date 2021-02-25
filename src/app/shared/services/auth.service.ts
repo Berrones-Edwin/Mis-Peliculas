@@ -9,9 +9,6 @@ import jwt_decode from "jwt-decode";
 
 import { environment } from "src/environments/environment";
 
-// import { userLogin, responseLogin } from "../../interfaces/auth/response-login";
-// import { ResponseRegisterUser } from "../../interfaces/auth/response-register";
-// import { TrackHttpError } from "../../interfaces/error/track-http-error";
 import { GlobalService } from "./global.service";
 import { responseLogin, userLogin } from "../interfaces/auth/response-login";
 import { TrackHttpError } from "../interfaces/error/track-http-error";
@@ -72,24 +69,19 @@ export class AuthService {
     let headers = new HttpHeaders();
     headers.append("Content-Type", "application/json");
 
-    const data = new FormData()
-    data.append('name',name)
-    data.append('lastname',lastname)
-    data.append('email',email)
-    data.append('password',password)
-    data.append('avatar',avatar)
+    const data = new FormData();
+    data.append("name", name);
+    data.append("lastname", lastname);
+    data.append("email", email);
+    data.append("password", password);
+    data.append("avatar", avatar);
 
-      console.log(data.get('avatar'));
-      
-    
-    
-    
+    console.log(data.get("avatar"));
+
     return this._http
-      .post<ResponseRegisterUser>(
-        `${environment.urlApi}auth/register`,
-        data,
-        { headers }
-      )
+      .post<ResponseRegisterUser>(`${environment.urlApi}auth/register`, data, {
+        headers,
+      })
       .pipe(
         map((res) => {
           if (res.user) {
@@ -110,10 +102,19 @@ export class AuthService {
   isAuth(): boolean {
     const token = localStorage.getItem("token");
 
-    if (helper.isTokenExpired(token) || !localStorage.getItem("token")) {
+    if (
+      helper.isTokenExpired(token) ||
+      !localStorage.getItem("token") ||
+      this.UserData === null ||
+      this.UserData === undefined
+    ) {
       return false;
     }
     return true;
+  }
+
+  getToken(){
+    return localStorage.getItem('token')
   }
 
   decodeToken(): userLogin {

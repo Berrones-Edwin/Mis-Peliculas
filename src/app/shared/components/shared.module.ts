@@ -12,10 +12,12 @@ import { GridCardComponent } from "./grid-card/grid-card.component";
 import { PaginationComponent } from "./pagination/pagination.component";
 import { MaintenanceComponent } from "./maintenance/maintenance.component";
 import { ErrorComponent } from "./error/error.component";
-// Pipes
-import { ImagePipe } from "src/app/shared/pipes/image.pipe";
 import { Error404Component } from "./error404/error404.component";
 import { SideBarComponent } from "./side-bar/side-bar.component";
+
+// Pipes
+import { ImagePipe } from "src/app/shared/pipes/image.pipe";
+import { ApiRestPipe } from "src/app/shared/pipes/image-api.pipe";
 
 
 const COMPONENTS = [
@@ -31,8 +33,8 @@ const COMPONENTS = [
   SideBarComponent,
 ];
 @NgModule({
-  exports: [...COMPONENTS, ImagePipe],
-  declarations: [...COMPONENTS, ImagePipe],
+  exports: [...COMPONENTS, ImagePipe,ApiRestPipe],
+  declarations: [...COMPONENTS, ImagePipe,ApiRestPipe],
   imports: [CommonModule, RouterModule, NgxPaginationModule],
 })
 export class SharedModule {}

@@ -1,71 +1,78 @@
-<ng-container  *ngIf="movie$ | async as movie; else loading">
-
-
+<ng-container *ngIf="movie$ | async as movie; else loading">
   <div class="row mt-4">
-
-    <section class="poster-container col-sm-12 col-md-12 mb-3 col-lg-4" >
-
-      <img class=" mb-4 shadow-lg" 
-            src="{{ movie.poster_path | image}}" 
-            alt="{{ movie.title }}"
-            title="{{ movie.title }}"
-            width="300"
-            height="500">
-
+    <section class="poster-container col-sm-12 col-md-12 mb-3 col-lg-4">
+      <img
+        class="mb-4 shadow-lg"
+        src="{{ movie.poster_path | image }}"
+        alt="{{ movie.title }}"
+        title="{{ movie.title }}"
+        width="300"
+        height="500"
+      />
 
       <div class="container-left-btn">
-
         <button (click)="addToFavorites()" class="btn btn-outline-danger mr-2">
-            <span><i class="fas fa-heart"></i></span>
-            Favoritos
+          <span><i class="fas fa-heart"></i></span>
+          Favoritos
         </button>
-        <ng-container *ngIf="movie.videos.results.length>0 ">
-          <a href="https://www.youtube.com/watch?v={{ movie.videos.results[0].key }}" 
-            target="_blank" 
+        <ng-container *ngIf="movie.videos.results.length > 0">
+          <a
+            href="https://www.youtube.com/watch?v={{
+              movie.videos.results[0].key
+            }}"
+            target="_blank"
             class="btn btn-outline-warning"
-           >
-              Mirar trailer
+          >
+            Mirar trailer
           </a>
         </ng-container>
-      
+
         <ng-template #elseTrailer>
-          <button [disabled]="true" 
-                  class="btn btn-outline-warning watch-trailer">Trailer no encontrado
+          <button
+            [disabled]="true"
+            class="btn btn-outline-warning watch-trailer"
+          >
+            Trailer no encontrado
           </button>
         </ng-template>
-       
       </div>
-
     </section>
 
     <section class="info-container col-sm-12 col-md-12 col-lg-8">
       <div class="row mb-4 container-title">
-        <h2  class="title  col-sm-12 col-md-10">{{movie.title}}</h2>
-        <span class="container-title-btn col-sm-12 col-md-2" >
-          <button (click)="goBack()" class="btn btn-outline-pink">Regresar</button>
+        <h2 class="title col-sm-12 col-md-10">{{ movie.title }}</h2>
+        <span class="container-title-btn col-sm-12 col-md-2">
+          <button (click)="goBack()" class="btn btn-outline-pink">
+            Regresar
+          </button>
         </span>
       </div>
-       <!-- Sinopsis -->
-       <div>
-       
+      <!-- Sinopsis -->
+      <div>
         <p class="movie-overview">{{ movie.overview }}</p>
       </div>
 
       <h6 class="mb-4 title">
-        <span> <i class="fas fa-star"></i>  {{ movie.vote_average }}</span>
+        <span> <i class="fas fa-star"></i> {{ movie.vote_average }}</span>
         &nbsp;
-        <span> <i class="fas fa-calendar-alt"></i> {{ movie.release_date }}</span>
+        <span>
+          <i class="fas fa-calendar-alt"></i> {{ movie.release_date }}</span
+        >
       </h6>
 
       <!-- Genero -->
       <div class="container-genres mb-3">
-        <button *ngFor="let genre of movie.genres" 
-                class="btn btn-sm btn-dark mr-2">{{genre.name}}</button>
+        <button
+          *ngFor="let genre of movie.genres"
+          class="btn btn-sm btn-dark mr-2"
+        >
+          {{ genre.name }}
+        </button>
       </div>
 
       <!-- End Genero -->
 
-      <hr>
+      <hr />
 
       <!-- Elenco -->
       <div class="cast" *ngIf="movie.credits.cast as credits">
@@ -77,45 +84,56 @@
         </div>
         <div class="container-cast">
           <div class="card-cast" *ngFor="let credit of credits.slice(0, 7)">
-            <a class="credits" routerLink="/actors/actor/{{credit.id}}" >
-              <img class="img-fluid shadow-lg cast__img" height="120px;" src="{{ credit.profile_path | image}}"
-                alt="{{ credit.name }}">
+            <a class="credits" routerLink="/actors/actor/{{ credit.id }}">
+              <img
+                class="img-fluid shadow-lg cast__img"
+                height="120px;"
+                src="{{ credit.profile_path | image }}"
+                alt="{{ credit.name }}"
+              />
               <p class="cast__name">{{ credit.name }}</p>
             </a>
           </div>
         </div>
       </div>
-
     </section>
-    <hr>
+    <hr />
 
-     <!-- Images -->
+    <!-- Images -->
     <section class="col-sm-12 col-md-12 mb-5">
       <!-- *ngIf="movie$ | async as movie; else loading"> -->
-       <div class="images" *ngIf="images$ | async as  image; else loadingImage  ">
-        <div class="row mb-4 container-title" *ngIf="image.posters.length > 0  ">
-
+      <div class="images" *ngIf="images$ | async as image; else loadingImage">
+        <div class="row mb-4 container-title" *ngIf="image.posters.length > 0">
           <h3 class="title col-sm-12 col-md-10">Posters</h3>
         </div>
-        <div class="gallery mb-2" id="lightgallery"> 
+        <div class="gallery mb-2" id="lightgallery">
           <div class="gallery__container" *ngFor="let poster of image.posters">
-            <a target="_blank" href="{{ poster.file_path | image}}">
-              <img class="img-fluid" src="{{ poster.file_path | image}}"
-              alt="">
+            <a target="_blank" href="{{ poster.file_path | image }}">
+              <img
+                class="img-fluid"
+                src="{{ poster.file_path | image }}"
+                alt=""
+              />
             </a>
-
           </div>
-          
         </div>
-        <div class="gallery" *ngIf="image.backdrops.length > 0  " id="lightgallery"> 
-          <div class="gallery__container" *ngFor="let poster of image.backdrops">
-            <a target="_blank" href="{{ poster.file_path | image}}">
-              <img class="img-fluid" src="{{ poster.file_path | image}}"
-              alt="">
+        <div
+          class="gallery"
+          *ngIf="image.backdrops.length > 0"
+          id="lightgallery"
+        >
+          <div
+            class="gallery__container"
+            *ngFor="let poster of image.backdrops"
+          >
+            <a target="_blank" href="{{ poster.file_path | image }}">
+              <img
+                class="img-fluid"
+                src="{{ poster.file_path | image }}"
+                alt=""
+              />
             </a>
-
           </div>
-          
         </div>
       </div>
 
@@ -127,45 +145,56 @@
 
     <!-- Peliculas Similares -->
     <div class="col-sm-12 col-md-12">
-
-       <ng-container  *ngIf="movie.recommendations as recommendations "> 
-        
-        <app-grid-card title="Películas Similares"
-                      [itemArray]="recommendations.results.slice(0,5)"
-                      (item)="detailsMovie($event)"
-                      [showPagination]="false"
-                      url="/peliculas/{{ movie.id }}/recomendaciones/1">
+      <ng-container *ngIf="movie.recommendations as recommendations">
+        <app-grid-card
+          title="Películas Similares"
+          [itemArray]="recommendations.results.slice(0, 5)"
+          (item)="detailsMovie($event)"
+          [showPagination]="false"
+          url="/peliculas/{{ movie.id }}/recomendaciones/1"
+        >
         </app-grid-card>
       </ng-container>
       <!-- END Peliculas Similares -->
-      <hr>
+      <hr />
 
       <!-- Reseñas-->
 
       <ng-container *ngIf="movie.review as reviews">
-
-        <div class="row mb-4 container-title" *ngIf="review.length>0">
+        <div class="row mb-4 container-title" *ngIf="review.length > 0">
           <h3 class="title col-sm-12 col-md-10">Reseñas</h3>
           <span class="container-title-btn col-sm-12 col-md-2">
             <button class="btn btn-outline-warning">Explorar</button>
           </span>
         </div>
-  
-        <div class="row" >
-            <div class="col-sm-6" *ngFor="let review of reviews.results">
-              <div class="card " style="background-color:transparent!important;border-radius: 15px;border:1px solid #FFF;">
-                <div class="card-body">
-                  <h5 class="card-title">{{ review.author | uppercase }}</h5>
-                  <hr>
-                  <p class="card-text">{{ review.content }}</p>
-                  <a [href]="review.url" style="color:#FFF;" target="_blank" class="">Ver comentario</a>
-                </div>
+
+        <div class="row">
+          <div class="col-sm-6" *ngFor="let review of reviews.results">
+            <div
+              class="card"
+              style="
+                background-color: transparent !important;
+                border-radius: 15px;
+                border: 1px solid #fff;
+              "
+            >
+              <div class="card-body">
+                <h5 class="card-title">{{ review.author | uppercase }}</h5>
+                <hr />
+                <p class="card-text">{{ review.content }}</p>
+                <a
+                  [href]="review.url"
+                  style="color: #fff"
+                  target="_blank"
+                  class=""
+                  >Ver comentario</a
+                >
               </div>
             </div>
-  
           </div>
+        </div>
       </ng-container>
-        <!-- End Reseñas-->
+      <!-- End Reseñas-->
     </div>
   </div>
 </ng-container>
