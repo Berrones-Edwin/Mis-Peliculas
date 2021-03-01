@@ -1,0 +1,21 @@
+<div class="row mb-4 mt-4 container container-title">
+  <h3 class="title col-sm-12 col-md-10">Últimos agregados a favoritos</h3>
+  <span class="container-title-btn col-sm-12 col-md-2">
+    <a routerLink="/profile/favoritos" class="btn btn-outline-warning"
+      >Explorar</a
+    >
+  </span>
+</div>
+
+<div class="card-deck">
+  <ng-container *ngFor="let item of favorites">
+    <card-favorites
+      [id]="item.item"
+      name="{{ item.name }}"
+      [description]="item.description"
+      [avatar]="item.avatar"
+      [created_at]="item.created_at"
+      (details) ="getDetails($event)"
+    ></card-favorites>
+  </ng-container>
+</div>

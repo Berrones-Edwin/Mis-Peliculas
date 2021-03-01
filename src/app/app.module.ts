@@ -1,33 +1,25 @@
 // Modules
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import {  HttpClientModule } from "@angular/common/http";
-import { AppRoutingModule } from './app-routing.module';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+import { HttpClientModule } from "@angular/common/http";
+import { AppRoutingModule } from "./app-routing.module";
 
 // Components
-import { AppComponent } from './app.component';
+import { AppComponent } from "./app.component";
 
-import { SharedModule } from './shared/components/shared.module';
-import { ProfileModule } from './components/profile/profile.module';
+import { SharedModule } from "./shared/components/shared.module";
+import { ProfileModule } from "./components/profile/profile.module";
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
-    ProfileModule
+    ProfileModule,
   ],
-  providers: [
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: GlobalService,
-    //   multi: true
-    // }
-  ],
-  bootstrap: [AppComponent]
+  providers: [],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

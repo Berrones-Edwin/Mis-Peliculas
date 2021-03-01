@@ -5,7 +5,7 @@ export interface AllList {
   lists: List;
 }
 
-interface List {
+export interface List {
   current_page: number;
   data: Array<ListDetail>;
   first_page_url: string;

@@ -31,44 +31,7 @@
   <!-- Listas-->
 
   <ng-container *ngIf="allLists$ | async as allList; else loadingList">
-    <div class="row mb-4 container container-title">
-      <h3 class="title col-sm-12 col-md-10">Últimos catalogos creados</h3>
-      <span class="container-title-btn col-sm-12 col-md-2">
-        <a routerLink="/profile/mis-catalogos" class="btn btn-outline-warning"
-          >Explorar</a
-        >
-      </span>
-    </div>
-
-    <div class="card-deck mb-4">
-      <div
-        class="card bg-dark"
-        *ngFor="let item of allList.lists.data"
-        style="width: 18rem"
-      >
-        <img
-          src="{{ item.avatar | imageApiRest }}"
-          class="card-img-top"
-          alt="{{ item.avatar | imageApiRest }}"
-        />
-        <div class="card-body">
-          <h5 class="card-title">{{ item.name }}</h5>
-          <p class="card-text">
-            {{ item.description }}
-          </p>
-          <p class="card-text">
-            <small class="text-muted">{{ item.created_at | date: dmy }}</small>
-          </p>
-        </div>
-        <div class="card-footer">
-          <a
-            [routerLink]="['catalogo/detalles', item.id]"
-            class="btn btn-outline-primary"
-            >Ver más</a
-          >
-        </div>
-      </div>
-    </div>
+    <grid-catalog [list]="allList.lists.data"></grid-catalog>
   </ng-container>
   <ng-template #loadingList>
     <app-loading></app-loading>
@@ -79,44 +42,7 @@
   <ng-container
     *ngIf="allFavorites$ | async as allFavorites; else loadingFavorites"
   >
-    <div class="row mb-4 mt-4 container container-title">
-      <h3 class="title col-sm-12 col-md-10">Últimos agregados a favoritos</h3>
-      <span class="container-title-btn col-sm-12 col-md-2">
-        <a routerLink="/profile/favoritos" class="btn btn-outline-warning"
-          >Explorar</a
-        >
-      </span>
-    </div>
-
-    <div class="card-deck">
-      <div
-        class="card bg-dark"
-        *ngFor="let item of allFavorites.data.data"
-        style="width: 18rem"
-      >
-        <img
-          src="{{ item.avatar | image }}"
-          class="card-img-top"
-          alt="{{ item.avatar | image }}"
-        />
-        <div class="card-body">
-          <h5 class="card-title">{{ item.name }}</h5>
-          <p class="card-text">
-            {{ item.description }}
-          </p>
-          <p class="card-text">
-            <small class="text-muted">{{ item.created_at | date: dmy }}</small>
-          </p>
-        </div>
-        <div class="card-footer">
-          <a
-            (click)="seeDetailsMovie(item.item)"
-            class="btn btn-outline-primary"
-            >Ver más</a
-          >
-        </div>
-      </div>
-    </div>
+    <grid-favorites [favorites]="allFavorites.data.data"></grid-favorites>
   </ng-container>
   <ng-template #loadingFavorites>
     <app-loading></app-loading>

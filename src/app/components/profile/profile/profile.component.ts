@@ -19,8 +19,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private _authService: AuthService,
-    private _profileService: ProfileService,
-    private _router: Router
+    private _profileService: ProfileService
   ) {}
 
   ngOnInit() {
@@ -34,9 +33,5 @@ export class ProfileComponent implements OnInit {
   }
   getFavorites(): void {
     this.allFavorites$ = this._profileService.getAllRateds();
-  }
-
-  seeDetailsMovie(item) {
-    this._router.navigate(["/peliculas", item]);
   }
 }
