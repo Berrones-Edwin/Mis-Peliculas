@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { Location } from "@angular/common";
 
-
 import { AuthService } from "src/app/shared/services/auth.service";
 import { GlobalService } from "src/app/shared/services/global.service";
 import { ResponseRegisterUser } from "src/app/shared/interfaces/auth/response-register";
@@ -15,6 +14,7 @@ import { ResponseRegisterUser } from "src/app/shared/interfaces/auth/response-re
 export class RegisterComponent implements OnInit {
   public form: FormGroup;
   image: File;
+  loading: boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,9 +28,9 @@ export class RegisterComponent implements OnInit {
   }
 
   register(form: FormGroup) {
-    console.log("register");
     const { email, password, name, lastName, avatar } = form.value;
 
+    this.loading = false;
     this._authService
       .register(name, lastName, email, password, this.image)
       .subscribe((data: ResponseRegisterUser) => {
@@ -41,31 +41,28 @@ export class RegisterComponent implements OnInit {
               "Te has registrado correctamente",
               "success"
             )
-            .then(() => this._location.back());
+            .then(() => {
+              this._location.back();
+              this.loading = true;
+            });
         }
       });
   }
 
   createForm() {
     this.form = this.formBuilder.group({
-      name: ["ivan", Validators.required],
-      lastName: ["perez", Validators.required],
+      name: ["", Validators.required],
+      lastName: ["", Validators.required],
       avatar: ["", Validators.required],
-      email: ["ivan@gmail.com", Validators.required],
-      password: ["password", [Validators.required, Validators.minLength(8)]],
-      repeat_password: [
-        "password",
-        [Validators.required, Validators.minLength(8)],
-      ],
+      email: ["", Validators.required],
+      password: ["", [Validators.required, Validators.minLength(8)]],
+      repeat_password: ["", [Validators.required, Validators.minLength(8)]],
     });
   }
 
   handleImage(event): void {
     if (event.target.files.length > 0) {
       this.image = event.target.files[0];
-      console.log(this.image);
-      
-      // this.form.get("avatar").setValue(this.image);
     }
   }
 

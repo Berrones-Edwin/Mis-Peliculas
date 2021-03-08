@@ -1,5 +1,8 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
+import { CatalogsComponent } from "./catalog/catalogs/catalogs.component";
+import { FormCatalogComponent } from "./catalog/form-catalog/form-catalog.component";
+import { FavoritesComponent } from "./favorite/favorites/favorites.component";
 import { ProfileComponent } from "./profile/profile.component";
 
 const routes: Routes = [
@@ -13,23 +16,23 @@ const routes: Routes = [
   },
   {
     path: "mis-catalogos",
-    component: ProfileComponent,
+    component: CatalogsComponent,
   },
   {
     path: "catalogo/detalles/:id",
-    component: ProfileComponent,
+    component: CatalogsComponent,
   },
   {
     path: "nuevo-catalogo",
-    component: ProfileComponent,
+    component: FormCatalogComponent,
   },
   {
     path: "favoritos",
-    component: ProfileComponent,
+    component: FavoritesComponent,
   },
   {
     path: "favoritos/detalles/:id",
-    component: ProfileComponent,
+    component: FavoritesComponent,
   },
   { path: "**", pathMatch: "full", redirectTo: "" },
 ];

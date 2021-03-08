@@ -14,6 +14,7 @@ import { MaintenanceComponent } from "./maintenance/maintenance.component";
 import { ErrorComponent } from "./error/error.component";
 import { Error404Component } from "./error404/error404.component";
 import { SideBarComponent } from "./side-bar/side-bar.component";
+import { HeaderSectionComponent } from "./header-section/header-section.component";
 
 // Pipes
 import { ImagePipe } from "src/app/shared/pipes/image.pipe";
@@ -31,6 +32,7 @@ const COMPONENTS = [
   ErrorComponent,
   Error404Component,
   SideBarComponent,
+  HeaderSectionComponent
 ];
 @NgModule({
   exports: [...COMPONENTS, ImagePipe,ApiRestPipe],

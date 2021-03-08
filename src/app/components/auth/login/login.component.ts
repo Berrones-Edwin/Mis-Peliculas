@@ -13,6 +13,7 @@ import { responseLogin } from "src/app/shared/interfaces/auth/response-login";
 })
 export class LoginComponent implements OnInit {
   public form: FormGroup;
+  loading: boolean = true;
   constructor(
     private formBuilder: FormBuilder,
     private _authService: AuthService,
@@ -27,11 +28,10 @@ export class LoginComponent implements OnInit {
 
   login(form: FormGroup) {
     const { email, password } = form.value;
-
+    this.loading = false;
     this._authService
       .login(email, password)
       .subscribe((data: responseLogin) => {
-
         if (data.exito === 1) {
           this._globalService
             .sweetAlert(
@@ -39,7 +39,10 @@ export class LoginComponent implements OnInit {
               "Has iniciado sesión correctamente",
               "success"
             )
-            .then(() => this._location.back());
+            .then(() => {
+              this._location.back();
+              this.loading = true;
+            });
         }
       });
   }

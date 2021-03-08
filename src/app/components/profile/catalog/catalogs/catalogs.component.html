@@ -1,1 +1,17 @@
-<p>catalogs works!</p>
+<header-section
+  title="Mis Catalogos"
+  url="/profile/nuevo-catalogo"
+  nameBTN="Crear nuevo"
+  typeButton="btn-primary"
+></header-section>
+
+
+
+<!-- Listas-->
+<ng-container *ngIf="allLists$ | async as allList; else loadingList">
+  <grid-catalog [list]="allList.lists.data" [showButton]="false"></grid-catalog>
+</ng-container>
+<ng-template #loadingList>
+  <app-loading></app-loading>
+</ng-template>
+<!-- End Listas-->

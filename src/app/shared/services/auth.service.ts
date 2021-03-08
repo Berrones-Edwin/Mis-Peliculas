@@ -76,8 +76,6 @@ export class AuthService {
     data.append("password", password);
     data.append("avatar", avatar);
 
-    console.log(data.get("avatar"));
-
     return this._http
       .post<ResponseRegisterUser>(`${environment.urlApi}auth/register`, data, {
         headers,
@@ -113,8 +111,8 @@ export class AuthService {
     return true;
   }
 
-  getToken(){
-    return localStorage.getItem('token')
+  getToken() {
+    return localStorage.getItem("token");
   }
 
   decodeToken(): userLogin {

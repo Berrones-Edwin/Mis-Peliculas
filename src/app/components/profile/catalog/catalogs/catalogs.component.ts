@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { TrackHttpError } from 'src/app/shared/interfaces/error/track-http-error';
+import { AllList } from 'src/app/shared/interfaces/profile/List/all-list.interface';
+import { ProfileService } from 'src/app/shared/services/profile.service';
 
 @Component({
   selector: 'app-catalogs',
@@ -7,9 +11,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CatalogsComponent implements OnInit {
 
-  constructor() { }
+  allLists$: Observable<AllList | TrackHttpError>;
+  constructor(
+    private _profileService: ProfileService
+  ) { }
 
   ngOnInit(): void {
+    this.getLists();
+  }
+  getLists(): void {
+    this.allLists$ = this._profileService.getAllList();
   }
 
 }

@@ -1,1 +1,132 @@
-<p>form-catalog works!</p>
+<div class="d-flex justify-content-center">
+  <div class="card" style="color: #000; width: 22rem">
+    <div class="card-header">
+      <h3 class="text-center card-title">Registro</h3>
+    </div>
+    <div class="card-body">
+      <form
+        [formGroup]="form"
+        enctype="multipart/form-data"
+        (ngSubmit)="saveCatalog(form)"
+        name="form"
+      >
+        <div class="row">
+          <!-- Name -->
+          <div
+            class="form-group col-md-6 col-sm-12"
+            [class.error]="nameIsInvalid"
+          >
+            <label for="exampleInputEmail1">Nombre</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              formControlName="name"
+              autocomplete="off"
+              [class.is-invalid]="nameIsInvalid"
+              [class.is-valid]="nameIsValid"
+              placeholder="Mi nuevo Catalogo"
+            />
+            <ng-container *ngIf="name.errors && name.touched">
+              <div class="invalid-feedback" *ngIf="name.hasError('required')">
+                Este Campo es obligatorio
+              </div>
+            </ng-container>
+          </div>
+
+          <div
+            class="form-group col-md-6 col-sm-12"
+            [class.error]="typeIDIsInvalid"
+          >
+            <label for="exampleInputEmail1">Tipo</label>
+            <select
+              class="form-control"
+              id="typeID"
+              formControlName="type_id"
+              autocomplete="off"
+              [class.is-invalid]="typeIDIsInvalid"
+              [class.is-valid]="typeIDIsValid"
+              (change)="changeType($event)"
+            >
+              <option value="" disabled selected>
+                Elige una opción
+              </option>
+              <option [value]="type.id" *ngFor="let type of typeCatalogs">
+                {{ type.name }} {{ type.id }}
+              </option>
+            </select>
+
+            <ng-container *ngIf="typeID.errors && typeID.touched">
+              <div class="invalid-feedback" *ngIf="typeID.hasError('required')">
+                Este Campo es obligatorio
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <!-- Lastname -->
+        <div
+          class="form-group col-md-12 col-sm-12"
+          [class.error]="nameIsInvalid"
+        >
+          <label for="exampleInputEmail1">Description</label>
+          <textarea
+            class="form-control"
+            id="description"
+            formControlName="description"
+            autocomplete="off"
+            [class.is-invalid]="descriptionIsInvalid"
+            [class.is-valid]="descriptionIsValid"
+            cols="30"
+            rows="10"
+          ></textarea>
+          <ng-container *ngIf="description.errors && description.touched">
+            <div
+              class="invalid-feedback"
+              *ngIf="description.hasError('required')"
+            >
+              Este Campo es obligatorio
+            </div>
+          </ng-container>
+        </div>
+        <!-- Avatar -->
+
+        <div class="form-group" [class.error]="avatarIsInvalid">
+          <label class="text-center" for="avatar">Avatar</label>
+          <input
+            type="file"
+            class="form-control"
+            id="avatar"
+            (change)="handleImage($event)"
+            formControlName="avatar"
+            autocomplete="off"
+            [class.is-invalid]="avatarIsInvalid"
+            [class.is-valid]="avatarIsValid"
+            accept="image/*"
+          />
+          <ng-container *ngIf="avatar.errors && avatar.touched">
+            <div class="invalid-feedback" *ngIf="avatar.hasError('required')">
+              Este Campo es obligatorio
+            </div>
+          </ng-container>
+        </div>
+
+        <button
+          [disabled]="form.invalid"
+          type="submit"
+          class="mb-2 btn btn-primary btn-block"
+          *ngIf="loading; else loadingElse"
+        >
+          <span>Guardar</span>
+        </button>
+        <ng-template #loadingElse>
+          <span
+            class="d-flex flex-column justify-content-center align-items-center"
+          >
+            <img width="50" src="assets/img/loading.gif" alt="loading" />
+            <p>Espere...</p>
+          </span>
+        </ng-template>
+      </form>
+    </div>
+  </div>
+</div>

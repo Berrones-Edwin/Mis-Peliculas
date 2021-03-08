@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { ReactiveFormsModule } from "@angular/forms";
 
 import { ProfileRoutingModule } from "./profile-routing.module";
 import { ProfileComponent } from "./profile/profile.component";
@@ -27,6 +28,11 @@ const COMPONENTS = [
 
 @NgModule({
   declarations: [...COMPONENTS],
-  imports: [CommonModule, ProfileRoutingModule, SharedModule],
+  imports: [
+    CommonModule,
+    ProfileRoutingModule,
+    SharedModule,
+    ReactiveFormsModule,
+  ],
 })
 export class ProfileModule {}

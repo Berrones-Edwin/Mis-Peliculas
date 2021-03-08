@@ -139,7 +139,7 @@
             type="file"
             class="form-control"
             id="avatar"
-            (change) ="handleImage($event)"
+            (change)="handleImage($event)"
             formControlName="avatar"
             autocomplete="off"
             [class.is-invalid]="avatarIsInvalid"
@@ -150,10 +150,6 @@
             <div class="invalid-feedback" *ngIf="avatar.hasError('required')">
               Este Campo es obligatorio
             </div>
-            <div class="invalid-feedback" *ngIf="avatar.hasError('minlength')">
-              Este campo debe de tener minimo
-              {{ avatar.errors.minlength.requiredLength }}
-            </div>
           </ng-container>
         </div>
 
@@ -161,9 +157,18 @@
           [disabled]="form.invalid"
           type="submit"
           class="mb-2 btn btn-primary btn-block"
+          *ngIf="loading; else loadingElse"
         >
-          Registrar
+          <span>Registrar</span>
         </button>
+        <ng-template #loadingElse>
+          <span
+            class="d-flex flex-column justify-content-center align-items-center"
+          >
+            <img width="50" src="assets/img/loading.gif" alt="loading" />
+            <p>Espere...</p>
+          </span>
+        </ng-template>
         <div class="text-center">
           <a routerLink="/auth/inicio-sesion">Ya tengo cuenta.</a>
         </div>
@@ -171,4 +176,3 @@
     </div>
   </div>
 </div>
-<img [src]="image" alt="" srcset="">

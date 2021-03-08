@@ -1,60 +1,69 @@
 <div class="d-flex justify-content-center">
-    <div class="card" style="color:#000; width: 22rem;">
-        <div class="card-header">
-            <h3 class="text-center card-title">Inicio de sesion</h3>
-        </div>
-        <div class="card-body">
-            <form [formGroup]="form" (ngSubmit)="login(form)">
-                <div class="form-group"
-                    [class.error]="emailIsInvalid">
-                    <label for="exampleInputEmail1">Correo Electronico</label>
-                    <input type="email" 
-                            class="form-control" 
-                            id="exampleInputEmail1"
-                            formControlName="email"
-                            autocomplete="off"
-                            [class.is-invalid]="emailIsInvalid"
-                            [class.is-valid]="emailIsValid"
-                    >
-                    <ng-container *ngIf="email.errors && email.touched">
-                        <div class="invalid-feedback"
-                            *ngIf="email.hasError('required')">
-                            Este Campo es obligatorio
-                        </div>
-                    </ng-container>
-                </div>
-                <div class="form-group "
-                    [class.error]="passwordIsInvalid"
-                >
-                    <label class="text-center" for="password">Password</label>
-                    <input type="password" 
-                            class="form-control" 
-                            id="password"
-                            formControlName="password"
-                            autocomplete="off"
-                            [class.is-invalid]="passwordIsInvalid"
-                            [class.is-valid]="passwordIsValid"
-                    >
-                    <ng-container *ngIf="password.errors && password.touched">
-                        <div class="invalid-feedback"
-                            *ngIf="password.hasError('required')">
-                            Este Campo es obligatorio
-                        </div>
-                        <div class="invalid-feedback"
-                            *ngIf="password.hasError('minlength')">
-                            Este campo debe de tener minimo {{ password.errors.minlength.requiredLength }}
-                        </div>
-                    </ng-container>
-                </div>
-                <button [disabled]="form.invalid" 
-                        type="submit" 
-                        class="mb-2 btn btn-primary btn-block">
-                        Entrar
-                </button>
-                <div class="text-center">
-                    <a routerLink="/auth/registro">Crear mi cuenta</a>
-                </div>
-            </form>
-        </div>
+  <div class="card" style="color: #000; width: 22rem">
+    <div class="card-header">
+      <h3 class="text-center card-title">Inicio de sesion</h3>
     </div>
+    <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="login(form)">
+        <div class="form-group" [class.error]="emailIsInvalid">
+          <label for="exampleInputEmail1">Correo Electronico</label>
+          <input
+            type="email"
+            class="form-control"
+            id="exampleInputEmail1"
+            formControlName="email"
+            autocomplete="off"
+            [class.is-invalid]="emailIsInvalid"
+            [class.is-valid]="emailIsValid"
+          />
+          <ng-container *ngIf="email.errors && email.touched">
+            <div class="invalid-feedback" *ngIf="email.hasError('required')">
+              Este Campo es obligatorio
+            </div>
+          </ng-container>
+        </div>
+        <div class="form-group" [class.error]="passwordIsInvalid">
+          <label class="text-center" for="password">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            formControlName="password"
+            autocomplete="off"
+            [class.is-invalid]="passwordIsInvalid"
+            [class.is-valid]="passwordIsValid"
+          />
+          <ng-container *ngIf="password.errors && password.touched">
+            <div class="invalid-feedback" *ngIf="password.hasError('required')">
+              Este Campo es obligatorio
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="password.hasError('minlength')"
+            >
+              Este campo debe de tener minimo
+              {{ password.errors.minlength.requiredLength }}
+            </div>
+          </ng-container>
+        </div>
+        <button
+          [disabled]="form.invalid"
+          type="submit"
+          class="mb-2 btn btn-primary btn-block"
+          *ngIf="loading; else loadingElse"
+        >
+          <span>Entrar</span>
+        </button>
+        <ng-template #loadingElse>
+          <span class="d-flex flex-column justify-content-center align-items-center">
+            <img width="50" src="assets/img/loading.gif" alt="loading" />
+            <p>Espere...</p>
+          </span>
+        </ng-template>
+        <div class="text-center">
+          <a routerLink="/auth/registro">Crear mi cuenta</a>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>

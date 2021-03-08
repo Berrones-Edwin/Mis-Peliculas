@@ -4,14 +4,11 @@ import { ListDetail } from "src/app/shared/interfaces/profile/List/list-detail.i
 @Component({
   selector: "grid-catalog",
   template: `
-    <div class="row mb-4 container container-title">
-      <h3 class="title col-sm-12 col-md-10">Últimos catalogos creados</h3>
-      <span class="container-title-btn col-sm-12 col-md-2">
-        <a routerLink="/profile/mis-catalogos" class="btn btn-outline-warning"
-          >Explorar</a
-        >
-      </span>
-    </div>
+    <header-section
+      title="Últimos catalogos creados"
+      url="/profile/mis-catalogos"
+      [showButton]=showButton
+    ></header-section>
 
     <div class="card-deck mb-4">
       <ng-container *ngFor="let item of list">
@@ -21,22 +18,22 @@ import { ListDetail } from "src/app/shared/interfaces/profile/List/list-detail.i
           [description]="item.description"
           [avatar]="item.avatar"
           [created_at]="item.created_at"
-          (details) ="getDetails($event)"
+          (details)="getDetails($event)"
         ></card-catalog>
       </ng-container>
     </div>
-    
   `,
   styleUrls: ["./grid-catalog.component.css"],
 })
 export class GridCatalogComponent implements OnInit {
   @Input() list: Array<ListDetail>;
+  @Input() showButton: boolean=true;
   constructor() {}
 
   ngOnInit(): void {}
 
-  getDetails(e){
-    //mandar a detalles
-    console.log(e)
+  getDetails(e) {
+    //  Mandar a details catalog
+    // console.log(e);
   }
 }
