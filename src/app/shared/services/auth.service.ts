@@ -39,7 +39,7 @@ export class AuthService {
     password: string
   ): Observable<responseLogin | TrackHttpError> {
     let headers = new HttpHeaders();
-    headers.append("Content-Type", "application/json");
+    // headers.append("Content-Type", "application/json");
 
     return this._http
       .post<responseLogin>(

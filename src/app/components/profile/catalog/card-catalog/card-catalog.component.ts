@@ -3,7 +3,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
 @Component({
   selector: "card-catalog",
   template: `
-    <div class="card bg-dark" style="width: 18rem">
+    <div class="card bg-dark mb-5" style="width: 18rem;min-width: 18rem">
       <img
         src="{{ avatar | imageApiRest }}"
         class="card-img-top"

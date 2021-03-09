@@ -1,1 +1,15 @@
-<p>favorites works!</p>
+<div class="row mb-4 container-header container-title">
+  <h3 class="title col-sm-12 col-md-10">Películas Favoritas</h3>
+</div>
+<ng-container
+  *ngIf="allFavorites$ | async as allFavorites; else loadingFavorites"
+>
+  <grid-favorites
+    [showHeaderAndButton]="false"
+    [favorites]="allFavorites.data.data"
+  ></grid-favorites>
+</ng-container>
+<ng-template #loadingFavorites>
+  <app-loading></app-loading>
+</ng-template>
+<!-- End Favoritos-->

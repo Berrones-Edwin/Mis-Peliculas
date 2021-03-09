@@ -9,6 +9,7 @@ import { ListDetail } from "src/app/shared/interfaces/profile/List/list-detail.i
 })
 export class GridFavoritesComponent implements OnInit {
   @Input() favorites: Array<ListDetail>;
+  @Input() showHeaderAndButton:boolean =true;
   constructor(private _router: Router) {}
 
   ngOnInit(): void {}

@@ -8,7 +8,6 @@
         [formGroup]="form"
         enctype="multipart/form-data"
         (ngSubmit)="saveCatalog(form)"
-        name="form"
       >
         <div class="row">
           <!-- Name -->
@@ -48,9 +47,7 @@
               [class.is-valid]="typeIDIsValid"
               (change)="changeType($event)"
             >
-              <option value="" disabled selected>
-                Elige una opción
-              </option>
+              <option value="" disabled selected>Elige una opción</option>
               <option [value]="type.id" *ngFor="let type of typeCatalogs">
                 {{ type.name }} {{ type.id }}
               </option>
