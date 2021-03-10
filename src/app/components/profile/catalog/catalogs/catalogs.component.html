@@ -1,17 +1,28 @@
-<header-section
-  title="Mis Catalogos"
-  url="/profile/nuevo-catalogo"
-  nameBTN="Crear nuevo"
-  typeButton="btn-primary"
-></header-section>
+<ng-container *ngIf="!list_id; else listDetails">
+  <header-section
+    title="Mis Catalogos"
+    url="/profile/nuevo-catalogo"
+    nameBTN="Crear nuevo"
+    typeButton="btn-primary"
+  ></header-section>
 
-
-
-<!-- Listas-->
-<ng-container *ngIf="allLists$ | async as allList; else loadingList">
-  <grid-catalog [list]="allList.lists.data" [showButton]="false"></grid-catalog>
+  <!-- Listas-->
+  <ng-container *ngIf="allLists$ | async as allList; else loadingList">
+    <grid-catalog
+      [list]="allList.lists.data"
+      [showButton]="false"
+    ></grid-catalog>
+  </ng-container>
+  <ng-template #loadingList>
+    <app-loading></app-loading>
+  </ng-template>
+  <!-- End Listas-->
 </ng-container>
-<ng-template #loadingList>
-  <app-loading></app-loading>
+<ng-template #listDetails>
+  <ng-container *ngIf="list_details">
+    <detail-catalog
+      [id]="list_id"
+      [details]="listDetails"
+    ></detail-catalog>
+  </ng-container>
 </ng-template>
-<!-- End Listas-->

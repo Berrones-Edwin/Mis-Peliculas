@@ -2,7 +2,11 @@ import { Item } from "./item.interface";
 
 export interface ListDetail {
   code: number;
-  catalog: {
+  catalog: Catalog
+}
+
+export interface Catalog{
+ 
     id: number;
     name: string;
     description: string;
@@ -13,5 +17,5 @@ export interface ListDetail {
     updated_at: string;
     items: Array<Item>;
     
-  }
+  
 }

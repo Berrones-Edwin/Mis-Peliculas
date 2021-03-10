@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { ListDetail } from "src/app/shared/interfaces/profile/List/list-detail.interface";
 
 @Component({
@@ -28,12 +29,15 @@ import { ListDetail } from "src/app/shared/interfaces/profile/List/list-detail.i
 export class GridCatalogComponent implements OnInit {
   @Input() list: Array<ListDetail>;
   @Input() showButton: boolean=true;
-  constructor() {}
+  constructor(
+    private _router : Router
+  ) {}
 
   ngOnInit(): void {}
 
   getDetails(e) {
     //  Mandar a details catalog
     // console.log(e);
+    this._router.navigate(['/profile/catalogo/detalles/',e])
   }
 }

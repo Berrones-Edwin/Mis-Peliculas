@@ -1,4 +1,11 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  ElementRef,
+  Renderer2,
+} from "@angular/core";
 import { MoviesService } from "src/app/shared/services/movies.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { map, takeUntil, tap } from "rxjs/operators";
@@ -11,6 +18,8 @@ import { PostRated } from "src/app/shared/interfaces/profile/rateds/post-rated.i
 import { GlobalService } from "src/app/shared/services/global.service";
 import { ListDetail } from "src/app/shared/interfaces/profile/List/list-detail.interface";
 import { AllList } from "src/app/shared/interfaces/profile/List/all-list.interface";
+import { PostItem } from "src/app/shared/interfaces/profile/item/post-item.interface";
+import { ResponsePostItem } from "src/app/shared/interfaces/profile/item/response-post-iten.interface";
 
 @Component({
   selector: "app-movie",
@@ -36,6 +45,10 @@ export class MovieComponent implements OnInit, OnDestroy {
   loadingFavorites: boolean = true;
   listCatalogs: Array<ListDetail>;
 
+  loadingCatalogs: boolean = true;
+
+  @ViewChild("modalCatalogBTN") modalCatalogBTN: ElementRef;
+
   constructor(
     private _moviesService: MoviesService,
     private _activatedRouter: ActivatedRoute,
@@ -43,7 +56,8 @@ export class MovieComponent implements OnInit, OnDestroy {
     private _authService: AuthService,
     private _router: Router,
     private _profileService: ProfileService,
-    private _globalService: GlobalService
+    private _globalService: GlobalService,
+    private _render: Renderer2
   ) {
     this.id = this._activatedRouter.snapshot.params["id"];
   }
@@ -78,28 +92,30 @@ export class MovieComponent implements OnInit, OnDestroy {
           );
       });
     } else {
-      this.movie$
-        .pipe(
-          map((detail) => {
-            const { id, title, poster_path } = detail;
-            return { id, title, poster_path };
-          })
-        )
-        .subscribe(
-          (data: { id: number; title: string; poster_path: string }) => {
-            this.loadingFavorites = false;
-            this.movieRated = {
-              type_id: 1,
-              user_id: this._authService.UserData.id,
-              name: data.title,
-              avatar: data.poster_path,
-              item: data.id,
-            };
+      this.getDetailsSaveMovie().subscribe(
+        (data: { id: number; title: string; poster_path: string }) => {
+          this.loadingFavorites = false;
+          this.movieRated = {
+            type_id: 1,
+            user_id: this._authService.UserData.id,
+            name: data.title,
+            avatar: data.poster_path,
+            item: data.id,
+          };
 
-            this.saveItemRated(this.movieRated);
-          }
-        );
+          this.saveItemRated(this.movieRated);
+        }
+      );
     }
+  }
+
+  getDetailsSaveMovie() {
+    return this.movie$.pipe(
+      map((detail) => {
+        const { id, title, poster_path } = detail;
+        return { id, title, poster_path };
+      })
+    );
   }
 
   saveItemRated(movie: PostRated) {
@@ -115,9 +131,37 @@ export class MovieComponent implements OnInit, OnDestroy {
     );
   }
 
-  addMovieToCatalog(id:number) {
+  addMovieToCatalog(id: number) {
+    this.loadingCatalogs = false;
     const catalog_id = id;
-    // this._profileService.postItemToList()
+    this.getDetailsSaveMovie().subscribe(
+      (data: { id: number; title: string; poster_path: string }) => {
+        const item: PostItem = {
+          item: data.id,
+          name: data.title,
+          avatar: data.poster_path,
+          catalog_id: catalog_id,
+          user_id: this._authService.UserData.id,
+        };
+        this._profileService.postItemToList(item).subscribe(
+          (data: ResponsePostItem) => {
+            if (data.data)
+              this._globalService
+                .sweetAlert("Correcto", data.message, "success")
+                .then(() => {
+                  this._render
+                    .selectRootElement(this.modalCatalogBTN.nativeElement)
+                    .click();
+                  this.loadingCatalogs = false;
+                });
+          },
+          (error) =>
+            this._globalService
+              .sweetAlert("Incorrecto", error, "error")
+              .then(() => (this.loadingCatalogs = false))
+        );
+      }
+    );
   }
 
   getDetails(id: string) {

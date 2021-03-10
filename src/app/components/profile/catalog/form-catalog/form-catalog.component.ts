@@ -13,7 +13,7 @@ import { ProfileService } from "src/app/shared/services/profile.service";
   styleUrls: ["./form-catalog.component.css"],
 })
 export class FormCatalogComponent implements OnInit {
-  public  form: FormGroup;
+  public form: FormGroup;
   public loading: boolean = true;
   public image: File;
   typeCatalogs = [
@@ -53,20 +53,7 @@ export class FormCatalogComponent implements OnInit {
 
     if (event.target.files.length > 0) {
       this.image = event.target.files[0];
-
-      // const [file] = event.target.files;
-
-      // reader.readAsDataURL(file);
-
-
-      // reader.onload = ()=>{
-      //   this.form.patchValue({
-      //     avatar: reader.result
-      //   })
-        // this.image = reader.
-      // }
-
-      //  this.cd.markForCheck()
+      this.handleFileSelect(event)
     }
   }
   changeType(event) {
@@ -75,45 +62,57 @@ export class FormCatalogComponent implements OnInit {
   saveCatalog(form: FormGroup) {
     const { name, description, type_id } = form.value;
 
-    const newCatalog: SaveCatalog = {
-      name: name,
-      description: description,
-      type_id: type_id,
-      avatar: this.image,
-      user_id: 0,
-    };
-
-    
+    const img = localStorage.getItem('img');
 
     this.loading = false;
-    this._profileService.saveCatalogs(newCatalog).subscribe(
-      (data: ResponseSaveCatalog) => {
-        if (data.data) {
-          this._globalService
-            .sweetAlert(
-              "Correcto",
-              "Tu catalogo se ha creado correctamente",
-              "success"
-            )
-            .then(() => {
-              this.loading = true;
-              this._router.navigate(["/profile/mis-catalogos"]);
-            });
-        } else {
-          this._globalService
-            .sweetAlert("Error", `${data.message}`, "error")
-            .then(() => {
-              this.loading = true;
-              this._router.navigate(["/profile/mis-catalogos"]);
-            });
+    this._profileService
+      .saveCatalogs(name, description, this.image, type_id)
+      .subscribe(
+        (data: ResponseSaveCatalog) => {
+          if (data.data) {
+            this._globalService
+              .sweetAlert(
+                "Correcto",
+                "Tu catalogo se ha creado correctamente",
+                "success"
+              )
+              .then(() => {
+                this.loading = true;
+              
+              });
+          } else {
+            this._globalService
+              .sweetAlert("Error", `${data.message}`, "error")
+              .then(() => {
+                this.loading = true;
+                this._router.navigate(["/profile/mis-catalogos"]);
+              });
+          }
+        },
+        (error) => {
+          console.log(error);
+          this._globalService.sweetAlert("Error", `${error.error}`, "error");
+          this.loading = true;
         }
-      },
-      (error) => {
-        console.log(error);
-        this._globalService.sweetAlert("Error", `${error.error}`, "error");
-        this.loading = true;
-      }
-    );
+      );
+  }
+
+  handleFileSelect(evt) {
+    var f = evt.target.files[0]; // FileList object
+    var reader = new FileReader();
+    
+    // Closure to capture the file information.
+    reader.onload = (function(theFile) {
+      return function(e) {
+        var binaryData = e.target.result;
+        //Converting Binary Data to base 64
+        var base64String = window.btoa(binaryData);
+        localStorage.setItem('img',base64String)
+       
+      };
+    })(f);
+    // Read in the image file as a data URL.
+    reader.readAsBinaryString(f);
   }
 
   get name() {

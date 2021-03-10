@@ -14,6 +14,7 @@ import { CardCatalogComponent } from "./catalog/card-catalog/card-catalog.compon
 import { FavoritesComponent } from "./favorite/favorites/favorites.component";
 import { GridFavoritesComponent } from "./favorite/grid-favorites/grid-favorites.component";
 import { CardFavoritesComponent } from "./favorite/card-favorites/card-favorites.component";
+import { DetailCatalogComponent } from './catalog/detail-catalog/detail-catalog.component';
 
 const COMPONENTS = [
   ProfileComponent,
@@ -27,7 +28,7 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS],
+  declarations: [...COMPONENTS, DetailCatalogComponent],
   imports: [
     CommonModule,
     ProfileRoutingModule,

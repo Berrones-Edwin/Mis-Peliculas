@@ -228,27 +228,40 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="text-secondary" id="exampleModalLabel">¿A qué catalogo deseas agregar tu película?</h5>
+        <h5 class="text-secondary" id="exampleModalLabel">
+          ¿A qué catalogo deseas agregar tu película?
+        </h5>
         <button
           type="button"
           class="close"
           data-dismiss="modal"
           aria-label="Close"
+          #modalCatalogBTN
         >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <ng-container *ngIf="listCatalogs; else notCatalogs">
-          <ul class="list-group" *ngFor="let catalog of listCatalogs">
-            <li   (click)="addMovieToCatalog(catalog.id)" class="btn btn-outline-primary mb-3"> {{ catalog.id }}.- <b>{{ catalog.name }}</b></li>
-          </ul>
+        <ng-container *ngIf="loadingCatalogs; else loadingCatalogsElse">
+          <ng-container *ngIf="listCatalogs; else notCatalogs">
+            <ul class="list-group" *ngFor="let catalog of listCatalogs">
+              <li
+                (click)="addMovieToCatalog(catalog.id, modalCatalog)"
+                class="btn btn-outline-primary mb-3"
+              >
+                {{ catalog.id }}.- <b>{{ catalog.name }}</b>
+              </li>
+            </ul>
+          </ng-container>
+          <ng-template #notCatalogs>
+            <p>Aún no cuentas con catalogos</p>
+            <a class="btn btn-primary" [routerLink]="'/profile/nuevo-catalogo'"
+              >Crea uno</a
+            >
+          </ng-template>
         </ng-container>
-        <ng-template #notCatalogs>
-          <p>Aún no cuentas con catalogos</p>
-          <a class="btn btn-primary" [routerLink]="'/profile/nuevo-catalogo'"
-            >Crea uno</a
-          >
+        <ng-template #loadingCatalogsElse>
+          <app-loading></app-loading>
         </ng-template>
       </div>
       <div class="modal-footer">
