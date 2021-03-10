@@ -18,7 +18,6 @@ import { PostRated } from "../interfaces/profile/rateds/post-rated.interface";
 import { ResponsePostRated } from "../interfaces/profile/rateds/response-post-rated.interface";
 import { PostItem } from "../interfaces/profile/item/post-item.interface";
 import { ResponsePostItem } from "../interfaces/profile/item/response-post-iten.interface";
-import { dataCalendar } from "../Data/calendar";
 import { ListDetail } from "../interfaces/profile/List/list-detail.interface";
 
 @Injectable({ providedIn: "root" })
@@ -89,6 +88,18 @@ export class ProfileService {
       .pipe(catchError((err) => this._globalService.handleHttpError(err)));
   }
 
+  deleteCatalog(
+    catalog_id: number
+  ): Observable<ResponseSaveCatalog | TrackHttpError> {
+    const headers = this.addHeaders();
+    return this._httpClient
+      .delete<ResponseSaveCatalog>(
+        `${environment.urlApi}catalogs/${catalog_id}`,
+        { headers }
+      )
+      .pipe(catchError((err) => this._globalService.handleHttpError(err)));
+  }
+
   postItemToList(
     item: PostItem
   ): Observable<ResponsePostItem | TrackHttpError> {
@@ -122,20 +133,21 @@ export class ProfileService {
   }
 
   postRated(rated: PostRated): Observable<ResponsePostRated | TrackHttpError> {
-    // const data = new FormData();
-    // data.append("item",rated.item.toString());
-    // data.append("name", rated.name);
-    // data.append("avatar", rated.avatar);
-    // data.append("type_id", rated.type_id.toString());
-    // data.append("user_id", rated.user_id.toString());
-
-    // data.forEach(console.log)
     const headers = this.addHeaders();
     return this._httpClient
       .post<ResponsePostRated>(`${environment.urlApi}rateds`, rated, {
         headers,
       })
       .pipe(catchError((err) => this._globalService.handleHttpError(err)));
+  }
+  deleteRated(
+    rated_id: number
+  ): Observable<ResponsePostRated | TrackHttpError> {
+    const headers = this.addHeaders();
+    return this._httpClient.delete<ResponsePostRated>(
+      `${environment.urlApi}rateds/${rated_id}`,
+      { headers }
+    );
   }
 
   /**Helpers */

@@ -17,8 +17,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
         <small class="text-muted">{{ created_at | date: "shortDate" }}</small>
       </p>
     </div>
-    <div class="card-footer">
-      <a (click)="seeDetailsMovie()" class="btn btn-outline-primary">Ver más</a>
+    <div class="card-footer d-flex justify-content-between">
+      <a (click)="seeDetailsMovie()" class="btn btn-primary">Ver más</a>
+      <a (click)="deleteItem()" class="btn btn-outline-danger">Eliminar</a>
     </div>
   </div>`,
   styles: [],
@@ -28,15 +29,20 @@ export class CardFavoritesComponent implements OnInit {
   @Input() name: string;
   @Input() description: string;
   @Input() created_at: string;
+  @Input() item: string;
   @Input() id: string;
 
   @Output() details = new EventEmitter<string>();
+  @Output() delete = new EventEmitter<string>();
 
   constructor() {}
 
   ngOnInit(): void {}
 
   seeDetailsMovie() {
-    this.details.emit(this.id);
+    this.details.emit(this.item);
+  }
+  deleteItem(){
+    this.delete.emit(this.id)
   }
 }
