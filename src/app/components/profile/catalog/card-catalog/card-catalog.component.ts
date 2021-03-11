@@ -15,13 +15,16 @@ import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
           {{ description }}
         </p>
         <p class="card-text">
-          <small class="text-muted">{{ created_at | date: 'shortDate' }}</small>
+          <small class="text-muted">{{ created_at | date: "shortDate" }}</small>
         </p>
       </div>
-      <div class="card-footer">
+      <div class="card-footer d-flex justify-content-between">
         <a (click)="detailsCatalogs()" class="btn btn-outline-primary"
           >Ver más</a
         >
+        <button (click)="deleteCatalog(id)" class="btn btn-outline-danger">
+          Eliminar
+        </button>
       </div>
     </div>
   `,
@@ -34,12 +37,15 @@ export class CardCatalogComponent implements OnInit {
   @Input() id: string;
   @Input() created_at: string;
   @Output() details = new EventEmitter<string>();
+  @Output() delete = new EventEmitter<string>();
   constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   detailsCatalogs() {
     this.details.emit(this.id);
+  }
+  deleteCatalog(id) {
+    this.delete.emit(id);
   }
 }

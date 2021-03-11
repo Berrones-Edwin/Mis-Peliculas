@@ -5,7 +5,17 @@
 ></header-section>
 
 <div class="card-deck">
-  <ng-container *ngFor="let item of favorites">
+  <ng-container
+    *ngFor="
+      let item of favorites
+        | paginate
+          : {
+              itemsPerPage: itemPerPage,
+              currentPage: page,
+              totalItems: total_results
+            }
+    "
+  >
     <card-favorites
       [id]="item.id"
       [item]="item.item"
@@ -18,3 +28,14 @@
     ></card-favorites>
   </ng-container>
 </div>
+
+<pagination-controls
+  class="my-pagination"
+  (pageChange)="pageChange($event)"
+  previousLabel="Anterior"
+  nextLabel="Siguiente"
+  *ngIf="showPagination"
+  [responsive]="true"
+  maxSize="10"
+>
+</pagination-controls>

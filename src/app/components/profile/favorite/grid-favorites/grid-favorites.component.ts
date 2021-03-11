@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { Router } from "@angular/router";
 import { ResponsePostItem } from "src/app/shared/interfaces/profile/item/response-post-iten.interface";
 import { ListDetail } from "src/app/shared/interfaces/profile/List/list-detail.interface";
@@ -15,6 +15,13 @@ import Swal from "sweetalert2";
 export class GridFavoritesComponent implements OnInit {
   @Input() favorites: Array<ListDetail>;
   @Input() showHeaderAndButton: boolean = true;
+  @Input() showPagination: boolean = true;
+
+  @Input() page: number = 1;
+  @Input() total_results: number;
+  @Input() itemPerPage: number;
+
+  @Output() number_page = new EventEmitter<any>();
 
   currentURL: string;
 
@@ -48,8 +55,11 @@ export class GridFavoritesComponent implements OnInit {
         else this.deleteItemOfCatalog(id);
       }
       
-      // this._router.navigateByUrl(this.currentURL).then(()=>console.log('aqui'))
     });
+  }
+  pageChange(event) {
+    this.page = event;
+    this.number_page.emit(event);
   }
 
   deleteFavorites(id: number) {

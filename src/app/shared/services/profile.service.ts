@@ -28,11 +28,15 @@ export class ProfileService {
     private _authService: AuthService
   ) {}
 
-  getAllList(): Observable<AllList | TrackHttpError> {
+  getAllList(page?: string): Observable<AllList | TrackHttpError> {
     const headers = this.addHeaders();
 
+    let url = page
+      ? `${environment.urlApi}catalogs?page=${page}`
+      : `${environment.urlApi}catalogs`;
+
     return this._httpClient
-      .get<AllList>(`${environment.urlApi}catalogs`, { headers })
+      .get<AllList>(url, { headers })
       .pipe(catchError((err) => this._globalService.handleHttpError(err)));
   }
 
@@ -45,7 +49,6 @@ export class ProfileService {
       .pipe(catchError((err) => this._globalService.handleHttpError(err)));
   }
 
-  // Falla
   saveCatalogs(
     name: string,
     description: string,
@@ -57,18 +60,20 @@ export class ProfileService {
       Authorization: `Bearer ${this._authService.getToken()}`,
     });
 
-    const data = new FormData();
-
-    data.append("name", name);
-    data.append("description", description);
-    data.append("avatar", avatar);
-    data.append("type_id", type_id.toString());
-    data.append("user_id", this._authService.UserData.id.toString());
-
     return this._httpClient
-      .post<ResponseSaveCatalog>(`${environment.urlApi}catalogs`, data, {
-        headers,
-      })
+      .post<ResponseSaveCatalog>(
+        `${environment.urlApi}catalogs`,
+        {
+          name: name,
+          description: description,
+          avatar: avatar,
+          type_id: type_id,
+          user_id: this._authService.UserData.id,
+        },
+        {
+          headers,
+        }
+      )
       .pipe(catchError((err) => this._globalService.handleHttpError(err)));
   }
 
@@ -125,10 +130,15 @@ export class ProfileService {
   }
 
   /**Rateds */
-  getAllRateds(): Observable<AllList | TrackHttpError> {
+  getAllRateds(page?: string): Observable<AllList | TrackHttpError> {
     const headers = this.addHeaders();
+
+    let url = page
+      ? `${environment.urlApi}rateds/movies?page=${page}`
+      : `${environment.urlApi}rateds/movies`;
+      
     return this._httpClient
-      .get<AllList>(`${environment.urlApi}rateds/movies`, { headers })
+      .get<AllList>(url, { headers })
       .pipe(catchError((err) => this._globalService.handleHttpError(err)));
   }
 

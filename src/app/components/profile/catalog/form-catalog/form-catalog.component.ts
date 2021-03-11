@@ -53,7 +53,7 @@ export class FormCatalogComponent implements OnInit {
 
     if (event.target.files.length > 0) {
       this.image = event.target.files[0];
-      this.handleFileSelect(event)
+      this.handleFileSelect(event);
     }
   }
   changeType(event) {
@@ -62,11 +62,11 @@ export class FormCatalogComponent implements OnInit {
   saveCatalog(form: FormGroup) {
     const { name, description, type_id } = form.value;
 
-    const img = localStorage.getItem('img');
+    const img = localStorage.getItem("img");
 
     this.loading = false;
     this._profileService
-      .saveCatalogs(name, description, this.image, type_id)
+      .saveCatalogs(name, description, img, type_id)
       .subscribe(
         (data: ResponseSaveCatalog) => {
           if (data.data) {
@@ -78,7 +78,6 @@ export class FormCatalogComponent implements OnInit {
               )
               .then(() => {
                 this.loading = true;
-              
               });
           } else {
             this._globalService
@@ -100,15 +99,14 @@ export class FormCatalogComponent implements OnInit {
   handleFileSelect(evt) {
     var f = evt.target.files[0]; // FileList object
     var reader = new FileReader();
-    
+
     // Closure to capture the file information.
-    reader.onload = (function(theFile) {
-      return function(e) {
+    reader.onload = (function (theFile) {
+      return function (e) {
         var binaryData = e.target.result;
         //Converting Binary Data to base 64
         var base64String = window.btoa(binaryData);
-        localStorage.setItem('img',base64String)
-       
+        localStorage.setItem("img", base64String);
       };
     })(f);
     // Read in the image file as a data URL.

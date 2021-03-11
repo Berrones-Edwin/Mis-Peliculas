@@ -7,6 +7,10 @@
   <grid-favorites
     [showHeaderAndButton]="false"
     [favorites]="allFavorites.data.data"
+    [total_results]="allFavorites.data.total"
+    [itemPerPage]="allFavorites.data.per_page"
+    [page]="id"
+    (number_page)="nextPage($event)"
   ></grid-favorites>
 </ng-container>
 <ng-template #loadingFavorites>

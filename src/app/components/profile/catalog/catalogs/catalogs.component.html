@@ -10,7 +10,11 @@
   <ng-container *ngIf="allLists$ | async as allList; else loadingList">
     <grid-catalog
       [list]="allList.lists.data"
+      [total_results]="allList.lists.total"
+      [itemPerPage]="allList.lists.per_page"
       [showButton]="false"
+      [page]="id"
+      (number_page)="nextPage($event)"
     ></grid-catalog>
   </ng-container>
   <ng-template #loadingList>

@@ -31,7 +31,10 @@
   <!-- Listas-->
 
   <ng-container *ngIf="allLists$ | async as allList; else loadingList">
-    <grid-catalog [list]="allList.lists.data.slice(0,3)"></grid-catalog>
+    <grid-catalog
+      [showPagination]="false"
+      [list]="allList.lists.data.slice(0, 3)"
+    ></grid-catalog>
   </ng-container>
   <ng-template #loadingList>
     <app-loading></app-loading>
@@ -42,7 +45,10 @@
   <ng-container
     *ngIf="allFavorites$ | async as allFavorites; else loadingFavorites"
   >
-    <grid-favorites [favorites]="allFavorites.data.data.slice(0,3)"></grid-favorites>
+    <grid-favorites
+      [favorites]="allFavorites.data.data.slice(0, 3)"
+      [showPagination]="false"
+    ></grid-favorites>
   </ng-container>
   <ng-template #loadingFavorites>
     <app-loading></app-loading>

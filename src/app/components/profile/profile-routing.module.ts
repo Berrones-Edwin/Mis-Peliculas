@@ -19,7 +19,11 @@ const routes: Routes = [
     component: CatalogsComponent,
   },
   {
-    path: "catalogo/detalles/:id",
+    path: "mis-catalogos/:id",
+    component: CatalogsComponent,
+  },
+  {
+    path: "catalogo/detalles/:details",
     component: CatalogsComponent,
   },
   {
@@ -31,7 +35,11 @@ const routes: Routes = [
     component: FavoritesComponent,
   },
   {
-    path: "favoritos/detalles/:id",
+    path: "favoritos/:id",
+    component: FavoritesComponent,
+  },
+  {
+    path: "favoritos/detalles/:detail",
     component: FavoritesComponent,
   },
   { path: "**", pathMatch: "full", redirectTo: "" },
