@@ -52,7 +52,6 @@ export class ProfileService {
   saveCatalogs(
     name: string,
     description: string,
-    avatar: File | string,
     type_id: number
   ): Observable<ResponseSaveCatalog | TrackHttpError> {
     let headers = new HttpHeaders({
@@ -66,7 +65,6 @@ export class ProfileService {
         {
           name: name,
           description: description,
-          avatar: avatar,
           type_id: type_id,
           user_id: this._authService.UserData.id,
         },
@@ -166,7 +164,6 @@ export class ProfileService {
     const data = new FormData();
     data.append("name", catalogo.name);
     data.append("description", catalogo.description);
-    data.append("avatar", catalogo.avatar);
     data.append("type_id", String(catalogo.type_id));
     data.append("user_id", String(this._authService.UserData.id));
 

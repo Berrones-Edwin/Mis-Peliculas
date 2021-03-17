@@ -9,7 +9,6 @@ export interface DataResponseSaveCatalog {
   description: string;
   type_id: number;
   user_id: number;
-  avatar: string;
   updated_at: string;
   created_at: string;
   id: number;

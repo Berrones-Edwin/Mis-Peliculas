@@ -8,7 +8,8 @@ export class ApiRestPipe implements PipeTransform {
 
     "http://localhost:8080/Laravel/mega-pelis/public/storage/img/181641-shadow-of-the-colossus-ps4_316552.jpg"
     return value === ""
-      ? ""
-      : `http://localhost:8080/Laravel/mega-pelis/public/storage/${value}`;
+      ? 'assets/img/image.jpg'
+      // : `http://localhost:8080/Laravel/mega-pelis/public/storage/${value}`;
+      : `https://mega-pelis.herokuapp.com/public/storage/${value}`;
   }
 }

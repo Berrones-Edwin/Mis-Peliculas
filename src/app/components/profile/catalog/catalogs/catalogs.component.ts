@@ -22,7 +22,8 @@ export class CatalogsComponent implements OnInit {
     private _router: Router
   ) {
     this._activatedRoute.params.subscribe((data) => {
-      if (data.detail) this.list_id = data.details;
+      console.log(data)
+      if (data.details) this.list_id = data.details;
       else if (data.id) this.id = data.id;
     });
   }

@@ -4,11 +4,6 @@ import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
   selector: "card-catalog",
   template: `
     <div class="card bg-dark mb-5" style="width: 18rem;min-width: 18rem">
-      <img
-        src="{{ avatar | imageApiRest }}"
-        class="card-img-top"
-        alt="{{ avatar | imageApiRest }}"
-      />
       <div class="card-body">
         <h5 class="card-title">{{ name }}</h5>
         <p class="card-text">
@@ -28,7 +23,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
       </div>
     </div>
   `,
-  styleUrls: ["./card-catalog.component.css"],
+  styles: [],
 })
 export class CardCatalogComponent implements OnInit {
   @Input() name: string;

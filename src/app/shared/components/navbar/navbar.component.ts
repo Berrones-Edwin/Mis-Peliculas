@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Router } from "@angular/router";
 import { AuthService } from "src/app/shared/services/auth.service";
 
 @Component({
@@ -7,12 +8,13 @@ import { AuthService } from "src/app/shared/services/auth.service";
   styleUrls: ["./navbar.component.css"],
 })
 export class NavbarComponent implements OnInit {
-  isAuth: boolean;
-  constructor(public _authService: AuthService) {}
+  
+  constructor(public _authService: AuthService,private _router:Router) {}
   ngOnInit() {
-    // this.isAuth = false;
-    this.isAuth  = this._authService.isAuth();
-    console.log( this._authService.isAuth())
+
+    if(!this._authService.isAuth()){
+      this._router.navigate(['/peliculas'])
+    }
     
   }
 

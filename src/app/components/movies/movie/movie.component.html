@@ -244,19 +244,21 @@
       <div class="modal-body">
         <ng-container *ngIf="loadingCatalogs; else loadingCatalogsElse">
           <ng-container *ngIf="listCatalogs; else notCatalogs">
-            <ul class="list-group" *ngFor="let catalog of listCatalogs">
-              <li
-                (click)="addMovieToCatalog(catalog.id, modalCatalog)"
-                class="btn btn-outline-primary mb-3"
-              >
-                {{ catalog.id }}.- <b>{{ catalog.name }}</b>
-              </li>
-            </ul>
+            <ng-container *ngIf="listCatalogs.length > 0; else notCatalogs">
+              <ul class="list-group" *ngFor="let catalog of listCatalogs">
+                <li
+                  (click)="addMovieToCatalog(catalog.id, modalCatalog)"
+                  class="btn btn-outline-primary mb-3"
+                >
+                  {{ catalog.id }}.- <b>{{ catalog.name }}</b>
+                </li>
+              </ul>
+            </ng-container>
           </ng-container>
           <ng-template #notCatalogs>
-            <p>Aún no cuentas con catalogos</p>
-            <a class="btn btn-primary" [routerLink]="'/profile/nuevo-catalogo'"
-              >Crea uno</a
+            <h3 style="color:black">Aún no cuentas con catalogos</h3>
+            <a class="btn btn-sm btn-primary" (click)="createCatalog()"
+              >Crear mi primer catalogo</a
             >
           </ng-template>
         </ng-container>

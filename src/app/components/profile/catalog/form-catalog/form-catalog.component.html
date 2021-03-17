@@ -85,27 +85,6 @@
             </div>
           </ng-container>
         </div>
-        <!-- Avatar -->
-
-        <div class="form-group" [class.error]="avatarIsInvalid">
-          <label class="text-center" for="avatar">Avatar</label>
-          <input
-            type="file"
-            class="form-control"
-            id="avatar"
-            (change)="handleImage($event)"
-            formControlName="avatar"
-            autocomplete="off"
-            [class.is-invalid]="avatarIsInvalid"
-            [class.is-valid]="avatarIsValid"
-            accept="image/*"
-          />
-          <ng-container *ngIf="avatar.errors && avatar.touched">
-            <div class="invalid-feedback" *ngIf="avatar.hasError('required')">
-              Este Campo es obligatorio
-            </div>
-          </ng-container>
-        </div>
 
         <button
           [disabled]="form.invalid"

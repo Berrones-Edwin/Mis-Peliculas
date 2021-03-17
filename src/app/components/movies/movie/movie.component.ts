@@ -75,6 +75,11 @@ export class MovieComponent implements OnInit, OnDestroy {
       .subscribe((data) => (this.listCatalogs = data));
   }
 
+  createCatalog(){
+    this._render.selectRootElement(this.modalCatalogBTN.nativeElement).click();
+    this._router.navigate(['profile/nuevo-catalogo'])
+  }
+
   addToFavorites() {
     if (!this._authService.isAuth()) {
       Swal.fire({
@@ -149,9 +154,7 @@ export class MovieComponent implements OnInit, OnDestroy {
               this._globalService
                 .sweetAlert("Correcto", data.message, "success")
                 .then(() => {
-                  this._render
-                    .selectRootElement(this.modalCatalogBTN.nativeElement)
-                    .click();
+                  this._router.navigate([this._router.url]);
                   this.loadingCatalogs = false;
                 });
           },

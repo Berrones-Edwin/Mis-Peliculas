@@ -39,7 +39,8 @@ export class AuthService {
     password: string
   ): Observable<responseLogin | TrackHttpError> {
     let headers = new HttpHeaders();
-    // headers.append("Content-Type", "application/json");
+    headers.append("Content-Type", "application/json");
+    // headers.append("Access-Control-Allow-Origin","https://mega-pelis.herokuapp.com")
 
     return this._http
       .post<responseLogin>(
@@ -64,17 +65,20 @@ export class AuthService {
     lastname: string,
     email: string,
     password: string,
-    avatar?: File
+    avatar?: File | string
   ): Observable<ResponseRegisterUser | TrackHttpError> {
     let headers = new HttpHeaders();
     headers.append("Content-Type", "application/json");
+    // headers.append("Access-Control-Allow-Origin","https://mega-pelis.herokuapp.com")
 
-    const data = new FormData();
-    data.append("name", name);
-    data.append("lastname", lastname);
-    data.append("email", email);
-    data.append("password", password);
-    data.append("avatar", avatar);
+    // const data = new FormData();
+    const data = {
+      name: name,
+      lastname: lastname,
+      email: email,
+      password: password,
+      avatar: avatar,
+    };
 
     return this._http
       .post<ResponseRegisterUser>(`${environment.urlApi}auth/register`, data, {

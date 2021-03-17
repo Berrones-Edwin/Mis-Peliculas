@@ -13,7 +13,6 @@ import { ResponseRegisterUser } from "src/app/shared/interfaces/auth/response-re
 })
 export class RegisterComponent implements OnInit {
   public form: FormGroup;
-  image: File;
   loading: boolean = true;
 
   constructor(
@@ -31,9 +30,8 @@ export class RegisterComponent implements OnInit {
     const { email, password, name, lastName, avatar } = form.value;
 
     this.loading = false;
-    this._authService
-      .register(name, lastName, email, password, this.image)
-      .subscribe((data: ResponseRegisterUser) => {
+    this._authService.register(name, lastName, email, password).subscribe(
+      (data: ResponseRegisterUser) => {
         if (data) {
           this._globalService
             .sweetAlert(
@@ -46,24 +44,22 @@ export class RegisterComponent implements OnInit {
               this.loading = true;
             });
         }
-      });
+      },
+      (err) => {
+        this._globalService.sweetAlert("Error", `${err.error}`, "error");
+        this.loading = true;
+      }
+    );
   }
 
   createForm() {
     this.form = this.formBuilder.group({
       name: ["", Validators.required],
       lastName: ["", Validators.required],
-      avatar: ["", Validators.required],
-      email: ["", Validators.required],
+      email: ["", [Validators.required, Validators.email]],
       password: ["", [Validators.required, Validators.minLength(8)]],
       repeat_password: ["", [Validators.required, Validators.minLength(8)]],
     });
-  }
-
-  handleImage(event): void {
-    if (event.target.files.length > 0) {
-      this.image = event.target.files[0];
-    }
   }
 
   get name() {

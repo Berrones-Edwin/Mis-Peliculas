@@ -4,35 +4,18 @@ import { ListDetail } from "src/app/shared/interfaces/profile/List/list-detail.i
 @Component({
   selector: "detail-catalog",
   template: `
-    <h2>Detalles del catalogo {{ id }}</h2>
+    <h2>Detalles del catalogo  {{ details.catalog.name }}</h2>
 
     <div class="row">
-      <section class="poster-container col-sm-12 col-md-12 mb-3 col-lg-4">
-        <img
-          class="mb-4 shadow-lg"
-          src="{{ details.catalog.avatar | imageApiRest }}"
-          alt="{{ details.catalog.avatar }}"
-          title="{{ details.catalog.avatar }}"
-          width="300"
-          height="300"
-        />
-      </section>
-
       <section
-        class="info-container col-sm-12 col-md-12 col-lg-8"
+        class="info-container col-sm-12 col-md-12 col-lg-12"
         *ngIf="details.catalog"
       >
         <div class="row mb-4 container-title">
-          <h2 class="title col-sm-12 col-md-10">
-            {{ details.catalog.name | uppercase }}
-          </h2>
-          <p>{{ details.catalog.description }}</p>
-          <span class="container-title-btn col-sm-12 col-md-2"> </span>
-        </div>
-        <div>
-          <p>
-            {{ details.catalog.description }}
-          </p>
+          <h3 class="title col-sm-12 col-md-10">
+          {{ details.catalog.description }}
+          </h3>
+          <hr />
         </div>
       </section>
       <section>

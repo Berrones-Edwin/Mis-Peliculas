@@ -29,9 +29,8 @@ export class LoginComponent implements OnInit {
   login(form: FormGroup) {
     const { email, password } = form.value;
     this.loading = false;
-    this._authService
-      .login(email, password)
-      .subscribe((data: responseLogin) => {
+    this._authService.login(email, password).subscribe(
+      (data: responseLogin) => {
         if (data.exito === 1) {
           this._globalService
             .sweetAlert(
@@ -44,7 +43,13 @@ export class LoginComponent implements OnInit {
               this.loading = true;
             });
         }
-      });
+      },
+      (err) => {
+        this._globalService.sweetAlert("Error", `${err.error.error}`, "error");
+        this.loading = true;
+        localStorage.removeItem("img-profile");
+      }
+    );
   }
 
   createForm() {
