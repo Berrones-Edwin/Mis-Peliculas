@@ -9,45 +9,55 @@ import Swal from "sweetalert2";
 @Component({
   selector: "grid-catalog",
   template: `
-    <header-section
-      title="Últimos catalogos creados"
-      url="/profile/mis-catalogos"
-      [showButton]="showButton"
-    ></header-section>
+    <ng-container *ngIf="list.length > 0; else emptyListCatalogs">
+      <header-section
+        title="Últimos catalogos creados"
+        url="/profile/mis-catalogos"
+        [showButton]="showButton"
+      ></header-section>
 
-    <div class="card-deck mb-4">
-      <ng-container
-        *ngFor="
-          let item of list
-            | paginate
-              : {
-                  itemsPerPage: itemPerPage,
-                  currentPage: page,
-                  totalItems: total_results
-                }
-        "
+      <div class="card-deck mb-4">
+        <ng-container
+          *ngFor="
+            let item of list
+              | paginate
+                : {
+                    itemsPerPage: itemPerPage,
+                    currentPage: page,
+                    totalItems: total_results
+                  }
+          "
+        >
+          <card-catalog
+            [id]="item.id"
+            name="{{ item.name }}"
+            [description]="item.description"
+            [avatar]="item.avatar"
+            [created_at]="item.created_at"
+            (details)="getDetails($event)"
+            (delete)="deleteItem($event)"
+          ></card-catalog>
+        </ng-container>
+      </div>
+      <pagination-controls
+        class="my-pagination"
+        (pageChange)="pageChange($event)"
+        previousLabel="Anterior"
+        nextLabel="Siguiente"
+        *ngIf="showPagination"
+        [responsive]="true"
+        maxSize="10"
       >
-        <card-catalog
-          [id]="item.id"
-          name="{{ item.name }}"
-          [description]="item.description"
-          [avatar]="item.avatar"
-          [created_at]="item.created_at"
-          (details)="getDetails($event)"
-          (delete)="deleteItem($event)"
-        ></card-catalog>
-      </ng-container>
-    </div>
-    <pagination-controls
-      class="my-pagination"
-      (pageChange)="pageChange($event)"
-      previousLabel="Anterior"
-      nextLabel="Siguiente"
-      *ngIf="showPagination"
-      [responsive]="true"
-      maxSize="10"
-    >
-    </pagination-controls>
+      </pagination-controls>
+    </ng-container>
+    <ng-template #emptyListCatalogs>
+      <div class="alert alert-warning container-full mr-4" role="alert">
+        Aún no cuentas con catalogos.
+        <a routerLink="/profile/nuevo-catalogo" class="alert-link"
+          >Crea mi primer catalogo</a
+        >
+      </div>
+    </ng-template>
   `,
   styleUrls: ["./grid-catalog.component.css"],
 })

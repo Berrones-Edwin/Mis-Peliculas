@@ -5,6 +5,7 @@ import { Location } from "@angular/common";
 import { AuthService } from "src/app/shared/services/auth.service";
 import { GlobalService } from "src/app/shared/services/global.service";
 import { ResponseRegisterUser } from "src/app/shared/interfaces/auth/response-register";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-register",
@@ -19,7 +20,7 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private _authService: AuthService,
     private _globalService: GlobalService,
-    private _location: Location
+    private _router:Router
   ) {}
 
   ngOnInit(): void {
@@ -40,12 +41,13 @@ export class RegisterComponent implements OnInit {
               "success"
             )
             .then(() => {
-              this._location.back();
+             this._router.navigate(['/profile'])
               this.loading = true;
             });
         }
       },
       (err) => {
+        console.log(err)
         this._globalService.sweetAlert("Error", `${err.error}`, "error");
         this.loading = true;
       }

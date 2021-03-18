@@ -18,10 +18,12 @@
   <!-- Listas-->
 
   <ng-container *ngIf="allLists$ | async as allList; else loadingList">
-    <grid-catalog
-      [showPagination]="false"
-      [list]="allList.lists.data.slice(0, 3)"
-    ></grid-catalog>
+    <div>
+      <grid-catalog
+        [showPagination]="false"
+        [list]="allList.lists.data.slice(0, 3)"
+      ></grid-catalog>
+    </div>
   </ng-container>
   <ng-template #loadingList>
     <app-loading></app-loading>

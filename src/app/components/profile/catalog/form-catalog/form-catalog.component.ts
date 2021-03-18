@@ -19,10 +19,10 @@ export class FormCatalogComponent implements OnInit {
       id: 1,
       name: "Películas",
     },
-    {
-      id: 2,
-      name: "Series",
-    },
+    // {
+    //   id: 2,
+    //   name: "Series",
+    // },
   ];
 
   constructor(
@@ -62,6 +62,7 @@ export class FormCatalogComponent implements OnInit {
             )
             .then(() => {
               this.loading = true;
+              this._router.navigate(["/profile/mis-catalogos"]);
             });
         } else {
           this._globalService
