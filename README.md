@@ -16,9 +16,9 @@ favoritas.
 
 ## Demo
 
-If you want to see the demo of this proyect deployed, you can visit [Demo of the proyect](https://github.com/Berrones-Edwin/Mis-Peliculas)
+If you want to see the demo of this proyect deployed, you can visit [Demo of the proyect](https://berrones-edwin.github.io/Mis-Peliculas/)
 
-Si tu quieres puedes ver el demo del proyecto ya desplegado, visitame [Demo of the proyect](https://github.com/Berrones-Edwin/Mis-Peliculas)
+Si tu quieres puedes ver el demo del proyecto ya desplegado, visitame [Demo of the proyect](https://berrones-edwin.github.io/Mis-Peliculas/)
 
 ## Installation | Instalación
 
