@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import { ListDetail } from "src/app/shared/interfaces/profile/List/list-detail.interface";
 
 @Component({
   selector: "detail-catalog",
   template: `
-    <h2>Detalles del catalogo  {{ details.catalog.name }}</h2>
+    <h2>Detalles del catalogo {{ details.catalog.name }}</h2>
 
     <div class="row">
       <section
@@ -13,7 +14,7 @@ import { ListDetail } from "src/app/shared/interfaces/profile/List/list-detail.i
       >
         <div class="row mb-4 container-title">
           <h3 class="title col-sm-12 col-md-10">
-          {{ details.catalog.description }}
+            {{ details.catalog.description }}
           </h3>
           <hr />
         </div>
@@ -23,6 +24,10 @@ import { ListDetail } from "src/app/shared/interfaces/profile/List/list-detail.i
         <grid-favorites
           [showHeaderAndButton]="false"
           [favorites]="details.catalog.items"
+          [total_results]="details.catalog.items.length"
+          [itemPerPage]="15"
+          [page]="pageID"
+          (number_page)="nextPage($event)"
         ></grid-favorites>
       </section>
     </div>
@@ -32,7 +37,18 @@ import { ListDetail } from "src/app/shared/interfaces/profile/List/list-detail.i
 export class DetailCatalogComponent implements OnInit {
   @Input() id;
   @Input() details: ListDetail;
-  constructor() {}
+  pageID: number = 1;
+  constructor(
+    private _activatedRoute: ActivatedRoute,
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._activatedRoute.params.subscribe((data) => {
+      this.pageID = data.id;
+    });
+  }
+
+  nextPage(page) {
+    this.pageID = page;
+  }
 }

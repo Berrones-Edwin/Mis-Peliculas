@@ -75,9 +75,9 @@ export class MovieComponent implements OnInit, OnDestroy {
       .subscribe((data) => (this.listCatalogs = data));
   }
 
-  createCatalog(){
+  createCatalog() {
     this._render.selectRootElement(this.modalCatalogBTN.nativeElement).click();
-    this._router.navigate(['profile/nuevo-catalogo'])
+    this._router.navigate(["profile/nuevo-catalogo"]);
   }
 
   addToFavorites() {
@@ -90,11 +90,7 @@ export class MovieComponent implements OnInit, OnDestroy {
         cancelButtonText: "Cancelar",
         type: "question",
       }).then((result) => {
-        if (result.value)
-          setTimeout(
-            () => this._router.navigate(["/auth/inicio-sesion"]),
-            1500
-          );
+        if (result.value) this._router.navigate(["/auth/inicio-sesion"]);
       });
     } else {
       this.getDetailsSaveMovie().subscribe(
@@ -155,13 +151,14 @@ export class MovieComponent implements OnInit, OnDestroy {
                 .sweetAlert("Correcto", data.message, "success")
                 .then(() => {
                   this._router.navigate([this._router.url]);
-                  this.loadingCatalogs = false;
+                  this.loadingCatalogs = true;
+                  this._render.selectRootElement(this.modalCatalogBTN.nativeElement).click();
                 });
           },
           (error) =>
             this._globalService
               .sweetAlert("Incorrecto", error, "error")
-              .then(() => (this.loadingCatalogs = false))
+              .then(() => (this.loadingCatalogs = true))
         );
       }
     );
