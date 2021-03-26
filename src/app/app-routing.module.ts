@@ -13,11 +13,6 @@ const routes: Routes = [
       import("./components/movies/movies.module").then((m) => m.MoviesModule),
   },
   {
-    path: "series",
-    loadChildren: () =>
-      import("./components/series/series.module").then((m) => m.SeriesModule),
-  },
-  {
     path: "info",
     loadChildren: () =>
       import("./components/information/information.module").then(
@@ -45,11 +40,6 @@ const routes: Routes = [
     path: "buscar/:termino",
     loadChildren: () =>
       import("./components/search/search.module").then((m) => m.SearchModule),
-  },
-  {
-    path: "actors",
-    loadChildren: () =>
-      import("./components/actors/actors.module").then((m) => m.ActorsModule),
   },
   { path: "**", redirectTo: "/", pathMatch: "full" },
 ];
