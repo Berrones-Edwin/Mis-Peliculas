@@ -80,12 +80,11 @@ export class ProfileService {
     catalog_id: number
   ): Observable<ResponseSaveCatalog | TrackHttpError> {
     const headers = this.addHeaders();
-    const data = this.getObjData(catalogo);
 
     return this._httpClient
       .put<ResponseSaveCatalog>(
         `${environment.urlApi}catalogs/${catalog_id}`,
-        data,
+        {...catalogo},
         { headers }
       )
       .pipe(catchError((err) => this._globalService.handleHttpError(err)));

@@ -31,6 +31,10 @@ const routes: Routes = [
     component: FormCatalogComponent,
   },
   {
+    path: "editar-catalogo/:id",
+    component: FormCatalogComponent,
+  },
+  {
     path: "favoritos",
     component: FavoritesComponent,
   },

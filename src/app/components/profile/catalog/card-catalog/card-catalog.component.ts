@@ -6,17 +6,17 @@ import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
     <div class="card bg-dark mb-5" style="width: 18rem;min-width: 18rem">
       <div class="card-body">
         <h5 class="card-title">{{ name }}</h5>
+
         <p class="card-text">
           {{ description }}
         </p>
         <p class="card-text">
-          <small class="text-muted">{{ created_at | date: "shortDate" }}</small>
+          <small class="text-muted">{{ created_at | date }}</small>
         </p>
       </div>
       <div class="card-footer d-flex justify-content-between">
-        <a (click)="detailsCatalogs()" class="btn btn-outline-primary"
-          >Ver más</a
-        >
+        <a (click)="detailsCatalogs()" class="btn btn-primary">Ver más</a>
+
         <button (click)="deleteCatalog(id)" class="btn btn-outline-danger">
           Eliminar
         </button>

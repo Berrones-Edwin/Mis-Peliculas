@@ -41,7 +41,6 @@ export class CatalogsComponent implements OnInit {
       .getDetailsList(this.list_id)
       .subscribe((data: ListDetail) => {
         this.list_details = data;
-        console.log(this.list_details);
       });
   }
 

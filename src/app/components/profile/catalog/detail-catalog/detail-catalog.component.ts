@@ -5,7 +5,12 @@ import { ListDetail } from "src/app/shared/interfaces/profile/List/list-detail.i
 @Component({
   selector: "detail-catalog",
   template: `
-    <h2>Detalles del catalogo {{ details.catalog.name }}</h2>
+    <div class="d-flex justify-content-between">
+      <h2>Detalles del catalogo {{ details.catalog.name }}</h2>
+      <button (click)="editForm()" class="btn btn-outline-warning">
+        Editar
+      </button>
+    </div>
 
     <div class="row">
       <section
@@ -40,15 +45,20 @@ export class DetailCatalogComponent implements OnInit {
   pageID: number = 1;
   constructor(
     private _activatedRoute: ActivatedRoute,
+    private _router: Router
   ) {}
 
   ngOnInit(): void {
     this._activatedRoute.params.subscribe((data) => {
+      // console.log(data)
       this.pageID = data.id;
     });
   }
 
   nextPage(page) {
     this.pageID = page;
+  }
+  editForm() {
+    this._router.navigate(["/profile/editar-catalogo/", this.id]);
   }
 }
