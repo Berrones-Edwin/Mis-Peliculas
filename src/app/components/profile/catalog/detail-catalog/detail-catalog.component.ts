@@ -50,7 +50,6 @@ export class DetailCatalogComponent implements OnInit {
 
   ngOnInit(): void {
     this._activatedRoute.params.subscribe((data) => {
-      // console.log(data)
       this.pageID = data.id;
     });
   }

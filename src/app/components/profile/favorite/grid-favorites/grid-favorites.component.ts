@@ -54,7 +54,6 @@ export class GridFavoritesComponent implements OnInit {
           this.deleteFavorites(id);
         else this.deleteItemOfCatalog(id);
       }
-      
     });
   }
   pageChange(event) {
@@ -67,24 +66,23 @@ export class GridFavoritesComponent implements OnInit {
       (data: ResponsePostRated) =>
         this._globalService
           .sweetAlert("Correcto", `${data.message}`, "success")
-          .then(() => this.favorites = this.deleteItemOfArray(id)),
+          .then(() => (this.favorites = this.deleteItemOfArray(id))),
       (error) =>
         this._globalService.sweetAlert("Incorrecto", `${error}`, "error")
     );
   }
   deleteItemOfCatalog(id: number) {
-    console.log(this.favorites)
     this._profileService.deleteItemToList(id).subscribe(
       (data: ResponsePostItem) =>
         this._globalService
           .sweetAlert("Correcto", `${data.message}`, "success")
-          .then(() => this.favorites = this.deleteItemOfArray(id)),
+          .then(() => (this.favorites = this.deleteItemOfArray(id))),
       (error) =>
         this._globalService.sweetAlert("Incorrecto", `${error}`, "error")
     );
   }
 
-  deleteItemOfArray(id:number):Array<ListDetail>{
-    return this.favorites.filter(data=> data['id'] != id)
+  deleteItemOfArray(id: number): Array<ListDetail> {
+    return this.favorites.filter((data) => data["id"] != id);
   }
 }

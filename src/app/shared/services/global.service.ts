@@ -34,11 +34,9 @@ export class GlobalService {
   }
 
   handleHttpError(error: HttpErrorResponse): Observable<TrackHttpError> {
-    // console.log(error.error);
-    const messageError = error.error?.error ?? error.statusText; 
-    // console.log(messageError);
-    
-    this.sweetAlert("Error",error.error?.error , "error");
+    const messageError = error.error?.error ?? error.statusText;
+
+    this.sweetAlert("Error", messageError, "error");
     // let data = new TrackHttpError();
     // data.errorNumber = error.status;
     // data.message = error.statusText;
@@ -56,7 +54,6 @@ export class GlobalService {
         calendar = element;
       }
     });
-    // calendar
     return calendar;
   }
   getNextMonth(): Calendar {

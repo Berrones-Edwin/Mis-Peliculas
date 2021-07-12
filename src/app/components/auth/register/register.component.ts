@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private _authService: AuthService,
     private _globalService: GlobalService,
-    private _router:Router
+    private _router: Router
   ) {}
 
   ngOnInit(): void {
@@ -41,13 +41,12 @@ export class RegisterComponent implements OnInit {
               "success"
             )
             .then(() => {
-             this._router.navigate(['/profile'])
+              this._router.navigate(["/profile"]);
               this.loading = true;
             });
         }
       },
       (err) => {
-        console.log(err)
         this._globalService.sweetAlert("Error", `${err.error}`, "error");
         this.loading = true;
       }
