@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "lint": "ng lint",
+    "lint-fix": "npx ng lint appPeliculas --fix",
+    "lint": "npx ng lint appPeliculas",
     "e2e": "ng e2e"
   },
   "private": true,
