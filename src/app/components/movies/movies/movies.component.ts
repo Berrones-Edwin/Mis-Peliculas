@@ -33,17 +33,17 @@ export class MoviesComponent implements OnInit, OnDestroy {
   detailsMovie(movie) {
     this._router.navigate([
       'peliculas',
-      movie['id']
-    ])
+      movie.id
+    ]);
 
   }
 
 
 
   popularMovies() {
-  
+
     this.moviesPopular$ =  this._moviesService.getPopular();
-   
+
   }
 
   topMovies() {

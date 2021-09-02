@@ -15,10 +15,10 @@ export class GetComingComponent implements OnInit {
 
   total_results: number[] = [];
 
-  id: string = '1';
+  id = '1';
   movies$: Observable<any>;
-  calendar:Calendar;
-  title:string;
+  calendar: Calendar;
+  title: string;
 
   constructor(
     private _moviesService: MoviesService,
@@ -55,15 +55,15 @@ export class GetComingComponent implements OnInit {
       page
     ]).then(() => {
       this.getUpComing();
-    })
+    });
 
   }
 
   detailsMovie(movie) {
     this._router.navigate([
       'peliculas',
-      movie['id']
-    ])
+      movie.id
+    ]);
   }
 
 

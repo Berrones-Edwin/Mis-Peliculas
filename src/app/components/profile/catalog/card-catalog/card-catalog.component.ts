@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
-  selector: "card-catalog",
+  selector: 'card-catalog',
   template: `
     <div class="card bg-dark mb-5" style="width: 18rem;min-width: 18rem">
       <div class="card-body">

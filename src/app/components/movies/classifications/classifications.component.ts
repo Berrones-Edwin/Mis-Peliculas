@@ -15,29 +15,29 @@ export class ClassificationsComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
   classificationsMovies$: Observable<any>;
   classification: string;
-  id:string="";
+  id='';
 
   constructor(
     private _moviesService: MoviesService,
     private _activatedRouter: ActivatedRoute,
-    private _router:Router
+    private _router: Router
   ) { }
 
   ngOnInit() {
 
     this._activatedRouter.params.subscribe((data) => {
 
-      this.classification = data["opcion"];
-      this.id = data["page"];
+      this.classification = data.opcion;
+      this.id = data.page;
 
       if (this.classification) {
-        this.getClasification("1", this.classification)
+        this.getClasification('1', this.classification);
       }
-    })
+    });
 
   }
 
-  getClasification(page: string = "1", classification: string) {
+  getClasification(page: string = '1', classification: string) {
 
     this.classificationsMovies$ = this._moviesService.getClasification(page, classification);
 
@@ -46,24 +46,24 @@ export class ClassificationsComponent implements OnInit, OnDestroy {
   nextPage(page): void {
 
     this.id = page;
-    let classification =  this.classification
+    const classification =  this.classification;
 
     this._router.navigate([
       '/peliculas/clasificaciones/',
         classification,
         page
-      
+
     ]).then(() => {
       this.getClasification(this.id,this.classification);
-    })
+    });
 
   }
 
   detailsMovie(movie) {
     this._router.navigate([
       'peliculas',
-      movie['id']
-    ])
+      movie.id
+    ]);
   }
 
 

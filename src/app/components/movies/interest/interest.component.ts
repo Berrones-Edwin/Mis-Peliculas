@@ -13,9 +13,9 @@ export class InterestComponent implements OnInit {
 
   private unsubscribe$ = new Subject<void>();
 
-  option: string = '';
-  title: string = "";
-  page: string = "1";
+  option = '';
+  title = '';
+  page = '1';
 
   movies$: Observable<any>;
 
@@ -26,12 +26,12 @@ export class InterestComponent implements OnInit {
     private _router: Router
   ) {
 
-    this.title = "";
+    this.title = '';
 
     this._activateRouter.params.subscribe((data) => {
       if (data) {
-        this.option = data['opcion'];
-        this.page = data['page'];
+        this.option = data.opcion;
+        this.page = data.page;
         this.showResults(this.option, this.page);
 
       }
@@ -44,23 +44,23 @@ export class InterestComponent implements OnInit {
 
   }
 
-  showResults(option, page: string = "1") {
+  showResults(option, page: string = '1') {
     switch (option) {
       case '1':
-        this.title = "Películas más populares para niños";
+        this.title = 'Películas más populares para niños';
         this.getPopularKids(page);
         break;
       case '2':
-        this.title = "Mejores películas del año pasado";
+        this.title = 'Mejores películas del año pasado';
         this.getPopularLastYear(page);
         break;
       case '3':
-        this.title = "Mejores películas clasificación R";
+        this.title = 'Mejores películas clasificación R';
         this.getClasificationR(page);
         break;
       case '4':
-        this.title = "Mejores películas de dramas del año actual";
-        this.getBestDramas(page)
+        this.title = 'Mejores películas de dramas del año actual';
+        this.getBestDramas(page);
         break;
 
       default:
@@ -71,8 +71,8 @@ export class InterestComponent implements OnInit {
   detailsMovie(movie) {
     this._router.navigate([
       'peliculas',
-      movie['id']
-    ])
+      movie.id
+    ]);
   }
 
   nextPage(page): void {
@@ -83,27 +83,27 @@ export class InterestComponent implements OnInit {
       page
     ]).then(() => {
       this.showResults(this.option, this.page);
-    })
+    });
   }
 
-  getPopularKids(page: string = "1") {
+  getPopularKids(page: string = '1') {
 
     this.movies$ = this._moviesService.getPopularKids(page);
 
   }
 
-  getPopularLastYear(page: string = "1") {
+  getPopularLastYear(page: string = '1') {
 
-    this.movies$ = this._moviesService.getPopularLastYear(page)
-
-  }
-  getClasificationR(page: string = "1") {
-
-
-    this.movies$ = this._moviesService.getClasification(page, "R");
+    this.movies$ = this._moviesService.getPopularLastYear(page);
 
   }
-  getBestDramas(page: string = "1") {
+  getClasificationR(page: string = '1') {
+
+
+    this.movies$ = this._moviesService.getClasification(page, 'R');
+
+  }
+  getBestDramas(page: string = '1') {
 
     this.movies$ = this._moviesService.getBestDramas(page);
 

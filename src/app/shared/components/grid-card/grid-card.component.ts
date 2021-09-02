@@ -1,25 +1,25 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: "app-grid-card",
-  templateUrl: "./grid-card.component.html",
-  styleUrls: ["./grid-card.component.css"],
+  selector: 'app-grid-card',
+  templateUrl: './grid-card.component.html',
+  styleUrls: ['./grid-card.component.css'],
 })
 export class GridCardComponent implements OnInit {
   @Input()
-  title = "";
+  title = '';
   @Input()
-  url = "";
+  url = '';
   @Input()
-  showBtnExplore: boolean = true;
+  showBtnExplore = true;
   @Input()
   itemArray: any[] = [];
   @Input()
   total_results = 0;
   @Input()
-  page: number = 1;
+  page = 1;
   @Input()
-  showPagination: boolean = true;
+  showPagination = true;
 
   @Output()
   number_page = new EventEmitter<any>();

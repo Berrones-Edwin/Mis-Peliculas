@@ -1,52 +1,52 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
-import { CatalogsComponent } from "./catalog/catalogs/catalogs.component";
-import { FormCatalogComponent } from "./catalog/form-catalog/form-catalog.component";
-import { FavoritesComponent } from "./favorite/favorites/favorites.component";
-import { ProfileComponent } from "./profile/profile.component";
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { CatalogsComponent } from './catalog/catalogs/catalogs.component';
+import { FormCatalogComponent } from './catalog/form-catalog/form-catalog.component';
+import { FavoritesComponent } from './favorite/favorites/favorites.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {
-    path: "",
+    path: '',
     component: ProfileComponent,
   },
   {
-    path: "mi-perfil",
+    path: 'mi-perfil',
     component: ProfileComponent,
   },
   {
-    path: "mis-catalogos",
+    path: 'mis-catalogos',
     component: CatalogsComponent,
   },
   {
-    path: "mis-catalogos/:id",
+    path: 'mis-catalogos/:id',
     component: CatalogsComponent,
   },
   {
-    path: "catalogo/detalles/:details",
+    path: 'catalogo/detalles/:details',
     component: CatalogsComponent,
   },
   {
-    path: "nuevo-catalogo",
+    path: 'nuevo-catalogo',
     component: FormCatalogComponent,
   },
   {
-    path: "editar-catalogo/:id",
+    path: 'editar-catalogo/:id',
     component: FormCatalogComponent,
   },
   {
-    path: "favoritos",
+    path: 'favoritos',
     component: FavoritesComponent,
   },
   {
-    path: "favoritos/:id",
+    path: 'favoritos/:id',
     component: FavoritesComponent,
   },
   {
-    path: "favoritos/detalles/:detail",
+    path: 'favoritos/detalles/:detail',
     component: FavoritesComponent,
   },
-  { path: "**", pathMatch: "full", redirectTo: "" },
+  { path: '**', pathMatch: 'full', redirectTo: '' },
 ];
 
 @NgModule({

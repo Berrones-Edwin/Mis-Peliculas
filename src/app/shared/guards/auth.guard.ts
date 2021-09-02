@@ -1,31 +1,33 @@
 import { Injectable } from '@angular/core';
-import { CanLoad, Route, UrlSegment, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanActivateChild } from '@angular/router';
+import {
+  CanLoad,
+  Route,
+  UrlSegment,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  UrlTree,
+  CanActivateChild,
+} from '@angular/router';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
-import { AuthService } from '../shared/services/auth.service';
+import { AuthService } from '../services/auth.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthGuard implements CanLoad {
-  constructor(
-    private _authService: AuthService
-  ) { }
+  constructor(private _authService: AuthService) {}
 
-  
   canLoad(
     route: Route,
-    segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
-
-
+    segments: UrlSegment[]
+  ): Observable<boolean> | Promise<boolean> | boolean {
     if (!this._authService.isAuth()) {
-
-
       Swal.fire({
         title: 'Error',
         text: 'Debes de haber iniciado sesión para ver este módulo.',
         type: 'error',
-        confirmButtonText: 'Aceptar'
+        confirmButtonText: 'Aceptar',
       });
 
       return false;

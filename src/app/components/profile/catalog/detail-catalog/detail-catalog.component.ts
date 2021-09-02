@@ -1,9 +1,9 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { ListDetail } from "src/app/shared/interfaces/profile/List/list-detail.interface";
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ListDetail } from 'src/app/shared/interfaces/profile/List/list-detail.interface';
 
 @Component({
-  selector: "detail-catalog",
+  selector: 'detail-catalog',
   template: `
     <div class="d-flex justify-content-between">
       <h2>Detalles del catalogo {{ details.catalog.name }}</h2>
@@ -42,7 +42,7 @@ import { ListDetail } from "src/app/shared/interfaces/profile/List/list-detail.i
 export class DetailCatalogComponent implements OnInit {
   @Input() id;
   @Input() details: ListDetail;
-  pageID: number = 1;
+  pageID = 1;
   constructor(
     private _activatedRoute: ActivatedRoute,
     private _router: Router
@@ -58,6 +58,6 @@ export class DetailCatalogComponent implements OnInit {
     this.pageID = page;
   }
   editForm() {
-    this._router.navigate(["/profile/editar-catalogo/", this.id]);
+    this._router.navigate(['/profile/editar-catalogo/', this.id]);
   }
 }

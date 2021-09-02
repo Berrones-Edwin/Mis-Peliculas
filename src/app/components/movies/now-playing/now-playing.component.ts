@@ -1,15 +1,15 @@
-import { Component, OnInit } from "@angular/core";
-import { Observable } from "rxjs";
-import { MoviesService } from "src/app/shared/services/movies.service";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { MoviesService } from 'src/app/shared/services/movies.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: "app-now-playing",
-  templateUrl: "./now-playing.component.html",
-  styleUrls: ["./now-playing.component.css"],
+  selector: 'app-now-playing',
+  templateUrl: './now-playing.component.html',
+  styleUrls: ['./now-playing.component.css'],
 })
 export class NowPlayingComponent implements OnInit {
-  id: string = "1";
+  id = '1';
   movies$: Observable<any>;
 
   constructor(
@@ -21,7 +21,7 @@ export class NowPlayingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.id) this.getNowPlaying();
+    if (this.id) {this.getNowPlaying();}
   }
 
   getId() {
@@ -35,12 +35,12 @@ export class NowPlayingComponent implements OnInit {
   nextPage(page): void {
     this.id = page;
 
-    this._router.navigate(["/peliculas/ahora-cines", page]).then(() => {
+    this._router.navigate(['/peliculas/ahora-cines', page]).then(() => {
       this.getNowPlaying();
     });
   }
 
   detailsMovie(movie) {
-    this._router.navigate(["peliculas", movie["id"]]);
+    this._router.navigate(['peliculas', movie.id]);
   }
 }

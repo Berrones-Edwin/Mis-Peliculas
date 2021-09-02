@@ -26,4 +26,4 @@ export const classifications: Classification[] = [
       name: 'Clasificación NC-17',
       text: '+18 Pelicula no es adecuada los menores de 18 años.'
     },
-  ]
+  ];

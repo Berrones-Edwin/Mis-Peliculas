@@ -1,20 +1,20 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, Validators, FormGroup } from "@angular/forms";
-import { Location } from "@angular/common";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Location } from '@angular/common';
 
-import { AuthService } from "src/app/shared/services/auth.service";
-import { GlobalService } from "src/app/shared/services/global.service";
-import { ResponseRegisterUser } from "src/app/shared/interfaces/auth/response-register";
-import { Router } from "@angular/router";
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { GlobalService } from 'src/app/shared/services/global.service';
+import { ResponseRegisterUser } from 'src/app/shared/interfaces/auth/response-register';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: "app-register",
-  templateUrl: "./register.component.html",
-  styleUrls: ["./register.component.css"],
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
   public form: FormGroup;
-  loading: boolean = true;
+  loading = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -37,17 +37,17 @@ export class RegisterComponent implements OnInit {
           this._globalService
             .sweetAlert(
               `Bienvenido ${name} ${lastName}`,
-              "Te has registrado correctamente",
-              "success"
+              'Te has registrado correctamente',
+              'success'
             )
             .then(() => {
-              this._router.navigate(["/profile"]);
+              this._router.navigate(['/profile']);
               this.loading = true;
             });
         }
       },
       (err) => {
-        this._globalService.sweetAlert("Error", `${err.error}`, "error");
+        this._globalService.sweetAlert('Error', `${err.error}`, 'error');
         this.loading = true;
       }
     );
@@ -55,16 +55,16 @@ export class RegisterComponent implements OnInit {
 
   createForm() {
     this.form = this.formBuilder.group({
-      name: ["", Validators.required],
-      lastName: ["", Validators.required],
-      email: ["", [Validators.required, Validators.email]],
-      password: ["", [Validators.required, Validators.minLength(8)]],
-      repeat_password: ["", [Validators.required, Validators.minLength(8)]],
+      name: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      repeat_password: ['', [Validators.required, Validators.minLength(8)]],
     });
   }
 
   get name() {
-    return this.form.get("name");
+    return this.form.get('name');
   }
   get nameIsValid() {
     return this.name.valid && this.name.touched;
@@ -73,7 +73,7 @@ export class RegisterComponent implements OnInit {
     return this.name.invalid && this.name.touched;
   }
   get lastName() {
-    return this.form.get("lastName");
+    return this.form.get('lastName');
   }
   get lastNameIsValid() {
     return this.lastName.valid && this.lastName.touched;
@@ -82,7 +82,7 @@ export class RegisterComponent implements OnInit {
     return this.lastName.invalid && this.lastName.touched;
   }
   get email() {
-    return this.form.get("email");
+    return this.form.get('email');
   }
   get emailIsValid() {
     return this.email.valid && this.email.touched;
@@ -91,7 +91,7 @@ export class RegisterComponent implements OnInit {
     return this.email.invalid && this.email.touched;
   }
   get avatar() {
-    return this.form.get("avatar");
+    return this.form.get('avatar');
   }
   get avatarIsValid() {
     return this.avatar.valid && this.avatar.touched;
@@ -100,7 +100,7 @@ export class RegisterComponent implements OnInit {
     return this.avatar.invalid && this.avatar.touched;
   }
   get password() {
-    return this.form.get("password");
+    return this.form.get('password');
   }
   get passwordIsValid() {
     return this.password.valid && this.password.touched;
@@ -109,7 +109,7 @@ export class RegisterComponent implements OnInit {
     return this.password.invalid && this.password.touched;
   }
   get repeat_password() {
-    return this.form.get("repeat_password");
+    return this.form.get('repeat_password');
   }
   get repeat_passwordIsValid() {
     return this.repeat_password.valid && this.repeat_password.touched;

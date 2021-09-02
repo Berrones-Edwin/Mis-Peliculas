@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import {
   HttpInterceptor,
   HttpRequest,
@@ -6,14 +6,14 @@ import {
   HttpEvent,
   HttpHeaders,
   HttpErrorResponse,
-} from "@angular/common/http";
-import { Observable, throwError } from "rxjs";
-import { catchError } from "rxjs/operators";
+} from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class GlobalService implements HttpInterceptor {
   constructor() {}
@@ -23,7 +23,7 @@ export class GlobalService implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     const headers = new HttpHeaders({
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     });
 
     const reqClone = req.clone({
@@ -35,10 +35,10 @@ export class GlobalService implements HttpInterceptor {
 
   manejarError(err: HttpErrorResponse) {
     Swal.fire({
-      title: "Ocurrio un error",
-      text: "Favor de recargar la página. En caso de volver a fallar pongase en contacto con el administrador en la pestaña contacto.",
-      type: "error",
-      confirmButtonText: "Aceptar",
+      title: 'Ocurrio un error',
+      text: 'Favor de recargar la página. En caso de volver a fallar pongase en contacto con el administrador en la pestaña contacto.',
+      type: 'error',
+      confirmButtonText: 'Aceptar',
     });
 
     return throwError(

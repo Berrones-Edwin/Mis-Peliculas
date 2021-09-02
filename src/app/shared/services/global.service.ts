@@ -1,30 +1,30 @@
-import { Injectable } from "@angular/core";
-import { HttpErrorResponse, HttpParams } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { HttpErrorResponse, HttpParams } from '@angular/common/http';
 
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
-import { dataCalendar } from "../Data/calendar";
-import { Calendar } from "../interfaces/Calendar.interface";
-import { Observable, throwError } from "rxjs";
-import { TrackHttpError } from "../interfaces/error/track-http-error";
-import { DatesInterface } from "../interfaces/Dates.interface";
+import { dataCalendar } from '../Data/calendar';
+import { Calendar } from '../interfaces/Calendar.interface';
+import { Observable, throwError } from 'rxjs';
+import { TrackHttpError } from '../interfaces/error/track-http-error';
+import { DatesInterface } from '../interfaces/Dates.interface';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class GlobalService {
   constructor() {}
 
-  private apiKey = "1de6ce733dd02d81073262cb66031536";
+  private apiKey = '1de6ce733dd02d81073262cb66031536';
 
   getApiKey(): string {
     return this.apiKey;
   }
 
   getHeaders(): HttpParams {
-    let params = new HttpParams()
-      .append("api_key", this.apiKey)
-      .append("language", "es");
+    const params = new HttpParams()
+      .append('api_key', this.apiKey)
+      .append('language', 'es');
 
     return params;
   }
@@ -36,7 +36,7 @@ export class GlobalService {
   handleHttpError(error: HttpErrorResponse): Observable<TrackHttpError> {
     const messageError = error.error?.error ?? error.statusText;
 
-    this.sweetAlert("Error", messageError, "error");
+    this.sweetAlert('Error', messageError, 'error');
     // let data = new TrackHttpError();
     // data.errorNumber = error.status;
     // data.message = error.statusText;
@@ -46,7 +46,7 @@ export class GlobalService {
   }
 
   getDateStart_DateEnd(): Calendar {
-    const currentMonth = new Date().getMonth() + 1 + "";
+    const currentMonth = new Date().getMonth() + 1 + '';
     let calendar: Calendar;
 
     dataCalendar.forEach((element: Calendar) => {
@@ -63,7 +63,7 @@ export class GlobalService {
     let calendar: Calendar;
 
     dataCalendar.forEach((element: Calendar) => {
-      if (element.month === currentMonth + "") {
+      if (element.month === currentMonth + '') {
         calendar = element;
       }
     });
@@ -73,10 +73,10 @@ export class GlobalService {
 
   // Private Methods
   private numberWeek(currentDay: number): string {
-    if (currentDay === 1 || currentDay <= 7) return "one";
-    else if (currentDay === 8 || currentDay <= 14) return "two";
-    else if (currentDay === 15 || currentDay <= 21) return "three";
-    else if (currentDay === 22 || currentDay <= 31) return "four";
+    if (currentDay === 1 || currentDay <= 7) {return 'one';}
+    else if (currentDay === 8 || currentDay <= 14) {return 'two';}
+    else if (currentDay === 15 || currentDay <= 21) {return 'three';}
+    else if (currentDay === 22 || currentDay <= 31) {return 'four';}
   }
 
   getDates(): DatesInterface {
@@ -84,24 +84,24 @@ export class GlobalService {
     // const currentDay = 25;
     const currentMonth = new Date().getMonth() + 1;
     const currentYear = new Date().getFullYear();
-    let firstDate: string = "";
-    let lastDate: string = "";
+    let firstDate = '';
+    let lastDate = '';
 
-    let myDates: DatesInterface = {
-      firstDate: "",
-      lastDate: "",
+    const myDates: DatesInterface = {
+      firstDate: '',
+      lastDate: '',
     };
 
-    if (this.numberWeek(currentDay) === "one") {
+    if (this.numberWeek(currentDay) === 'one') {
       firstDate = `${currentYear}-${currentMonth}-01`;
       lastDate = `${currentYear}-${currentMonth}-07`;
-    } else if (this.numberWeek(currentDay) === "two") {
+    } else if (this.numberWeek(currentDay) === 'two') {
       firstDate = `${currentYear}-${currentMonth}-08`;
       lastDate = `${currentYear}-${currentMonth}-14`;
-    } else if (this.numberWeek(currentDay) === "three") {
+    } else if (this.numberWeek(currentDay) === 'three') {
       firstDate = `${currentYear}-${currentMonth}-15`;
       lastDate = `${currentYear}-${currentMonth}-21`;
-    } else if (this.numberWeek(currentDay) === "four") {
+    } else if (this.numberWeek(currentDay) === 'four') {
       firstDate = `${currentYear}-${currentMonth}-22`;
 
       if (
@@ -113,8 +113,8 @@ export class GlobalService {
         currentMonth === 10 ||
         currentMonth === 12
       )
-        lastDate = `${currentYear}-${currentMonth}-31`;
-      else lastDate = `${currentYear}-${currentMonth}-30`;
+        {lastDate = `${currentYear}-${currentMonth}-31`;}
+      else {lastDate = `${currentYear}-${currentMonth}-30`;}
     }
 
     myDates.firstDate = firstDate;
@@ -125,8 +125,8 @@ export class GlobalService {
 }
 
 export type SweetAlertType =
-  | "success"
-  | "error"
-  | "warning"
-  | "question"
-  | "info";
+  | 'success'
+  | 'error'
+  | 'warning'
+  | 'question'
+  | 'info';

@@ -5,26 +5,26 @@ import {
   ViewChild,
   ElementRef,
   Renderer2,
-} from "@angular/core";
-import { MoviesService } from "src/app/shared/services/movies.service";
-import { ActivatedRoute, Router } from "@angular/router";
-import { map, takeUntil, tap } from "rxjs/operators";
-import { Subject, Observable } from "rxjs";
-import { Location } from "@angular/common";
-import { AuthService } from "src/app/shared/services/auth.service";
-import Swal from "sweetalert2";
-import { ProfileService } from "src/app/shared/services/profile.service";
-import { PostRated } from "src/app/shared/interfaces/profile/rateds/post-rated.interface";
-import { GlobalService } from "src/app/shared/services/global.service";
-import { ListDetail } from "src/app/shared/interfaces/profile/List/list-detail.interface";
-import { AllList } from "src/app/shared/interfaces/profile/List/all-list.interface";
-import { PostItem } from "src/app/shared/interfaces/profile/item/post-item.interface";
-import { ResponsePostItem } from "src/app/shared/interfaces/profile/item/response-post-iten.interface";
+} from '@angular/core';
+import { MoviesService } from 'src/app/shared/services/movies.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { map, takeUntil, tap } from 'rxjs/operators';
+import { Subject, Observable } from 'rxjs';
+import { Location } from '@angular/common';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import Swal from 'sweetalert2';
+import { ProfileService } from 'src/app/shared/services/profile.service';
+import { PostRated } from 'src/app/shared/interfaces/profile/rateds/post-rated.interface';
+import { GlobalService } from 'src/app/shared/services/global.service';
+import { ListDetail } from 'src/app/shared/interfaces/profile/List/list-detail.interface';
+import { AllList } from 'src/app/shared/interfaces/profile/List/all-list.interface';
+import { PostItem } from 'src/app/shared/interfaces/profile/item/post-item.interface';
+import { ResponsePostItem } from 'src/app/shared/interfaces/profile/item/response-post-iten.interface';
 
 @Component({
-  selector: "app-movie",
-  templateUrl: "./movie.component.html",
-  styleUrls: ["./movie.component.css"],
+  selector: 'app-movie',
+  templateUrl: './movie.component.html',
+  styleUrls: ['./movie.component.css'],
 })
 export class MovieComponent implements OnInit, OnDestroy {
   id: string;
@@ -33,7 +33,7 @@ export class MovieComponent implements OnInit, OnDestroy {
   recomendations: any[] = [];
   reviews: any[] = [];
   urlTrailerYotube: string;
-  btnWatchTrailer: boolean = false;
+  btnWatchTrailer = false;
 
   movie$: Observable<any>;
   credits$: Observable<any>;
@@ -42,12 +42,12 @@ export class MovieComponent implements OnInit, OnDestroy {
   images$: Observable<any>;
 
   movieRated: PostRated;
-  loadingFavorites: boolean = true;
+  loadingFavorites = true;
   listCatalogs: Array<ListDetail>;
 
-  loadingCatalogs: boolean = true;
+  loadingCatalogs = true;
 
-  @ViewChild("modalCatalogBTN") modalCatalogBTN: ElementRef;
+  @ViewChild('modalCatalogBTN') modalCatalogBTN: ElementRef;
 
   constructor(
     private _moviesService: MoviesService,
@@ -59,7 +59,7 @@ export class MovieComponent implements OnInit, OnDestroy {
     private _globalService: GlobalService,
     private _render: Renderer2
   ) {
-    this.id = this._activatedRouter.snapshot.params["id"];
+    this.id = this._activatedRouter.snapshot.params.id;
   }
 
   ngOnInit() {
@@ -68,16 +68,14 @@ export class MovieComponent implements OnInit, OnDestroy {
     this._profileService
       .getAllList()
       .pipe(
-        map((data: AllList) => {
-          return data.lists.data;
-        })
+        map((data: AllList) => data.lists.data)
       )
       .subscribe((data) => (this.listCatalogs = data));
   }
 
   createCatalog() {
     this._render.selectRootElement(this.modalCatalogBTN.nativeElement).click();
-    this._router.navigate(["profile/nuevo-catalogo"]);
+    this._router.navigate(['profile/nuevo-catalogo']);
   }
 
   addToFavorites() {
@@ -114,11 +112,11 @@ export class MovieComponent implements OnInit, OnDestroy {
     this._profileService.postRated(movie).subscribe(
       (data) =>
         this._globalService
-          .sweetAlert("Correcto", data.message, "success")
+          .sweetAlert('Correcto', data.message, 'success')
           .then(() => (this.loadingFavorites = true)),
       (err) =>
         this._globalService
-          .sweetAlert("Incorrecto", err.message, "error")
+          .sweetAlert('Incorrecto', err.message, 'error')
           .then(() => (this.loadingFavorites = true))
     );
   }
@@ -132,25 +130,25 @@ export class MovieComponent implements OnInit, OnDestroy {
           item: data.id,
           name: data.title,
           avatar: data.poster_path,
-          catalog_id: catalog_id,
+          catalog_id,
           user_id: this._authService.UserData.id,
         };
         this._profileService.postItemToList(item).subscribe(
           (data: ResponsePostItem) => {
             if (data.data)
-              this._globalService
-                .sweetAlert("Correcto", data.message, "success")
+              {this._globalService
+                .sweetAlert('Correcto', data.message, 'success')
                 .then(() => {
                   this._router.navigate([this._router.url]);
                   this.loadingCatalogs = true;
                   this._render
                     .selectRootElement(this.modalCatalogBTN.nativeElement)
                     .click();
-                });
+                });}
           },
           (error) =>
             this._globalService
-              .sweetAlert("Incorrecto", error, "error")
+              .sweetAlert('Incorrecto', error, 'error')
               .then(() => (this.loadingCatalogs = true))
         );
       }
@@ -169,8 +167,8 @@ export class MovieComponent implements OnInit, OnDestroy {
   }
 
   detailsMovie(movie) {
-    this._router.navigate(["peliculas", movie["id"]]).then(() => {
-      this.id = movie["id"];
+    this._router.navigate(['peliculas', movie.id]).then(() => {
+      this.id = movie.id;
       this.getDetails(this.id);
       this.getImages(this.id);
     });
@@ -182,13 +180,13 @@ export class MovieComponent implements OnInit, OnDestroy {
 
   isUserAuth() {
     Swal.fire({
-      text: "Para realizar esta acción debes haber iniciado sesión. ¿Deseas iniciar sesión?",
+      text: 'Para realizar esta acción debes haber iniciado sesión. ¿Deseas iniciar sesión?',
       showCancelButton: true,
-      confirmButtonText: "Aceptar",
-      cancelButtonText: "Cancelar",
-      type: "question",
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar',
+      type: 'question',
     }).then((result) => {
-      if (result.value) this._router.navigate(["/auth/inicio-sesion"]);
+      if (result.value) {this._router.navigate(['/auth/inicio-sesion']);}
     });
   }
 

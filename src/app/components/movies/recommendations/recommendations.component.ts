@@ -1,17 +1,17 @@
-import { Component, OnInit } from "@angular/core";
-import { MoviesService } from "src/app/shared/services/movies.service";
-import { Observable } from "rxjs";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { MoviesService } from 'src/app/shared/services/movies.service';
+import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: "app-recommendations",
-  templateUrl: "./recommendations.component.html",
-  styleUrls: ["./recommendations.component.css"],
+  selector: 'app-recommendations',
+  templateUrl: './recommendations.component.html',
+  styleUrls: ['./recommendations.component.css'],
 })
 export class RecommendationsComponent implements OnInit {
   movies$: Observable<any>;
-  id: string = "";
-  page: string = "1";
+  id = '';
+  page = '1';
 
   constructor(
     private _moviesService: MoviesService,
@@ -22,7 +22,7 @@ export class RecommendationsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.id) this.getMoviesRecommendations();
+    if (this.id) {this.getMoviesRecommendations();}
   }
 
   getId(): void {
@@ -45,6 +45,6 @@ export class RecommendationsComponent implements OnInit {
   }
 
   detailsMovie(movie) {
-    this._router.navigate(["peliculas", movie["id"]]);
+    this._router.navigate(['peliculas', movie.id]);
   }
 }

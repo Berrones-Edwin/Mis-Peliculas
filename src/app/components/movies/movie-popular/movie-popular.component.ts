@@ -1,18 +1,16 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable } from 'rxjs';
-import { MoviesService } from 'src/app/shared/services/movies.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { Observable } from "rxjs";
+import { MoviesService } from "src/app/shared/services/movies.service";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
-  selector: 'app-movie-popular',
-  templateUrl: './movie-popular.component.html',
-  styleUrls: ['./movie-popular.component.css']
+  selector: "app-movie-popular",
+  templateUrl: "./movie-popular.component.html",
+  styleUrls: ["./movie-popular.component.css"],
 })
 export class MoviePopularComponent implements OnInit {
-
-  id: string = '1';
+  id = "1";
   movies$: Observable<any>;
-
 
   constructor(
     private _movieService: MoviesService,
@@ -23,9 +21,9 @@ export class MoviePopularComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    if (this.id)
-      this.getMoviesPopular()
+    if (this.id) {
+      this.getMoviesPopular();
+    }
   }
 
   getId() {
@@ -33,28 +31,18 @@ export class MoviePopularComponent implements OnInit {
   }
 
   getMoviesPopular() {
-    this.movies$ = this._movieService.getPopular(this.id)
+    this.movies$ = this._movieService.getPopular(this.id);
   }
 
   nextPage(page): void {
-
     this.id = page;
 
-    this._router.navigate([
-      '/peliculas/popular',
-      page
-    ]).then(() => {
-      this.getMoviesPopular()
-    })
-
-
+    this._router.navigate(["/peliculas/popular", page]).then(() => {
+      this.getMoviesPopular();
+    });
   }
 
   detailsMovie(movie) {
-    this._router.navigate([
-      'peliculas',
-      movie['id']
-    ])
+    this._router.navigate(["peliculas", movie.id]);
   }
-
 }

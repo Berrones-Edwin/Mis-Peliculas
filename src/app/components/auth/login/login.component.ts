@@ -1,19 +1,19 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Location } from "@angular/common";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Location } from '@angular/common';
 
-import { AuthService } from "src/app/shared/services/auth.service";
-import { GlobalService } from "src/app/shared/services/global.service";
-import { responseLogin } from "src/app/shared/interfaces/auth/response-login";
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { GlobalService } from 'src/app/shared/services/global.service';
+import { responseLogin } from 'src/app/shared/interfaces/auth/response-login';
 
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.css"],
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
   public form: FormGroup;
-  loading: boolean = true;
+  loading = true;
   constructor(
     private formBuilder: FormBuilder,
     private _authService: AuthService,
@@ -34,9 +34,9 @@ export class LoginComponent implements OnInit {
         if (data.exito === 1) {
           this._globalService
             .sweetAlert(
-              "Bienvenido",
-              "Has iniciado sesión correctamente",
-              "success"
+              'Bienvenido',
+              'Has iniciado sesión correctamente',
+              'success'
             )
             .then(() => {
               this._location.back();
@@ -45,22 +45,22 @@ export class LoginComponent implements OnInit {
         }
       },
       (err) => {
-        this._globalService.sweetAlert("Error", `${err.error.error}`, "error");
+        this._globalService.sweetAlert('Error', `${err.error.error}`, 'error');
         this.loading = true;
-        localStorage.removeItem("img-profile");
+        localStorage.removeItem('img-profile');
       }
     );
   }
 
   createForm() {
     this.form = this.formBuilder.group({
-      email: ["", Validators.required],
-      password: ["", [Validators.required, Validators.minLength(8)]],
+      email: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(8)]],
     });
   }
 
   get email() {
-    return this.form.get("email");
+    return this.form.get('email');
   }
   get emailIsValid() {
     return this.email.valid && this.email.touched;
@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
     return this.email.invalid && this.email.touched;
   }
   get password() {
-    return this.form.get("password");
+    return this.form.get('password');
   }
   get passwordIsValid() {
     return this.password.valid && this.password.touched;

@@ -1,4 +1,4 @@
-import { ListDetail } from "./list-detail.interface";
+import { ListDetail } from './list-detail.interface';
 
 export interface AllList {
   code: number;

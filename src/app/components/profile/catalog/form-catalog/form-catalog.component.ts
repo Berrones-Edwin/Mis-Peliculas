@@ -1,30 +1,30 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { map, take, tap } from "rxjs/operators";
-import { ListDetail } from "src/app/shared/interfaces/profile/List/list-detail.interface";
-import { ResponseSaveCatalog } from "src/app/shared/interfaces/profile/List/response-save-catalog.interface";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { map, take, tap } from 'rxjs/operators';
+import { ListDetail } from 'src/app/shared/interfaces/profile/List/list-detail.interface';
+import { ResponseSaveCatalog } from 'src/app/shared/interfaces/profile/List/response-save-catalog.interface';
 import {
   GlobalService,
   SweetAlertType,
-} from "src/app/shared/services/global.service";
-import { ProfileService } from "src/app/shared/services/profile.service";
+} from 'src/app/shared/services/global.service';
+import { ProfileService } from 'src/app/shared/services/profile.service';
 
 @Component({
-  selector: "app-form-catalog",
-  templateUrl: "./form-catalog.component.html",
-  styleUrls: ["./form-catalog.component.css"],
+  selector: 'app-form-catalog',
+  templateUrl: './form-catalog.component.html',
+  styleUrls: ['./form-catalog.component.css'],
 })
 export class FormCatalogComponent implements OnInit {
   public form: FormGroup;
-  public loading: boolean = true;
+  public loading = true;
   public image: File;
   id: string;
   catalogEdit: any = {};
   typeCatalogs = [
     {
       id: 1,
-      name: "Películas",
+      name: 'Películas',
     },
   ];
 
@@ -40,15 +40,15 @@ export class FormCatalogComponent implements OnInit {
     this._activatedRoute.params.pipe(take(1)).subscribe((data) => {
       this.id = data.id;
     });
-    if (this.id) this.getDetailsCatalog();
+    if (this.id) {this.getDetailsCatalog();}
     this.createForm();
   }
 
   createForm(): void {
     this.form = this.formBuilder.group({
-      name: ["", Validators.required],
-      description: [""],
-      type_id: ["", Validators.required],
+      name: ['', Validators.required],
+      description: [''],
+      type_id: ['', Validators.required],
     });
   }
 
@@ -80,8 +80,8 @@ export class FormCatalogComponent implements OnInit {
       });
   }
   submitForm(form: FormGroup) {
-    if (!this.id) this.saveCatalog(form);
-    else this.editCatalog(form);
+    if (!this.id) {this.saveCatalog(form);}
+    else {this.editCatalog(form);}
   }
   saveCatalog(form: FormGroup) {
     const { name, description, type_id } = form.value;
@@ -89,10 +89,10 @@ export class FormCatalogComponent implements OnInit {
     this.loading = false;
     this._profileService.saveCatalogs(name, description, type_id).subscribe(
       (data: ResponseSaveCatalog) => {
-        this.showAlertAndNavigation("Correcto", data.message, "success");
+        this.showAlertAndNavigation('Correcto', data.message, 'success');
       },
       (error) => {
-        this._globalService.sweetAlert("Error", `${error.error}`, "error");
+        this._globalService.sweetAlert('Error', `${error.error}`, 'error');
         this.loading = true;
       }
     );
@@ -107,14 +107,14 @@ export class FormCatalogComponent implements OnInit {
       .subscribe(
         (data: ResponseSaveCatalog) => {
           if (data.message)
-            this.showAlertAndNavigation(
-              "Correcto",
-              "Tú catálogo se ha editado correctamente",
-              "success"
-            );
+            {this.showAlertAndNavigation(
+              'Correcto',
+              'Tú catálogo se ha editado correctamente',
+              'success'
+            );}
         },
         (error) => {
-          this._globalService.sweetAlert("Error", `${error.error}`, "error");
+          this._globalService.sweetAlert('Error', `${error.error}`, 'error');
           this.loading = true;
         }
       );
@@ -126,12 +126,12 @@ export class FormCatalogComponent implements OnInit {
   ) {
     this._globalService.sweetAlert(title, description, type).then(() => {
       this.loading = true;
-      this._router.navigate(["/profile/mis-catalogos"]);
+      this._router.navigate(['/profile/mis-catalogos']);
     });
   }
 
   get name() {
-    return this.form.get("name");
+    return this.form.get('name');
   }
   get nameIsValid() {
     return this.name.valid && this.name.touched;
@@ -140,7 +140,7 @@ export class FormCatalogComponent implements OnInit {
     return this.name.invalid && this.name.touched;
   }
   get description() {
-    return this.form.get("description");
+    return this.form.get('description');
   }
   get descriptionIsValid() {
     return this.description.valid && this.description.touched;
@@ -150,7 +150,7 @@ export class FormCatalogComponent implements OnInit {
   }
 
   get typeID() {
-    return this.form.get("type_id");
+    return this.form.get('type_id');
   }
   get typeIDIsValid() {
     return this.typeID.valid && this.typeID.touched;

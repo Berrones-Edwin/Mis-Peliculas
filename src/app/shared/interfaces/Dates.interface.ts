@@ -1,4 +1,4 @@
 export interface DatesInterface{
-    firstDate:string;
-    lastDate:string;
+    firstDate: string;
+    lastDate: string;
 }

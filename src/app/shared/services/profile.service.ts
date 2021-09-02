@@ -1,26 +1,26 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { environment } from "src/environments/environment";
+import { environment } from 'src/environments/environment';
 
-import { Observable } from "rxjs/internal/Observable";
-import { catchError } from "rxjs/internal/operators/catchError";
+import { Observable } from 'rxjs/internal/Observable';
+import { catchError } from 'rxjs/internal/operators/catchError';
 
-import { GlobalService } from "./global.service";
-import { AuthService } from "./auth.service";
+import { GlobalService } from './global.service';
+import { AuthService } from './auth.service';
 
-import { ResponseSaveCatalog } from "../interfaces/profile/List/response-save-catalog.interface";
-import { AllList } from "../interfaces/profile/List/all-list.interface";
-import { SaveCatalog } from "../interfaces/profile/List/save-catalog.interface";
-import { TrackHttpError } from "../interfaces/error/track-http-error";
-import { PutCatalog } from "../interfaces/profile/List/put-catalog.interface";
-import { PostRated } from "../interfaces/profile/rateds/post-rated.interface";
-import { ResponsePostRated } from "../interfaces/profile/rateds/response-post-rated.interface";
-import { PostItem } from "../interfaces/profile/item/post-item.interface";
-import { ResponsePostItem } from "../interfaces/profile/item/response-post-iten.interface";
-import { ListDetail } from "../interfaces/profile/List/list-detail.interface";
+import { ResponseSaveCatalog } from '../interfaces/profile/List/response-save-catalog.interface';
+import { AllList } from '../interfaces/profile/List/all-list.interface';
+import { SaveCatalog } from '../interfaces/profile/List/save-catalog.interface';
+import { TrackHttpError } from '../interfaces/error/track-http-error';
+import { PutCatalog } from '../interfaces/profile/List/put-catalog.interface';
+import { PostRated } from '../interfaces/profile/rateds/post-rated.interface';
+import { ResponsePostRated } from '../interfaces/profile/rateds/response-post-rated.interface';
+import { PostItem } from '../interfaces/profile/item/post-item.interface';
+import { ResponsePostItem } from '../interfaces/profile/item/response-post-iten.interface';
+import { ListDetail } from '../interfaces/profile/List/list-detail.interface';
 
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class ProfileService {
   constructor(
     private _httpClient: HttpClient,
@@ -31,7 +31,7 @@ export class ProfileService {
   getAllList(page?: string): Observable<AllList | TrackHttpError> {
     const headers = this.addHeaders();
 
-    let url = page
+    const url = page
       ? `${environment.urlApi}catalogs?page=${page}`
       : `${environment.urlApi}catalogs`;
 
@@ -54,8 +54,8 @@ export class ProfileService {
     description: string,
     type_id: number
   ): Observable<ResponseSaveCatalog | TrackHttpError> {
-    let headers = new HttpHeaders({
-      "Content-Type": "application/json",
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${this._authService.getToken()}`,
     });
 
@@ -63,9 +63,9 @@ export class ProfileService {
       .post<ResponseSaveCatalog>(
         `${environment.urlApi}catalogs`,
         {
-          name: name,
-          description: description,
-          type_id: type_id,
+          name,
+          description,
+          type_id,
           user_id: this._authService.UserData.id,
         },
         {
@@ -130,10 +130,10 @@ export class ProfileService {
   getAllRateds(page?: string): Observable<AllList | TrackHttpError> {
     const headers = this.addHeaders();
 
-    let url = page
+    const url = page
       ? `${environment.urlApi}rateds/movies?page=${page}`
       : `${environment.urlApi}rateds/movies`;
-      
+
     return this._httpClient
       .get<AllList>(url, { headers })
       .pipe(catchError((err) => this._globalService.handleHttpError(err)));
@@ -161,18 +161,18 @@ export class ProfileService {
 
   getObjData(catalogo: SaveCatalog | PutCatalog): FormData {
     const data = new FormData();
-    data.append("name", catalogo.name);
-    data.append("description", catalogo.description);
-    data.append("type_id", String(catalogo.type_id));
-    data.append("user_id", String(this._authService.UserData.id));
+    data.append('name', catalogo.name);
+    data.append('description', catalogo.description);
+    data.append('type_id', String(catalogo.type_id));
+    data.append('user_id', String(this._authService.UserData.id));
 
     return data;
   }
 
   addHeaders() {
     return new HttpHeaders({
-      "Content-Type": "application/json",
-      Accept: "application/json",
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
       // "Content-Type" : "multipart/form-data",
       Authorization: `Bearer ${this._authService.getToken()}`,
     });

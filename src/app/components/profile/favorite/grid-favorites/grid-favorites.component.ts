@@ -14,10 +14,10 @@ import Swal from "sweetalert2";
 })
 export class GridFavoritesComponent implements OnInit {
   @Input() favorites: Array<ListDetail>;
-  @Input() showHeaderAndButton: boolean = true;
-  @Input() showPagination: boolean = true;
+  @Input() showHeaderAndButton = true;
+  @Input() showPagination = true;
 
-  @Input() page: number = 1;
+  @Input() page = 1;
   @Input() total_results: number;
   @Input() itemPerPage: number;
 
@@ -50,9 +50,11 @@ export class GridFavoritesComponent implements OnInit {
         if (
           this.currentURL === "/profile/favoritos" ||
           this.currentURL === "/profile"
-        )
+        ) {
           this.deleteFavorites(id);
-        else this.deleteItemOfCatalog(id);
+        } else {
+          this.deleteItemOfCatalog(id);
+        }
       }
     });
   }

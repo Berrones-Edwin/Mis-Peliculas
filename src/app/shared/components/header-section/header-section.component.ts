@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: "header-section",
+  selector: 'header-section',
   styles: [
     `
       .container-header {
@@ -21,9 +21,9 @@ import { Component, Input, OnInit } from "@angular/core";
 export class HeaderSectionComponent implements OnInit {
   @Input() title: string;
   @Input() url: string;
-  @Input() nameBTN: string ="Explorar";
-  @Input() typeButton: string ="btn-outline-warning";
-  @Input() showButton:boolean=true;
+  @Input() nameBTN ='Explorar';
+  @Input() typeButton ='btn-outline-warning';
+  @Input() showButton=true;
   constructor() {}
 
   ngOnInit() {}

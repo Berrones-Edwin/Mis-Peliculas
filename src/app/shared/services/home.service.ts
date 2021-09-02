@@ -15,14 +15,14 @@ export class HomeService {
 
   constructor(
     private _moviesService: MoviesService,
-    private _globalService:GlobalService,
-    private _seriesService:SeriesService
+    private _globalService: GlobalService,
+    private _seriesService: SeriesService
   ) {
     this.apiKey = this._globalService.getApiKey();
    }
 
-  // Peliculas en cines esta semana 
-  getPopularMovies(page: string = "1") {
+  // Peliculas en cines esta semana
+  getPopularMovies(page: string = '1') {
     return this._moviesService.getPopular();
   }
 

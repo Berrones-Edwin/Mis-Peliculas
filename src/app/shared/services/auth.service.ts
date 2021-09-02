@@ -1,22 +1,22 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpParams, HttpHeaders } from "@angular/common/http";
-import { Router } from "@angular/router";
-import { BehaviorSubject, Observable } from "rxjs";
-import { catchError, map } from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
-import { JwtHelperService } from "@auth0/angular-jwt";
-import jwt_decode from "jwt-decode";
+import { JwtHelperService } from '@auth0/angular-jwt';
+import jwt_decode from 'jwt-decode';
 
-import { environment } from "src/environments/environment";
+import { environment } from 'src/environments/environment';
 
-import { GlobalService } from "./global.service";
-import { responseLogin, userLogin } from "../interfaces/auth/response-login";
-import { TrackHttpError } from "../interfaces/error/track-http-error";
-import { ResponseRegisterUser } from "../interfaces/auth/response-register";
+import { GlobalService } from './global.service';
+import { responseLogin, userLogin } from '../interfaces/auth/response-login';
+import { TrackHttpError } from '../interfaces/error/track-http-error';
+import { ResponseRegisterUser } from '../interfaces/auth/response-register';
 
 const helper = new JwtHelperService();
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class AuthService {
   private user: BehaviorSubject<userLogin>;
@@ -27,7 +27,7 @@ export class AuthService {
     private _globalService: GlobalService
   ) {
     this.user = new BehaviorSubject<userLogin>(
-      JSON.parse(localStorage.getItem("user"))
+      JSON.parse(localStorage.getItem('user'))
     );
   }
 
@@ -38,8 +38,8 @@ export class AuthService {
     email: string,
     password: string
   ): Observable<responseLogin | TrackHttpError> {
-    let headers = new HttpHeaders();
-    headers.append("Content-Type", "application/json");
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
 
     return this._http
       .post<responseLogin>(
@@ -66,15 +66,15 @@ export class AuthService {
     password: string,
     avatar?: File | string
   ): Observable<ResponseRegisterUser | TrackHttpError> {
-    let headers = new HttpHeaders();
-    headers.append("Content-Type", "application/json");
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
 
     const data = {
-      name: name,
-      lastname: lastname,
-      email: email,
-      password: password,
-      avatar: avatar,
+      name,
+      lastname,
+      email,
+      password,
+      avatar,
     };
 
     return this._http
@@ -94,16 +94,16 @@ export class AuthService {
   }
 
   saveDataLocalStorage(token: string, user: string) {
-    localStorage.setItem("token", token);
-    localStorage.setItem("user", user);
+    localStorage.setItem('token', token);
+    localStorage.setItem('user', user);
   }
 
   isAuth(): boolean {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
 
     if (
       helper.isTokenExpired(token) ||
-      !localStorage.getItem("token") ||
+      !localStorage.getItem('token') ||
       this.UserData === null ||
       this.UserData === undefined
     ) {
@@ -113,17 +113,17 @@ export class AuthService {
   }
 
   getToken() {
-    return localStorage.getItem("token");
+    return localStorage.getItem('token');
   }
 
   decodeToken(): userLogin {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
     return token ? jwt_decode(token) : null;
   }
 
   logout() {
     localStorage.clear();
     this.user.next(null);
-    this._router.navigate(["/"]);
+    this._router.navigate(['/']);
   }
 }

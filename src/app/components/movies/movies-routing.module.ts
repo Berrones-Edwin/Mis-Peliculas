@@ -30,7 +30,7 @@ const routes: Routes = [
   { path: 'clasificaciones', component: ClassificationsComponent },
 
   { path: 'clasificaciones/:opcion/:page', component: ClassificationsComponent },
-  
+
   { path: ':id/recomendaciones/:page', component: RecommendationsComponent },
 
   { path: ':id', component: MovieComponent },

@@ -63,10 +63,10 @@ import Swal from "sweetalert2";
 })
 export class GridCatalogComponent implements OnInit {
   @Input() list: Array<ListDetail>;
-  @Input() showButton: boolean = true;
-  @Input() showPagination: boolean = true;
+  @Input() showButton = true;
+  @Input() showPagination = true;
 
-  @Input() page: number = 1;
+  @Input() page = 1;
   @Input() total_results: number;
   @Input() itemPerPage: number;
 
@@ -91,17 +91,20 @@ export class GridCatalogComponent implements OnInit {
       cancelButtonText: "Cancelar",
       type: "question",
     }).then((result) => {
-      if (result.value) this.deleteCatalog(id);
+      if (result.value) {
+        this.deleteCatalog(id);
+      }
     });
   }
 
   deleteCatalog(id) {
     this._profileService.deleteCatalog(id).subscribe(
       (data: ResponseSaveCatalog) => {
-        if (data.message)
+        if (data.message) {
           this._globalService
             .sweetAlert("Correcto", data.message, "success")
             .then(() => (this.list = this.deleteItemToArray(id)));
+        }
       },
       (error) => {
         this._globalService.sweetAlert("Correcto", error, "error");

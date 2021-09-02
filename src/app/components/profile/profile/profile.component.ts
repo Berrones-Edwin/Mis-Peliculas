@@ -1,16 +1,16 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { Observable } from "rxjs";
-import { userLogin } from "src/app/shared/interfaces/auth/response-login";
-import { TrackHttpError } from "src/app/shared/interfaces/error/track-http-error";
-import { AllList } from "src/app/shared/interfaces/profile/List/all-list.interface";
-import { AuthService } from "src/app/shared/services/auth.service";
-import { ProfileService } from "src/app/shared/services/profile.service";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { userLogin } from 'src/app/shared/interfaces/auth/response-login';
+import { TrackHttpError } from 'src/app/shared/interfaces/error/track-http-error';
+import { AllList } from 'src/app/shared/interfaces/profile/List/all-list.interface';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { ProfileService } from 'src/app/shared/services/profile.service';
 
 @Component({
-  selector: "app-profile",
-  templateUrl: "./profile.component.html",
-  styleUrls: ["./profile.component.css"],
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
   informationUser: userLogin;

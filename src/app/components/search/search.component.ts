@@ -1,20 +1,20 @@
-import { Component, OnInit } from "@angular/core";
-import { HomeService } from "src/app/shared/services/home.service";
-import { Subject } from "rxjs";
-import { map, takeUntil } from "rxjs/operators";
-import { Router, ActivatedRoute } from "@angular/router";
-import { GlobalService } from "src/app/shared/services/global.service";
+import { Component, OnInit } from '@angular/core';
+import { HomeService } from 'src/app/shared/services/home.service';
+import { Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
+import { Router, ActivatedRoute } from '@angular/router';
+import { GlobalService } from 'src/app/shared/services/global.service';
 
 @Component({
-  selector: "app-search",
-  templateUrl: "./search.component.html",
-  styleUrls: ["./search.component.css"],
+  selector: 'app-search',
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.css'],
 })
 export class SearchComponent implements OnInit {
   private unsubscribe$ = new Subject<void>();
 
   movies: any[] = [];
-  terminoBusqueda: string = "";
+  terminoBusqueda = '';
 
   constructor(
     private _homeService: HomeService,
@@ -33,7 +33,7 @@ export class SearchComponent implements OnInit {
   }
 
   detailsMovie(movie) {
-    this._router.navigate(["peliculas", movie["id"]]);
+    this._router.navigate(['peliculas', movie.id]);
   }
 
   buscar(busqueda) {
@@ -42,7 +42,7 @@ export class SearchComponent implements OnInit {
         this.movies = data;
       })
       .catch((err) =>
-        this._globalService.sweetAlert("Ha Ocurrido un error", err, "error")
+        this._globalService.sweetAlert('Ha Ocurrido un error', err, 'error')
       );
   }
 
@@ -56,8 +56,8 @@ export class SearchComponent implements OnInit {
         )
         .subscribe(
           (data: any) => {
-            if (data) resolve(data);
-            else reject();
+            if (data) {resolve(data);}
+            else {reject();}
           },
           (err) => reject()
         );

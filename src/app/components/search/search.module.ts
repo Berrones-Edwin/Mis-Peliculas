@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SearchRoutingModule } from './search-routing.module';
 import { SearchComponent } from './search.component';
 import { SharedModule } from '../../shared/components/shared.module';
-import { FormsModule } from "@angular/forms";
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({

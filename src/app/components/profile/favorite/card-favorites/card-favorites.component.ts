@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: "card-favorites",
+  selector: 'card-favorites',
   template: ` <div class="card bg-dark" style="width: 18rem">
     <img
       src="{{ avatar | image }}"
@@ -43,6 +43,6 @@ export class CardFavoritesComponent implements OnInit {
     this.details.emit(this.item);
   }
   deleteItem(){
-    this.delete.emit(this.id)
+    this.delete.emit(this.id);
   }
 }
