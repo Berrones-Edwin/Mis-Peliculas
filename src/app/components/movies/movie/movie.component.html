@@ -46,6 +46,7 @@
           data-toggle="modal"
           data-target="#modalCatalog"
           class="btn btn-outline-primary"
+          [disabled]="!this._authService.isAuth()"
         >
           Catalogo
         </button>
@@ -256,7 +257,7 @@
             </ng-container>
           </ng-container>
           <ng-template #notCatalogs>
-            <h3 style="color:black">Aún no cuentas con catalogos</h3>
+            <h3 style="color: black">Aún no cuentas con catalogos</h3>
             <a class="btn btn-sm btn-primary" (click)="createCatalog()"
               >Crear mi primer catalogo</a
             >

@@ -82,16 +82,7 @@ export class MovieComponent implements OnInit, OnDestroy {
 
   addToFavorites() {
     if (!this._authService.isAuth()) {
-      Swal.fire({
-        text:
-          "Para realizar esta acción debes haber iniciado sesión. ¿Deseas iniciar sesión?",
-        showCancelButton: true,
-        confirmButtonText: "Aceptar",
-        cancelButtonText: "Cancelar",
-        type: "question",
-      }).then((result) => {
-        if (result.value) this._router.navigate(["/auth/inicio-sesion"]);
-      });
+      this.isUserAuth();
     } else {
       this.getDetailsSaveMovie().subscribe(
         (data: { id: number; title: string; poster_path: string }) => {
@@ -152,7 +143,9 @@ export class MovieComponent implements OnInit, OnDestroy {
                 .then(() => {
                   this._router.navigate([this._router.url]);
                   this.loadingCatalogs = true;
-                  this._render.selectRootElement(this.modalCatalogBTN.nativeElement).click();
+                  this._render
+                    .selectRootElement(this.modalCatalogBTN.nativeElement)
+                    .click();
                 });
           },
           (error) =>
@@ -185,6 +178,18 @@ export class MovieComponent implements OnInit, OnDestroy {
 
   goBack() {
     this._location.back();
+  }
+
+  isUserAuth() {
+    Swal.fire({
+      text: "Para realizar esta acción debes haber iniciado sesión. ¿Deseas iniciar sesión?",
+      showCancelButton: true,
+      confirmButtonText: "Aceptar",
+      cancelButtonText: "Cancelar",
+      type: "question",
+    }).then((result) => {
+      if (result.value) this._router.navigate(["/auth/inicio-sesion"]);
+    });
   }
 
   ngOnDestroy() {}
